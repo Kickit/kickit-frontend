@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import logo from './logo.svg';
-import Login from './login';
-import Register from './register';
+import Login from './components/login';
+import Register from './components/register';
 import './App.css';
 
 const MyRouter = () => (
   <Router>
     <div className="nav-links">
-      <Link to="/login">Login</Link>
-      <Link to="/register">Register</Link>
+      <button><Link to="/login">Login</Link></button>
+      <button><Link to="/register">Register</Link></button>
 
       <hr />
 
