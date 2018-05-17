@@ -4,17 +4,24 @@ import logo from './logo.svg';
 import Login from './login';
 import './App.css';
 
+const MyRouter = () => (
+  <Router>
+    <div>
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
+
+      <hr />
+
+      <Route path="/login" component={Login} />
+    </div>
+  </Router>
+)
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>
-          <div>
-            <Link to="/login">Login</Link>
-            <Route path="/login" component={Login} />
-          </div>
-        </Router>
+        <MyRouter/>
       </div>
     );
   }
