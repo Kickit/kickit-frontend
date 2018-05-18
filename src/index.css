@@ -16,4 +16,5 @@ body {
   justify-content: flex-end;
   margin: auto;
   width: 100vw;
+  padding: 1rem;
 }

@@ -10,8 +10,9 @@ const MyRouter = () => (
   <Router>
     <div className="application">
     <div className="nav-links">
-      <Button><Link to="/login">Login</Link></Button>
-      <Button><Link to="/register">Register</Link></Button>
+
+      <Button basic color='blue'><Link to="/login">Login</Link></Button>
+      <Button color='yellow'><Link to="/register">Register</Link></Button>
 
     </div>
     <div className="outlet">
