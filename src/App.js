@@ -11,8 +11,8 @@ const MyRouter = () => (
     <div className="application">
     <div className="nav-links">
 
-      <Button basic color='blue'><Link to="/login">Login</Link></Button>
-      <Button color='yellow'><Link to="/register">Register</Link></Button>
+      <Link to="/login"><Button basic color='blue'>Login</Button></Link>
+      <Link to="/register"><Button color='yellow'>Register</Button></Link>
 
     </div>
     <div className="outlet">
