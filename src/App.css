@@ -39,9 +39,13 @@
   margin: auto;
   width: 100vw;
   padding: 1rem;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-
+.button {
+  z-index: 10
+}
 
 .register {
   height: 100VH;
@@ -75,6 +79,114 @@
   margin: 0.5rem;
 }
 
+img {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto -5rem auto;
+}
 
+
+.circle {
+  border-radius: 50%;
+  border: 2px #d9d9d9 dotted;
+  position: absolute;
+}
+.circle.one {
+  width: 300px;
+  height: 300px;
+  right: -25px;
+  top: -10px;
+  z-index: -1;
+}
+.circle.two {
+  width: 275px;
+  height: 275px;
+  right: -10px;
+  z-index: -1;
+}
+.circle.three {
+  width: 200px;
+  height: 200px;
+  right: 0;
+  top: 20px;
+  z-index: -1;
+}
+.circle.four {
+  width: 375px;
+  height: 375px;
+  right: 180px;
+  top: -210px;
+  z-index: -1;
+}
+.circle.five {
+  width: 100px;
+  height: 100px;
+  right: 20px;
+  top: 40px;
+  z-index: -1;
+}
+.circle.six {
+  width: 175px;
+  height: 175px;
+  right: 200px;
+  top: -100px;
+  z-index: -1;
+}
+.circle.seven {
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  right: 200px;
+  z-index: -1;
+}
+.circle.eight {
+  width: 250px;
+  height: 250px;
+  top: -120px;
+  right: 200px;
+  z-index: -1;
+}
+.circle.nine {
+  width: 400px;
+  height: 400px;
+  top: -50px;
+  right: -50px;
+  z-index: -1;
+}
+.circle.ten {
+  width: 135px;
+  height: 135px;
+  right: 20px;
+  top: 300px;
+  z-index: -1;
+}
+.circle.eleven {
+  width: 145px;
+  height: 145px;
+  right: 20px;
+  top: 300px;
+  z-index: -1;
+}
+.circle.twelve {
+  width: 55px;
+  height: 55px;
+  right: 40px;
+  top: 340px;
+  z-index: -1;
+}
+.circle.thirteen {
+  width: 255px;
+  height: 255px;
+  right: 0px;
+  top: 250px;
+  z-index: -1;
+}
+.circle.fourteen {
+  width: 220px;
+  height: 220px;
+  right: -10px;
+  top: 20px;
+  z-index: -1;
+}
 
 
