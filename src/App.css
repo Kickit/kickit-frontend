@@ -26,3 +26,55 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.application {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: auto;
+  width: 100vw;
+  padding: 1rem;
+}
+
+
+
+.register {
+  height: 100VH;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.inputModal {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  max-height: 400px;
+  max-width: 600px;
+  background-color:whitesmoke;
+  border-radius: 1rem;
+  padding: 1rem 5rem 5rem 5rem;
+  margin: 3rem auto auto auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  align-content: flex-start;
+  flex-direction: column;
+}
+
+.input {
+  padding: 0.5rem;
+}
+.button {
+  margin: 0.5rem;
+}
+
+
+
+
