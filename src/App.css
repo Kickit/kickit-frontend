@@ -93,14 +93,14 @@ img {
 .circle.one {
   width: 300px;
   height: 300px;
-  right: -25px;
+  right: 0px;
   top: -10px;
   z-index: -1;
 }
 .circle.two {
   width: 275px;
   height: 275px;
-  right: -10px;
+  right: 0px;
   z-index: -1;
 }
 .circle.three {
@@ -149,7 +149,7 @@ img {
   width: 400px;
   height: 400px;
   top: -50px;
-  right: -50px;
+  right: 0px;
   z-index: -1;
 }
 .circle.ten {
@@ -183,7 +183,7 @@ img {
 .circle.fourteen {
   width: 220px;
   height: 220px;
-  right: -10px;
+  right: 0px;
   top: 20px;
   z-index: -1;
 }
