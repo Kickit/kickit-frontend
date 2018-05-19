@@ -10,7 +10,7 @@ const LoginModal = () => {
     <div className="container">
     <h3>Login</h3>
     <Input placeholder='Email' />
-    <Input placeholder='Password' />
+    <Input placeholder='Password' type='password' />
     <Button color='yellow'>Login</Button>
     </div>
   )
