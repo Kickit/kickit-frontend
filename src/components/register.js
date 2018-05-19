@@ -33,7 +33,7 @@ import logo from '../kickit_logo.png';
         <h3>Register</h3>
         <Input placeholder='First Name' />
         <Input placeholder='Last Name' />
-        <Input placeholder='Password' />
+        <Input placeholder='Password' type='password'  />
         <Button onClick={() => this.updateStep(1)} color='yellow'>Register</Button>
         </div>
       )
