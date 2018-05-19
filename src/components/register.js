@@ -1,6 +1,6 @@
 import React from 'react';
 import '../index.css';
-import { Button, Input } from 'semantic-ui-react'
+import { Button, Input, Form } from 'semantic-ui-react'
 import logo from '../kickit_logo.png';
 
   class Register extends React.Component {
@@ -21,8 +21,14 @@ import logo from '../kickit_logo.png';
       return (
         <div className="container">
         <h3>Register</h3>
-        <Input placeholder='Email' />
-        <Button onClick={() => this.updateStep(1)} color='yellow'>Next</Button>
+        <Form>
+          <Form.Field>
+            <Input placeholder='Email' />
+          </Form.Field>
+          <Form.Field>
+            <Button type='submit' onClick={() => this.updateStep(1)} color='yellow'>Next</Button>
+          </Form.Field>
+        </Form>
         </div>
       )
     }
@@ -31,10 +37,20 @@ import logo from '../kickit_logo.png';
       return (
         <div className="container">
         <h3>Register</h3>
-        <Input placeholder='First Name' />
-        <Input placeholder='Last Name' />
-        <Input placeholder='Password' type='password'  />
-        <Button onClick={() => this.updateStep(1)} color='yellow'>Register</Button>
+        <Form>
+          <Form.Field>
+            <Input placeholder='First Name' />
+          </Form.Field>
+          <Form.Field>
+            <Input placeholder='Last Name' />
+          </Form.Field>
+          <Form.Field>
+            <Input placeholder='Password' type="password" />
+          </Form.Field>
+          <Form.Field>
+            <Button type='submit' onClick={() => this.updateStep(1)} color='yellow'>Register</Button>
+          </Form.Field>
+        </Form>
         </div>
       )
     }
