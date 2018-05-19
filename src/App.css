@@ -47,10 +47,11 @@
 }
 
 .register {
-  height: 100VH;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
+  margin: 1rem;
+}
+
+.login {
+  margin: 1rem;
 }
 
 .inputModal {
