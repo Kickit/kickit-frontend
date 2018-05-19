@@ -34,29 +34,32 @@ import logo from '../kickit_logo.png';
         <Input placeholder='First Name' />
         <Input placeholder='Last Name' />
         <Input placeholder='Password' />
-        <Button color='yellow'>Register</Button>
+        <Button onClick={() => this.updateStep(1)} color='yellow'>Register</Button>
         </div>
       )
     }
 
-    RegNamePass = () => {
+    RegThankyou = () => {
       return (
         <div className="container">
-        <h3>Register</h3>
-        <Input placeholder='First Name' />
-        <Input placeholder='Last Name' />
-        <Input placeholder='Password' />
-        <Button color='yellow'>Register</Button>
+        <h3>Thankyou for Registering!</h3>
+        <a> If you are not redirected to application click here</a>
+        
         </div>
       )
     }
 
     render () {
       let CurrStep = this.RegEmail
-      if(this.state.step === 1 ){
-        CurrStep = this.RegEmail
-      } else if(this.state.step === 2){
-        CurrStep = this.RegNamePass
+      switch (this.state.step){
+        case 1:
+          CurrStep = this.RegEmail
+          break
+        case 2:
+          CurrStep = this.RegNamePass
+          break
+        case 3:
+          CurrStep = this.RegThankyou
       }
       return (
         <div className="register">
