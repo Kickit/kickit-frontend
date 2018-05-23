@@ -8,6 +8,12 @@ import logo from '../kickit_logo.png';
       super()
       this.state = {
         step: 1,
+        userData: {
+          email: '',
+          firstName: '',
+          lastName: '',
+          password: '',
+        }
       }
     }
 
@@ -26,7 +32,7 @@ import logo from '../kickit_logo.png';
             <Input placeholder='Email' />
           </Form.Field>
           <Form.Field>
-            <Button type='submit' onClick={() => this.updateStep(1)} color='yellow'>Next</Button>
+            <Button onClick={() => this.updateStep(1)} color='yellow'>Next {'>'}</Button>
           </Form.Field>
         </Form>
         </div>
@@ -48,6 +54,7 @@ import logo from '../kickit_logo.png';
             <Input placeholder='Password' type="password" />
           </Form.Field>
           <Form.Field>
+            <Button onClick={() => this.updateStep(-1)} color='blue'> {'<'} Back</Button>
             <Button type='submit' onClick={() => this.updateStep(1)} color='yellow'>Register</Button>
           </Form.Field>
         </Form>
@@ -66,22 +73,22 @@ import logo from '../kickit_logo.png';
     }
 
     render () {
-      let CurrStep = this.RegEmail
+      let CurrScreen = this.RegEmail
       switch (this.state.step){
         case 1:
-          CurrStep = this.RegEmail
+          CurrScreen = this.RegEmail
           break
         case 2:
-          CurrStep = this.RegNamePass
+          CurrScreen = this.RegNamePass
           break
         case 3:
-          CurrStep = this.RegThankyou
+          CurrScreen = this.RegThankyou
       }
       return (
         <div className="register">
           <img src={logo} height={"300px"} width={"300px"} alt={""}/>
           <div className="inputModal">
-            <CurrStep/>
+            <CurrScreen/>
           </div>
         </div>
       )
