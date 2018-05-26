@@ -42,7 +42,6 @@ class Login extends React.Component {
   //Triggered by login button
   attemptLogin = async () => {
     const { email, password } = this.state
-    console.log(email, password)
     const result = await this.props.loginMutation({
       variables: {
         email,
@@ -51,7 +50,7 @@ class Login extends React.Component {
     })
     const { token } = result.data.login
     this.saveAuthData(token)
-    this.props.history.push(`/`)
+    this.props.history.push(`/0/`)
   }
 
   checkAuth = () => {
