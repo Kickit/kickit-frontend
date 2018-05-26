@@ -24,62 +24,7 @@ class Login extends React.Component {
   state = {
     login: true, // switch between Login and SignUp
     email: '',
-    password: '',
-    name: '',
-  }
-
-  _confirm = async () => {
-    const { name, email, password } = this.state
-    if (this.state.login) {
-      const result = await this.props.loginMutation({
-        variables: {
-          email,
-          password,
-        },
-      })
-      const { token } = result.data.login
-      this._saveUserData(token)
-    } else {
-      const result = await this.props.signupMutation({
-        variables: {
-          name,
-          email,
-          password,
-        },
-      })
-      const { token } = result.data.signup
-      this._saveUserData(token)
-    }
-    this.props.history.push(`/`)
-  }
-  
-  attemptLogin = () => {
-    console.log('Login attempted')
-  }
-
-  checkAuth = () => {
-    const authToken = localStorage.getItem(AUTH_TOKEN)
-    if(false){}
-
-  }
-
-  LoginModal = () => {
-    return (
-      <div className="container">
-      <h3>Login</h3>
-      <Form>
-        <Form.Field>
-          <Input placeholder='Email' />
-        </Form.Field>
-        <Form.Field>
-          <Input placeholder='Password' type='password' />
-        </Form.Field>
-        <Form.Field>
-          <Button type='submit' onClick={() => this.attemptLogin()}  color='yellow'>Login</Button>
-        </Form.Field>
-      </Form>
-      </div>
-    )
+    password: ''
   }
 
   render () {
@@ -90,6 +35,54 @@ class Login extends React.Component {
         <div className="inputModal">
           <CurrScreen/>
         </div>
+      </div>
+    )
+  }
+
+  //Triggered by login button
+  attemptLogin = async () => {
+    const { email, password } = this.state
+    console.log(email, password)
+    const result = await this.props.loginMutation({
+      variables: {
+        email,
+        password,
+      },
+    })
+    const { token } = result.data.login
+    this.saveAuthData(token)
+    this.props.history.push(`/`)
+  }
+
+  checkAuth = () => {
+    const authToken = localStorage.getItem(AUTH_TOKEN)
+    if(false){}
+
+  }
+
+  handleChange(v, e) {
+    this.setState({ [v]: e.target.value });
+  }
+
+  saveAuthData = token => {
+    localStorage.setItem(AUTH_TOKEN, token)
+  }
+
+  LoginModal = () => {
+    return (
+      <div className="container">
+      <h3>Login</h3>
+      <Form>
+        <Form.Field>
+          <Input value={this.state.email} onChange={ this.handleChange.bind(this, 'email') } placeholder='Email' />
+        </Form.Field>
+        <Form.Field>
+          <Input value={this.state.password} onChange={ this.handleChange.bind(this, 'password') } placeholder='Password' type='password' />
+        </Form.Field>
+        <Form.Field>
+          <Button type='submit' onClick={() => this.attemptLogin()}  color='yellow'>Login</Button>
+        </Form.Field>
+      </Form>
       </div>
     )
   }
