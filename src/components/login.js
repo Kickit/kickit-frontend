@@ -1,20 +1,66 @@
-import React from 'react';
+import React, { Component } from 'react'
+import { AUTH_TOKEN } from '../constants'
 import { Button, Input, Form } from 'semantic-ui-react'
-import logo from '../kickit_logo.png';
+import logo from '../kickit_logo.png'
+import { graphql, compose } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import '../index.css';
 import 'semantic-ui-css/semantic.min.css';
 
-class Login extends React.Component {
-  constructor () {
-    super()
-    this.state = {
-      isLoggedIn: false
+/*
+  Todo: @nicklewanowicz using localstorage for JWT session tokens. 
+        MUST swap this to serverside sessions and client cookie auth
+*/
+const LOGIN_MUTATION = gql`
+  mutation LoginMutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
     }
   }
+`
 
+class Login extends React.Component {
+  state = {
+    login: true, // switch between Login and SignUp
+    email: '',
+    password: '',
+    name: '',
+  }
+
+  _confirm = async () => {
+    const { name, email, password } = this.state
+    if (this.state.login) {
+      const result = await this.props.loginMutation({
+        variables: {
+          email,
+          password,
+        },
+      })
+      const { token } = result.data.login
+      this._saveUserData(token)
+    } else {
+      const result = await this.props.signupMutation({
+        variables: {
+          name,
+          email,
+          password,
+        },
+      })
+      const { token } = result.data.signup
+      this._saveUserData(token)
+    }
+    this.props.history.push(`/`)
+  }
+  
   attemptLogin = () => {
     console.log('Login attempted')
+  }
+
+  checkAuth = () => {
+    const authToken = localStorage.getItem(AUTH_TOKEN)
+    if(false){}
+
   }
 
   LoginModal = () => {
@@ -49,4 +95,7 @@ class Login extends React.Component {
   }
 
 }
-export default Login;
+
+export default compose(
+  graphql(LOGIN_MUTATION, { name: 'loginMutation' }),
+)(Login)
