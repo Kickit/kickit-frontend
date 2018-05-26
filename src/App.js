@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Button } from 'semantic-ui-react'
-import logo from './logo.svg';
 import Login from './components/login';
 import Register from './components/register';
 import './App.css';
