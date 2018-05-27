@@ -3,6 +3,8 @@ import '../index.css';
 import { AUTH_TOKEN } from '../constants'
 import { Button, Input, Form, Message } from 'semantic-ui-react'
 import { graphql, compose } from 'react-apollo'
+
+import Header from './Header'
 import logo from '../kickit_logo.png';
 import gql from 'graphql-tag'
 
@@ -165,13 +167,16 @@ class Register extends React.Component {
         CurrScreen = this.RegThankyou
     }
     return (
-      <div className="register">
-        <img src={logo} height={"300px"} width={"300px"} alt={""}/>
-        <this.ErrorMessage error={this.state.error} />
-        <div className="inputModal">
-          <CurrScreen/>
+      <span>
+        <Header />
+        <div className="register">
+          <img src={logo} height={"300px"} width={"300px"} alt={""}/>
+          <this.ErrorMessage error={this.state.error} />
+          <div className="inputModal">
+            <CurrScreen/>
+          </div>
         </div>
-      </div>
+      </span>
     )
   }
 }

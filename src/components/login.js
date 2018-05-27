@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { AUTH_TOKEN } from '../constants'
 import { Button, Input, Form, Message, Icon } from 'semantic-ui-react'
 import logo from '../kickit_logo.png'
+import Header from './Header'
+
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -31,13 +33,16 @@ class Login extends React.Component {
   render () {
     let CurrScreen = this.LoginModal
     return (
-      <div className="login">
-        <img src={logo} height={"300px"} width={"300px"} alt={""}/>
-        <this.ErrorMessage error={this.state.error} />
-        <div className="inputModal">
-          <CurrScreen/>
+      <span>
+        <Header/>
+        <div className="login">
+          <img src={logo} height={"300px"} width={"300px"} alt={""}/>
+          <this.ErrorMessage error={this.state.error} />
+          <div className="inputModal">
+            <CurrScreen/>
+          </div>
         </div>
-      </div>
+      </span>
     )
   }
 
