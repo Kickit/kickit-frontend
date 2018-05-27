@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AUTH_TOKEN } from '../constants'
-import { Button, Input, Form } from 'semantic-ui-react'
+import { Button, Input, Form, Message, Icon } from 'semantic-ui-react'
 import logo from '../kickit_logo.png'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -24,7 +24,8 @@ class Login extends React.Component {
   state = {
     login: true, // switch between Login and SignUp
     email: '',
-    password: ''
+    password: '',
+    error: '',
   }
 
   render () {
@@ -32,6 +33,7 @@ class Login extends React.Component {
     return (
       <div className="login">
         <img src={logo} height={"300px"} width={"300px"} alt={""}/>
+        <this.ErrorMessage error={this.state.error} />
         <div className="inputModal">
           <CurrScreen/>
         </div>
@@ -42,21 +44,25 @@ class Login extends React.Component {
   //Triggered by login button
   attemptLogin = async () => {
     const { email, password } = this.state
-    const result = await this.props.loginMutation({
-      variables: {
-        email,
-        password,
-      },
-    })
-    const { token } = result.data.login
-    this.saveAuthData(token)
-    this.props.history.push(`/0/`)
+    try {
+      const result = await this.props.loginMutation({
+        variables: {
+          email,
+          password,
+        },
+      })
+      const { token } = result.data.login
+      this.saveAuthData(token)
+      this.props.history.push(`/0/`)
+    } catch (e) {
+      this.setState((prevState, props) => {
+        return {error: "The username or password is not correct."}
+      })
+    }
   }
 
   checkAuth = () => {
     const authToken = localStorage.getItem(AUTH_TOKEN)
-    if(false){}
-
   }
 
   handleChange(v, e) {
@@ -67,25 +73,46 @@ class Login extends React.Component {
     localStorage.setItem(AUTH_TOKEN, token)
   }
 
+  ErrorMessage = (error) => {
+    if(error.error !== ""){
+      return (
+        <Message warning>
+          <Message.Header>Opps!</Message.Header>
+          <p>{error.error}</p>
+        </Message>
+      )
+    }
+    return ''
+  }
+
   LoginModal = () => {
     return (
       <div className="container">
       <h3>Login</h3>
       <Form>
         <Form.Field>
-          <Input value={this.state.email} onChange={ this.handleChange.bind(this, 'email') } placeholder='Email' />
+          <Input 
+            value={this.state.email} 
+            onChange={ this.handleChange.bind(this, 'email') } 
+            placeholder='Email' />
         </Form.Field>
         <Form.Field>
-          <Input value={this.state.password} onChange={ this.handleChange.bind(this, 'password') } placeholder='Password' type='password' />
+          <Input 
+            value={this.state.password} 
+            onChange={ this.handleChange.bind(this, 'password') } 
+            placeholder='Password' 
+            type='password' />
         </Form.Field>
         <Form.Field>
-          <Button type='submit' onClick={() => this.attemptLogin()}  color='yellow'>Login</Button>
+          <Button 
+            type='submit' 
+            onClick={() => this.attemptLogin()}  
+            color='yellow'>Login</Button>
         </Form.Field>
       </Form>
       </div>
     )
   }
-
 }
 
 export default compose(

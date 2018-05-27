@@ -1,7 +1,7 @@
 import React from 'react';
 import '../index.css';
 import { AUTH_TOKEN } from '../constants'
-import { Button, Input, Form } from 'semantic-ui-react'
+import { Button, Input, Form, Message } from 'semantic-ui-react'
 import { graphql, compose } from 'react-apollo'
 import logo from '../kickit_logo.png';
 import gql from 'graphql-tag'
@@ -23,23 +23,31 @@ class Register extends React.Component {
       first: '',
       last: '',
       password: '',
-    }
+    },
+    error: ''
   }
   
   attemptRegister = async () => {
     const { first, last, email, password } = this.state.userData
-    const result = await this.props.signupMutation({
-      variables: {
-        first,
-        last,
-        email,
-        password,
-      },
-    })
-    const { token } = result.data.signup
-    this.saveAuthData(token)
 
-    this.props.history.push(`/0/`)
+    try {
+      const result = await this.props.signupMutation({
+        variables: {
+          first,
+          last,
+          email,
+          password,
+        },
+      })
+      const { token } = result.data.signup
+      this.saveAuthData(token)
+  
+      this.props.history.push(`/0/`)
+    } catch (e) {
+      this.setState((prevState, props) => {
+        return {error: e.message.split(':')[1], step: 1}
+      })
+    }
   }
 
   updateStep = (i) => {
@@ -57,21 +65,39 @@ class Register extends React.Component {
   saveAuthData = token => {
     localStorage.setItem(AUTH_TOKEN, token)
   }
-
+  
   RegEmail = () => {
     return (
       <div className="container">
       <h3>Register</h3>
       <Form>
         <Form.Field>
-          <Input value={this.state.userData.email} onChange={ this.handleChange.bind(this, 'email') } placeholder='Email' />
+          <Input 
+            value={this.state.userData.email} 
+            onChange={ this.handleChange.bind(this, 'email') } 
+            placeholder='Email' 
+          />
         </Form.Field>
         <Form.Field>
-          <Button onClick={() => this.updateStep(1)} color='yellow'>Next {'>'}</Button>
+          <Button 
+            onClick={() => this.updateStep(1)} 
+            color='yellow'>Next {'>'}</Button>
         </Form.Field>
       </Form>
       </div>
     )
+  }
+
+  ErrorMessage = (error) => {
+    if(error.error !== ""){
+      return (
+        <Message warning>
+          <Message.Header>Opps!</Message.Header>
+          <p>{error.error}</p>
+        </Message>
+      )
+    }
+    return ''
   }
   
   RegNamePass = () => {
@@ -80,17 +106,36 @@ class Register extends React.Component {
       <h3>Register</h3>
       <Form>
         <Form.Field>
-          <Input value={this.state.userData.first} onChange={ this.handleChange.bind(this, 'first') } placeholder='First Name' />
+          <Input 
+            value={this.state.userData.first} 
+            onChange={ this.handleChange.bind(this, 'first') } 
+            placeholder='First Name' 
+          />
         </Form.Field>
         <Form.Field>
-          <Input value={this.state.userData.last} onChange={ this.handleChange.bind(this, 'last') } placeholder='Last Name' />
+          <Input 
+            value={this.state.userData.last} 
+            onChange={ this.handleChange.bind(this, 'last') } 
+            placeholder='Last Name' 
+          />
         </Form.Field>
         <Form.Field>
-          <Input value={this.state.userData.password} onChange={ this.handleChange.bind(this, 'password') } placeholder='Password' type="password" />
+          <Input 
+            value={this.state.userData.password} 
+            onChange={ this.handleChange.bind(this, 'password') } 
+            placeholder='Password' type="password" 
+          />
         </Form.Field>
         <Form.Field>
-          <Button onClick={() => this.updateStep(-1)} color='blue'> {'<'} Back</Button>
-          <Button type='submit' onClick={() => this.attemptRegister()} color='yellow'>Register</Button>
+          <Button 
+            onClick={() => this.updateStep(-1)} 
+            color='blue'> 
+            {'<'} Back
+          </Button>
+          <Button 
+            type='submit' 
+            onClick={() => this.attemptRegister()} 
+            color='yellow'>Register</Button>
         </Form.Field>
       </Form>
       </div>
@@ -122,6 +167,7 @@ class Register extends React.Component {
     return (
       <div className="register">
         <img src={logo} height={"300px"} width={"300px"} alt={""}/>
+        <this.ErrorMessage error={this.state.error} />
         <div className="inputModal">
           <CurrScreen/>
         </div>
