@@ -14,6 +14,8 @@ import 'semantic-ui-css/semantic.min.css';
   Todo: @nicklewanowicz using localstorage for JWT session tokens. 
         MUST swap this to serverside sessions and client cookie auth
 */
+
+//Mutation definition to match with serverside "login" mutation
 const LOGIN_MUTATION = gql`
   mutation LoginMutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -21,15 +23,16 @@ const LOGIN_MUTATION = gql`
     }
   }
 `
-
+//Todo @nicklewanowicz add check to see if they have a valid JWT token
+//     and tranition them automatically
 class Login extends React.Component {
   state = {
-    login: true, // switch between Login and SignUp
     email: '',
     password: '',
     error: '',
   }
 
+  //Renders Modal frame with "CurrScreen" inside.
   render () {
     let CurrScreen = this.LoginModal
     return (
@@ -65,11 +68,13 @@ class Login extends React.Component {
       })
     }
   }
-
+  
+  //Will be used to automatically transition people @foopert
   checkAuth = () => {
     const authToken = localStorage.getItem(AUTH_TOKEN)
   }
 
+  //Updates state on text input
   handleChange(v, e) {
     this.setState({ [v]: e.target.value });
   }
@@ -78,6 +83,7 @@ class Login extends React.Component {
     localStorage.setItem(AUTH_TOKEN, token)
   }
 
+  //Generic Error 'message' component
   ErrorMessage = (error) => {
     if(error.error !== ""){
       return (
@@ -90,6 +96,7 @@ class Login extends React.Component {
     return ''
   }
 
+  //2 input boxes for email and password and a button 
   LoginModal = () => {
     return (
       <div className="container">

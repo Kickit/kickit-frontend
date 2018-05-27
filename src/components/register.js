@@ -9,6 +9,7 @@ import logo from '../kickit_logo.png';
 import gql from 'graphql-tag'
 
 
+//Mutation definition matching with server 'signup' mutation
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation($email: String!, $password: String!, $first: String!, $last: String!) {
     signup(first: $first, last: $last, email: $email, password: $password) {
@@ -29,6 +30,8 @@ class Register extends React.Component {
     error: ''
   }
   
+  //Triggered by the login button
+  //  Will trigger signup mutation and either display error or transition to /0/
   attemptRegister = async () => {
     const { first, last, email, password } = this.state.userData
 
@@ -52,12 +55,14 @@ class Register extends React.Component {
     }
   }
 
+  //Moves you to the next registration step
   updateStep = (i) => {
     this.setState((prevState, props) => {
       return { step: prevState.step + i }
     })
   }
 
+  //Updates state on user input
   handleChange(v, e) {
     let userData = {...this.state.userData}
     userData[v] = e.target.value
@@ -66,6 +71,19 @@ class Register extends React.Component {
 
   saveAuthData = token => {
     localStorage.setItem(AUTH_TOKEN, token)
+  }
+
+  //Generic Error 'message' component
+  ErrorMessage = (error) => {
+    if(error.error !== ""){
+      return (
+        <Message warning>
+          <Message.Header>Opps!</Message.Header>
+          <p>{error.error}</p>
+        </Message>
+      )
+    }
+    return ''
   }
   
   RegEmail = () => {
@@ -88,18 +106,6 @@ class Register extends React.Component {
       </Form>
       </div>
     )
-  }
-
-  ErrorMessage = (error) => {
-    if(error.error !== ""){
-      return (
-        <Message warning>
-          <Message.Header>Opps!</Message.Header>
-          <p>{error.error}</p>
-        </Message>
-      )
-    }
-    return ''
   }
   
   RegNamePass = () => {
@@ -154,6 +160,7 @@ class Register extends React.Component {
     )
   }
 
+  //based on the 'step' will display the appropriate input fields
   render () {
     let CurrScreen = this.RegEmail
     switch (this.state.step){
