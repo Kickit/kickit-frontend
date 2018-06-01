@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../index.css';
-import { Button, Input, Form, Message, Sidebar, Segment, Menu, Image, Icon, Header, Label } from 'semantic-ui-react'
+import { Button, Input, Form, Message, Sidebar, Segment, Menu, Image, Icon, Header, Label, Divider } from 'semantic-ui-react'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import logo from '../../kickit_logo.png';
 import data from '../../fixture'
@@ -12,11 +12,20 @@ class Home extends React.Component {
 	state = { sidebar: false }
 	toggleVisibility = () => this.setState({ sidebar: !this.state.sidebar })
 	
+	userInfo = () => {
+		return (
+			<UserCard>
+				<h4><Icon name='user outline' size='small' />{data.first} {data.last}</h4>
+				<p>{data.email}</p>
+				<Divider inverted/>
+			</UserCard>
+		)
+	}
 	menuProjects = () => {
 		return data.projects.map( el => {
 			return (
 				<Menu.Item name={el.title} position='left'>
-					- {el.title}
+					<p>{el.title}<Icon name='angle right' inverted={true} size='small' /></p>
         </Menu.Item>
 			)
 		})
@@ -33,13 +42,18 @@ class Home extends React.Component {
 		return (
 			<div>
 			<Sidebar.Pushable as={Segment}>
-				<Sidebar as={Menu} animation='push' width='thin' visible={sidebar} icon='labeled' vertical inverted>
+				<Sidebar as={Menu} animation='push' width='wide' visible={sidebar} icon='labeled' vertical inverted>
+					<this.userInfo/>
 					<this.menuProjects/>
 				</Sidebar>
 				<Sidebar.Pusher>
-					<Tbar> This is the nav </Tbar>
+					<Tbar> 
+					<NavButton basic onClick={this.toggleVisibility}><Icon name='sidebar' /></NavButton>
+					<p>Kickit</p>
+					<NavButton basic onClick={this.toggleVisibility}><Icon name='external' /></NavButton>
+					</Tbar>
 					<Main basic onClick={this.handleClick}>
-						<Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
+						
 					</Main>
 				</Sidebar.Pusher>
 			</Sidebar.Pushable>
@@ -94,9 +108,34 @@ const Main = styled(Segment)`
 	padding: 0;
 	margin: 0;
 `
+const NavButton = styled(Button)`
+	display: flex;
+	max-height: 2.5rem;
+	max-width: 4rem;
+	padding: 0;
+	margin: 0;
+`
+const UserCard = styled.div`
+	display: flex;
+	flex-direction: column;
+	color: white;
+	h4 {
+		text-align: center;
+		width: 100%;
+		margin: 1rem;
+	}
+`
+
 const Tbar = styled(Segment)`
-  display: flex;
+	display: flex;
+	justify-content: space-between;
 	width: 100%;
+	padding: 0.2rem;
+	p {
+		font-weight: 800;
+		font-size: 2rem;
+		margin: 0;
+	}
 
 `
 const SBar = styled.div`
