@@ -104,7 +104,7 @@ const Screen = styled.div`
 
 const Main = styled(Segment)`
   display: flex;
-	height: calc(100VH - 68px);
+	height: calc(100VH - 88px);
 	padding: 0;
 	margin: 0;
 `
