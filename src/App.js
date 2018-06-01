@@ -17,7 +17,7 @@ class App extends Component {
           <Route path="/register" component={Register} />
         </Switch>
         <div className="circle one">&nbsp;</div>
-        <div className="circle two">&nbsp;</div>
+        {/* <div className="circle two">&nbsp;</div> */}
         <div className="circle three">&nbsp;</div>
         <div className="circle four">&nbsp;</div>
         <div className="circle five">&nbsp;</div>
