@@ -14,7 +14,7 @@ export default {
                 "title":"standardization",
                 "position":1,
                 "tasks":[
-                   {
+                   { 
                       "id":"102de32c-14ca-4ef2-9850-a3aaa9c8fc2b",
                       "title":"heuristic",
                       "description":"Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum.",
