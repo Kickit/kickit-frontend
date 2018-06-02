@@ -41,22 +41,25 @@ class Home extends React.Component {
 		const { sidebar } = this.state
 		return (
 			<div>
-			<Sidebar.Pushable as={Segment}>
+			<Content as={Segment} >
 				<Sidebar as={Menu} animation='push' width='wide' visible={sidebar} icon='labeled' vertical inverted>
 					<this.userInfo/>
 					<this.menuProjects/>
 				</Sidebar>
 				<Sidebar.Pusher>
 					<Tbar> 
-					<NavButton basic onClick={this.toggleVisibility}><Icon name='sidebar' /></NavButton>
-					<p>Kickit</p>
+					<NavButton 
+						basic onClick={this.toggleVisibility}>
+						<Icon name='sidebar' />
+					</NavButton>
+					<Logo src={logo}/>
 					<NavButton basic onClick={this.toggleVisibility}><Icon name='external' /></NavButton>
 					</Tbar>
 					<Main basic onClick={this.handleClick}>
 						
 					</Main>
 				</Sidebar.Pusher>
-			</Sidebar.Pushable>
+			</Content>
 		</div>
 		)
 	}
@@ -95,6 +98,16 @@ const media = Object.keys(sizes).reduce((acc, label) => {
 //   ${media.tablet`background: mediumseagreen;`}
 //   ${media.phone`background: palevioletred;`}
 // `;
+
+const Logo = styled.img`
+	width: 12rem;
+  height: 12rem;
+`
+const Content = styled(Sidebar.Pushable)`
+	:last-child {
+		background-color: rgba(0,0,0,0);
+	}
+`
 
 const Screen = styled.div`
   display: flex;
