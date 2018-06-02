@@ -42,7 +42,7 @@ class Home extends React.Component {
 		return (
 			<div>
 			<Content as={Segment} >
-				<Sidebar as={Menu} animation='push' width='wide' visible={sidebar} icon='labeled' vertical inverted>
+				<Sidebar as={Menu} animation='push' width='wide' visible={sidebar} icon='labeled' onClick={this.handleClick} vertical inverted>
 					<this.userInfo/>
 					<this.menuProjects/>
 				</Sidebar>
@@ -56,7 +56,7 @@ class Home extends React.Component {
 					<NavButton basic onClick={this.toggleVisibility}><Icon name='external' /></NavButton>
 					</Tbar>
 					<Main basic onClick={this.handleClick}>
-						
+						{/* //List will go here */}
 					</Main>
 				</Sidebar.Pusher>
 			</Content>
