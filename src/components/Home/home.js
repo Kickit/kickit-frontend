@@ -21,12 +21,10 @@ class Home extends React.Component {
 		let project = data.projects.filter( proj => {
 			return proj.id === props.location.pathname.split('/')[3]
 		})[0] || null
-		console.log(project)
 		this.state = { 
 			sidebar: false,
 			selectedProject: project
 		}
-		console.log(this.state.selectedProject)
 	}
 	
 	
@@ -52,7 +50,6 @@ class Home extends React.Component {
 	}
 
 	goToProject = (project) => {
-		console.log(project)
 		this.setState({ selectedProject: project });
 		this.props.history.push(`/0/projects/${project.id}`)
 	}
