@@ -1,15 +1,35 @@
-import React from 'react';
-import '../../index.css';
-import { Button, Input, Form, Message, Sidebar, Segment, Menu, Image, Icon, Header, Label, Divider } from 'semantic-ui-react'
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import logo from '../../kickit_logo.png';
+import React from 'react'
+import Project from './components/project'
+import { 
+	Button, Input, Form, 
+	Message, Sidebar, Segment, 
+	Menu, Image, Icon, 
+	Header, Label, Divider 
+} from 'semantic-ui-react'
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
+import logo from '../../kickit_logo.png'
 import data from '../../fixture'
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
+import '../../index.css'
 
 //Fiture data to start with, will wire up later
 
 class Home extends React.Component {
-	state = { sidebar: false }
+	constructor(props){
+		super(props)
+		let x = data
+		let project = data.projects.filter( proj => {
+			return proj.id === props.location.pathname.split('/')[3]
+		})[0] || null
+		console.log(project)
+		this.state = { 
+			sidebar: false,
+			selectedProject: project
+		}
+		console.log(this.state.selectedProject)
+	}
+	
+	
 	toggleVisibility = () => this.setState({ sidebar: !this.state.sidebar })
 	
 	userInfo = () => {
@@ -24,11 +44,17 @@ class Home extends React.Component {
 	menuProjects = () => {
 		return data.projects.map( el => {
 			return (
-				<Menu.Item name={el.title} position='left'>
+				<Menu.Item name={el.title} position='left' onClick={() => this.goToProject(el)}>
 					<p>{el.title}<Icon name='angle right' inverted={true} size='small' /></p>
         </Menu.Item>
 			)
 		})
+	}
+
+	goToProject = (project) => {
+		console.log(project)
+		this.setState({ selectedProject: project });
+		this.props.history.push(`/0/projects/${project.id}`)
 	}
 
 	handleClick = () => {
@@ -56,7 +82,9 @@ class Home extends React.Component {
 					<NavButton basic onClick={this.toggleVisibility}><Icon name='external' /></NavButton>
 					</Tbar>
 					<Main basic onClick={this.handleClick}>
-						{/* //List will go here */}
+						<Switch>
+							<Route path='/0/projects/:projectid' render={() => <Project project={this.state.selectedProject}/>} />
+						</Switch>
 					</Main>
 				</Sidebar.Pusher>
 			</Content>
