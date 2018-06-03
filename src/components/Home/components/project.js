@@ -14,15 +14,15 @@ import '../../../index.css'
 
 const SortableItem = SortableElement(({value}) =>
     {if(value.type == 'section'){
-        return <li><h1>{value.data.title}</h1></li>
+        return <li className='section'><h1>{value.data.title}</h1></li>
     } else {
-        return <li>{value.data.title}</li>
+        return <li className='task'>{value.data.title}</li>
     }}
 )
 
 const SortableList = SortableContainer(({items}) => {
   return (
-    <ul>
+    <ul className='project-list'>
       {items.map((value, index) => (
         <SortableItem key={`item-${index}`} index={index} value={value} />
       ))}
@@ -62,11 +62,42 @@ class Project extends React.Component {
 	render() {
         console.log(this.state.items)
 		return (
-			<div>
+			<ProjectContainer>
                 <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
-		    </div>
+		    </ProjectContainer>
 		)
 	}
 }
+
+const ProjectList = styled(SortableContainer)`
+    background-color: black;
+    padding-top: 500px;
+    .project-list {
+        background-color: black;
+    }
+`
+
+const ProjectContainer = styled('div')`
+	color: #FFFFFF;
+	padding: 15px;
+    background: linear-gradient(135deg, rgba(30, 187, 202,0.4), rgba(235, 188, 167, 0.4));
+    border-radius: 1rem;
+    overflow-y: overlay;
+    ul {
+        list-style-type: none;
+        padding: 0;
+        li {
+            background-color: #FFFFFF;
+            cursor: pointer;
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Fira Sans", sans-serif;
+            color: #757575;
+            transition: opacity 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+    }
+
+`
 
 export default Project
