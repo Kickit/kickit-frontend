@@ -35,22 +35,30 @@ class Project extends React.Component {
 	constructor(props) {
         super(props)
         let items = []
-        if(props.project){
-            items = [].concat(...props.project.sections.map( section => {
-                return [].concat({type: 'section', data: section}, ...section.tasks.map( task => {
-                    return {type:'task', data: task}
-                }))
-            }))
-        }
         console.log(items)
         this.state = {
             project: props.project,
-            items: items
+            items: this.projectItems(props.project),
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ project: nextProps.project });  
+        console.log('Update: ',nextProps)
+        this.setState({ project: nextProps.project, items: this.projectItems(nextProps.project) });  
+    }
+
+    getItemList(project) {
+        return null
+    }
+
+    projectItems(project) {
+        if(project === undefined || project.sections === undefined){return []}
+
+        return [].concat(...project.sections.map( section => {
+            return [].concat({type: 'section', data: section}, ...section.tasks.map( task => {
+                return {type:'task', data: task}
+            }))
+        }))
     }
 
     onSortEnd = ({oldIndex, newIndex}) => {
@@ -60,7 +68,6 @@ class Project extends React.Component {
 
     }
 	render() {
-        console.log(this.state.items)
 		return (
 			<ProjectContainer>
                 <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
