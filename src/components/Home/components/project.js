@@ -12,6 +12,7 @@ import data from '../../../fixture'
 import '../../../index.css'
 
 
+// SortableItem: Templating for the card
 const SortableItem = SortableElement(({value}) =>
     {if(value.type == 'section'){
         return <li className='section'><h1>{value.data.title}</h1></li>
@@ -20,6 +21,7 @@ const SortableItem = SortableElement(({value}) =>
     }}
 )
 
+// SortableList: Templating for the list
 const SortableList = SortableContainer(({items}) => {
   return (
     <ul className='project-list'>
@@ -31,6 +33,7 @@ const SortableList = SortableContainer(({items}) => {
 })
 
 
+// Project: Component used on the /projects/:id route
 class Project extends React.Component {
 	constructor(props) {
         super(props)
@@ -44,10 +47,6 @@ class Project extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({ project: nextProps.project, items: this.projectItems(nextProps.project) });  
-    }
-
-    getItemList(project) {
-        return null
     }
 
     projectItems(project) {
@@ -74,14 +73,6 @@ class Project extends React.Component {
 		)
 	}
 }
-
-const ProjectList = styled(SortableContainer)`
-    background-color: black;
-    padding-top: 500px;
-    .project-list {
-        background-color: black;
-    }
-`
 
 const ProjectContainer = styled('div')`
 	color: #FFFFFF;
