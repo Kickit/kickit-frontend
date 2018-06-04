@@ -43,7 +43,6 @@ class Project extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('Update: ',nextProps)
         this.setState({ project: nextProps.project, items: this.projectItems(nextProps.project) });  
     }
 
