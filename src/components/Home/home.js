@@ -65,6 +65,11 @@ class Home extends React.Component {
     }
 	}
 
+	// goTo: simple helper to goto a given route
+	goTo = (route) => {
+		this.props.history.push(`/0/`)
+	}
+
 	// logout: remove auth token from storage and redirect to login
 	logout = () => {
 		localStorage.removeItem(AUTH_TOKEN)
@@ -88,11 +93,17 @@ class Home extends React.Component {
 					<this.menuProjects/>
 				</Sidebar>
 				<Sidebar.Pusher>
-					<TopBar> 
-						<NavButton 
-							basic onClick={this.toggleVisibility}>
-							<Icon name='sidebar' />
-						</NavButton>
+					<TopBar>
+						<Row>
+							<NavButton 
+								basic onClick={this.toggleVisibility}>
+								<Icon name='sidebar' />
+							</NavButton>
+							<NavButton 
+								basic onClick={() => this.goTo('/0/')}>
+								<Icon name='home' />
+							</NavButton>
+						</Row>
 						<Logo src={logo}/>
 						<NavButton basic onClick={this.logout}>
 							<Icon name='external' />
@@ -140,6 +151,11 @@ const media = Object.keys(sizes).reduce((acc, label) => {
 //   ${media.tablet`background: mediumseagreen;`}
 //   ${media.phone`background: palevioletred;`}
 // `;
+
+const Row = styled('div')`
+	display: flex;
+	flex-direction: row;
+` 
 
 const Logo = styled.img`
 	width: 12rem;
