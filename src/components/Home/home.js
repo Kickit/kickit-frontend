@@ -1,19 +1,20 @@
 import React from 'react'
-import Project from './components/project'
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import { 
 	Button, Input, Form, 
 	Message, Sidebar, Segment, 
 	Menu, Image, Icon, 
 	Header, Label, Divider 
 } from 'semantic-ui-react'
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
-import logo from '../../kickit_logo.png'
-import data from '../../fixture'
 import styled, { css } from 'styled-components'
 import '../../index.css'
+import Project from './components/project'
+import { AUTH_TOKEN } from '../../constants'
+import logo from '../../kickit_logo.png'
+import data from '../../fixture'  //Fixture data to start with, will wire up later
 
-//Fiture data to start with, will wire up later
 
+// Home: Dashboard style setup with some grouping and visualizations
 class Home extends React.Component {
 	constructor(props){
 		super(props)
@@ -27,9 +28,10 @@ class Home extends React.Component {
 		}
 	}
 	
-	
+	// toggleVisibility: Open and close sidebar
 	toggleVisibility = () => this.setState({ sidebar: !this.state.sidebar })
 	
+	// userInfo: piece to populate account information of sidebar
 	userInfo = () => {
 		return (
 			<UserCard>
@@ -39,6 +41,7 @@ class Home extends React.Component {
 			</UserCard>
 		)
 	}
+	// menuProjects: piece to populated projects for a user
 	menuProjects = () => {
 		return data.projects.map( el => {
 			return (
@@ -49,50 +52,64 @@ class Home extends React.Component {
 		})
 	}
 
+	// goToProject: function to manage navigation to project route
 	goToProject = (project) => {
 		this.setState({ selectedProject: project });
 		this.props.history.push(`/0/projects/${project.id}`)
 	}
 
-	handleClick = () => {
+	// closeSidebar: specifically close the sidebar when user clicks away from it
+	closeSidebar = () => {
     if (this.state.sidebar) {
       this.setState({ sidebar: false });
     }
 	}
+
+	// logout: remove auth token from storage and redirect to login
+	logout = () => {
+		localStorage.removeItem(AUTH_TOKEN)
+		this.props.history.push(`../../login`)
+	}
 	
+	// Todo: break sidebar into its own component
 	render() {
 		const { sidebar } = this.state
 		return (
 			<div>
-			<Content as={Segment} >
-				<Sidebar as={Menu} animation='push' width='wide' visible={sidebar} icon='labeled' onClick={this.handleClick} vertical inverted>
+			<Outlet as={Segment} >
+				<Sidebar 
+					as={Menu} 
+					animation='push' 
+					width='wide' 
+					visible={sidebar} 
+					icon='labeled' 
+					onClick={this.closeSidebar} vertical inverted>
 					<this.userInfo/>
 					<this.menuProjects/>
 				</Sidebar>
 				<Sidebar.Pusher>
-					<Tbar> 
-					<NavButton 
-						basic onClick={this.toggleVisibility}>
-						<Icon name='sidebar' />
-					</NavButton>
-					<Logo src={logo}/>
-					<NavButton basic onClick={this.toggleVisibility}><Icon name='external' /></NavButton>
-					</Tbar>
-					<Main basic onClick={this.handleClick}>
+					<TopBar> 
+						<NavButton 
+							basic onClick={this.toggleVisibility}>
+							<Icon name='sidebar' />
+						</NavButton>
+						<Logo src={logo}/>
+						<NavButton basic onClick={this.logout}>
+							<Icon name='external' />
+						</NavButton>
+					</TopBar>
+					<Main basic onClick={this.closeSidebar}>
 						<Switch>
 							<Route path='/0/projects/:projectid' render={() => <Project project={this.state.selectedProject}/>} />
 						</Switch>
 					</Main>
 				</Sidebar.Pusher>
-			</Content>
+			</Outlet>
 		</div>
 		)
 	}
 
 }
-
-
-
 // Styling
 
 const sizes = {
@@ -128,7 +145,7 @@ const Logo = styled.img`
 	width: 12rem;
   height: 12rem;
 `
-const Content = styled(Sidebar.Pushable)`
+const Outlet = styled(Sidebar.Pushable)`
 	:last-child {
 		background-color: rgba(0,0,0,0);
 	}
@@ -164,7 +181,7 @@ const UserCard = styled.div`
 	}
 `
 
-const Tbar = styled(Segment)`
+const TopBar = styled(Segment)`
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
@@ -175,9 +192,6 @@ const Tbar = styled(Segment)`
 		margin: 0;
 	}
 
-`
-const SBar = styled.div`
-  display: flex;
 `
 
 
