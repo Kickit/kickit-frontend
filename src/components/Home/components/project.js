@@ -1,13 +1,14 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 import { 
 	Button, Input, Form, 
 	Message, Sidebar, Segment, 
 	Menu, Image, Icon, 
 	Header, Label, Divider 
 } from 'semantic-ui-react'
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
-import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import styled, { css } from 'styled-components'
+
 import data from '../../../fixture'
 import '../../../index.css'
 
@@ -15,20 +16,25 @@ import '../../../index.css'
 // SortableItem: Templating for the card
 const SortableItem = SortableElement(({value}) =>
     {if(value.type == 'section'){
-        return <li className='section'><h1>{value.data.title}</h1></li>
+        return <StyledElement className='item section'><h1>{value.data.title}</h1></StyledElement>
     } else {
-        return <li className='task'>{value.data.title}</li>
+        return (
+            <StyledElement className='item task'>
+                <span className='title'>{value.data.title}</span>
+                <span className='description'>{value.data.description}</span>
+            </StyledElement>
+        )
     }}
 )
 
 // SortableList: Templating for the list
 const SortableList = SortableContainer(({items}) => {
   return (
-    <ul className='project-list'>
+    <ProjectList className='project-list'>
       {items.map((value, index) => (
         <SortableItem key={`item-${index}`} index={index} value={value} />
       ))}
-    </ul>
+    </ProjectList>
   )
 })
 
@@ -68,33 +74,59 @@ class Project extends React.Component {
 	render() {
 		return (
 			<ProjectContainer>
-                <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
+                <SortableList pressDelay={200} items={this.state.items} onSortEnd={this.onSortEnd} />
+                <div style={{width: '50VW'}}>
+                    Sample
+                </div>
 		    </ProjectContainer>
 		)
 	}
 }
 
-const ProjectContainer = styled('div')`
-	color: #FFFFFF;
-	padding: 15px;
+const ProjectList = styled('div')`
     background: linear-gradient(135deg, rgba(30, 187, 202,0.4), rgba(235, 188, 167, 0.4));
     border-radius: 1rem;
+    color: #FFFFFF;
+    list-style: none;
     overflow-y: overlay;
-    ul {
-        list-style-type: none;
-        padding: 0;
-        li {
-            background-color: #FFFFFF;
-            cursor: pointer;
-            margin-top: 10px;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: "Fira Sans", sans-serif;
-            color: #757575;
-            transition: opacity 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    padding: 1rem;
+`
+const StyledElement = styled('li')`
+    background-color: #FFFFFF;
+    cursor: pointer;
+    padding: 5px;
+    font-family: "Fira Sans", sans-serif;
+    color: #757575;
+    &.section {
+        margin: 1rem 0rem 1rem 0rem;
+        transition: opacity 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+        border-radius: 0.5rem;
+        list-style: none;
+        text-align: center;
+    }
+    &.task {
+        display: flex;
+        border-radius: 0;
+        transition: opacity 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+        .title {
+            font-weight: 600;
+        }
+        .description {
+            text-align: left;
+            width: 80%;
+            margin-left: 1rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
     }
+`
 
+const ProjectContainer = styled('div')`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 `
 
 export default Project
