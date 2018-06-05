@@ -44,7 +44,6 @@ class Project extends React.Component {
 	constructor(props) {
         super(props)
         let items = []
-        console.log(items)
         this.state = {
             project: props.project,
             items: this.projectItems(props.project),

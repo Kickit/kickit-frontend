@@ -11,13 +11,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Router>
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/0/" component={Home} />
           <Route path="/register" component={Register} />
         </Switch>
+        </Router>
         <div className="circle one">&nbsp;</div>
-        {/* <div className="circle two">&nbsp;</div> */}
         <div className="circle three">&nbsp;</div>
         <div className="circle four">&nbsp;</div>
         <div className="circle five">&nbsp;</div>
