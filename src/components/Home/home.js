@@ -19,16 +19,15 @@ class Home extends React.Component {
 	constructor(props){
 		super(props)
 		//  #TODO: Change this to query backend for VALID auth_token
-		if(!localStorage.getItem(AUTH_TOKEN)){
-			this.props.history.push(`/login`)
-		} else {
-			let project = data.projects.filter( proj => {
-				return proj.id === props.location.pathname.split('/')[2]
-			})[0] || null
-			this.state = { 
-				sidebar: false,
-				selectedProject: project
-			}
+		// if(!localStorage.getItem(AUTH_TOKEN)){
+		// 	this.props.history.push(`/login`)
+		// }
+		let project = data.projects.filter( proj => {
+			return proj.id === props.location.pathname.split('/')[2]
+		})[0] || null
+		this.state = { 
+			sidebar: false,
+			selectedProject: project
 		}
 		
 	}
@@ -83,7 +82,6 @@ class Home extends React.Component {
 	
 	// Todo: break sidebar into its own component
 	render() {
-		const { sidebar } = this.state
 		return (
 			<div>
 			<Outlet as={Segment} >
@@ -91,7 +89,7 @@ class Home extends React.Component {
 					as={Menu} 
 					animation='push' 
 					width='wide' 
-					visible={sidebar} 
+					visible={this.state.sidebar} 
 					icon='labeled' 
 					onClick={this.closeSidebar} vertical inverted>
 					<this.userInfo/>
