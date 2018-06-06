@@ -106,33 +106,28 @@ class Project extends React.Component {
 	}
 }
 
+// Media querry logic
 const sizes = {
     desktop: 992,
     tablet: 768,
-    phone: 676
+    phone: 576
   }
   
-  // Iterate through the sizes and create a media template
-  const media = Object.keys(sizes).reduce((acc, label) => {
+const media = Object.keys(sizes).reduce((acc, label) => {
     acc[label] = (...args) => css`
-      @media (max-width: ${sizes[label]}px) {
+        @media (max-width: ${sizes[label]}px) {
         ${css(...args)}
-      }
+        }
     `
-  
     return acc
 }, {})
+
 
 const Row = styled('div')`
     display: flex;
     flex-direction: row;
 `
-const Container = Row.extend`
-    ${media.phone`flex-direction: column;`}
-    div {
-        max-width: 100%;
-    }
-`
+
 const Column = styled('div')`
     display: flex;
     flex-direction: column;
@@ -151,6 +146,12 @@ const Card = styled(Segment)`
 
     }
 `
+const Container = Row.extend`
+    ${media.phone`flex-direction: column;`}
+    div {
+        max-width: 100%;
+    }
+`
 
 const DetailsCard = Card.extend`
     &.ui.segment {
@@ -158,7 +159,6 @@ const DetailsCard = Card.extend`
     }
 `
 const ListColumn = Column.extend`
-    ${media.desktop`flex: 2;`}
     ${media.phone`display: none;`}
 `
 const DetailColumn = Column.extend`
