@@ -15,7 +15,7 @@ class App extends Component {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/" component={Home} />
+          <Route path="" component={Home} />
         </Switch>
         </Router>
         <div className="circle one">&nbsp;</div>
