@@ -18,13 +18,19 @@ import data from '../../fixture'  //Fixture data to start with, will wire up lat
 class Home extends React.Component {
 	constructor(props){
 		super(props)
-		let project = data.projects.filter( proj => {
-			return proj.id === props.location.pathname.split('/')[2]
-		})[0] || null
-		this.state = { 
-			sidebar: false,
-			selectedProject: project
+		//  #TODO: Change this to query backend for VALID auth_token
+		if(!localStorage.getItem(AUTH_TOKEN)){
+			this.props.history.push(`/login`)
+		} else {
+			let project = data.projects.filter( proj => {
+				return proj.id === props.location.pathname.split('/')[2]
+			})[0] || null
+			this.state = { 
+				sidebar: false,
+				selectedProject: project
+			}
 		}
+		
 	}
 	
 	// toggleVisibility: Open and close sidebar
