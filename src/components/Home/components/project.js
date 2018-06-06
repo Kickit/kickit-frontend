@@ -14,30 +14,47 @@ import '../../../index.css'
 
 
 // SortableItem: Templating for the card
-const SortableItem = SortableElement(({value}) =>
+const SortableItem = SortableElement(({value, clicked}) =>
+    
     {if(value.type == 'section'){
         return <StyledElement className='item section'><h1>{value.data.title}</h1></StyledElement>
     } else {
         return (
+            <div onClick={()=> clicked(value)}>
             <StyledElement className='item task'>
                 <span className='title'>{value.data.title}</span>
                 <span className='description'>{value.data.description}</span>
             </StyledElement>
+            </div>
         )
     }}
 )
 
 // SortableList: Templating for the list
-const SortableList = SortableContainer(({items}) => {
-  return (
-    <ProjectList className='project-list'>
-      {items.map((value, index) => (
-        <SortableItem key={`item-${index}`} index={index} value={value} />
-      ))}
-    </ProjectList>
-  )
+const SortableList = SortableContainer(({items, clicked, visable}) => {
+    return (
+        <ProjectList className={`project-list ${visable}`}>
+        {items.map((value, index) => (
+            <SortableItem key={`item-${index}`}  index={index} value={value} clicked={clicked} />
+        ))}
+        </ProjectList>
+    )
 })
 
+// TaskDetails: Full information related to the task 
+const TaskDetails = ({task, close}) => {
+    if (task) {
+        return (
+            <DetailsCard>
+                <Row><Icon name='close' onClick={()=> close(null)}/></Row>
+                <h1>{task.data.title}</h1>
+                <p>{task.data.description}</p>
+            </DetailsCard>
+        )
+    } else {
+        return null
+    }
+}
 
 // Project: Component used on the /projects/:id route
 class Project extends React.Component {
@@ -47,6 +64,7 @@ class Project extends React.Component {
         this.state = {
             project: props.project,
             items: this.projectItems(props.project),
+            selectedItem: null,
         }
     }
 
@@ -55,13 +73,17 @@ class Project extends React.Component {
     }
 
     projectItems(project) {
-        if(project === undefined || project.sections === undefined){return []}
+        if( !project || project.sections === undefined){return []}
 
         return [].concat(...project.sections.map( section => {
             return [].concat({type: 'section', data: section}, ...section.tasks.map( task => {
                 return {type:'task', data: task}
             }))
         }))
+    }
+
+    selectItem(item) {
+        this.setState({selectedItem: item})
     }
 
     onSortEnd = ({oldIndex, newIndex}) => {
@@ -72,24 +94,79 @@ class Project extends React.Component {
     }
 	render() {
 		return (
-			<ProjectContainer>
-                <SortableList pressDelay={200} items={this.state.items} onSortEnd={this.onSortEnd} />
-                <div style={{width: '50VW'}}>
-                    Sample
-                </div>
-		    </ProjectContainer>
+			<Row>
+                <SortableList visable={!!this.state.selectedItem ? 'sm-invisible' : 'sm-visible'} clicked={e => this.selectItem(e)} pressDelay={200} items={this.state.items} onSortEnd={this.onSortEnd} />
+                <DetailColumn>
+                    <TaskDetails close={e => this.selectItem(e)} task={this.state.selectedItem}/>
+                    <Card>
+                        This is some sample text to demonstrate the width of this card.
+                    </Card>
+                </DetailColumn>
+		    </Row>
 		)
 	}
 }
 
-const ProjectList = styled('div')`
-    background: linear-gradient(135deg, rgba(30, 187, 202,0.4), rgba(235, 188, 167, 0.4));
-    border-radius: 1rem;
-    color: #FFFFFF;
-    list-style: none;
-    overflow-y: overlay;
-    padding: 1rem;
+const sizes = {
+    desktop: 992,
+    tablet: 768,
+    phone: 376
+  }
+  
+  // Iterate through the sizes and create a media template
+  const media = Object.keys(sizes).reduce((acc, label) => {
+    acc[label] = (...args) => css`
+      @media (max-width: ${sizes[label] / 16}em) {
+        ${css(...args)}
+      }
+    `
+  
+    return acc
+}, {})
+
+const Row = styled('div')`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    
+    ${media.phone`flex-direction: column;`}
 `
+const Column = styled('div')`
+    display: flex;
+    flex-direction: column;
+`
+
+const Card = styled(Segment)`
+    &.ui.segment {
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
+    
+    &.sm-invisible {
+            ${media.phone`display: none;`}
+    }
+`
+
+const DetailsCard = Card.extend`
+    &.ui.segment {
+        
+    }
+`
+const DetailColumn = Column.extend`
+
+`
+
+const ProjectList = Card.extend`
+    &.ui.segment {
+        background: linear-gradient(135deg, rgba(30, 187, 202,0.4), rgba(235, 188, 167, 0.4));
+        border-radius: 0.5rem;
+        color: #FFFFFF;
+        list-style: none;
+        overflow-y: overlay;
+    }
+    
+`
+
 const StyledElement = styled('li')`
     background-color: #FFFFFF;
     cursor: pointer;
@@ -120,12 +197,6 @@ const StyledElement = styled('li')`
             overflow: hidden;
         }
     }
-`
-
-const ProjectContainer = styled('div')`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
 `
 
 export default Project
