@@ -18,9 +18,8 @@ import data from '../../fixture'  //Fixture data to start with, will wire up lat
 class Home extends React.Component {
 	constructor(props){
 		super(props)
-		let x = data
 		let project = data.projects.filter( proj => {
-			return proj.id === props.location.pathname.split('/')[3]
+			return proj.id === props.location.pathname.split('/')[2]
 		})[0] || null
 		this.state = { 
 			sidebar: false,
@@ -55,7 +54,7 @@ class Home extends React.Component {
 	// goToProject: function to manage navigation to project route
 	goToProject = (project) => {
 		this.setState({ selectedProject: project });
-		this.props.history.push(`/0/projects/${project.id}`)
+		this.props.history.push(`/projects/${project.id}`)
 	}
 
 	// closeSidebar: specifically close the sidebar when user clicks away from it
@@ -67,7 +66,7 @@ class Home extends React.Component {
 
 	// goTo: simple helper to goto a given route
 	goTo = (route) => {
-		this.props.history.push(`/0/`)
+		this.props.history.push(`/`)
 	}
 
 	// logout: remove auth token from storage and redirect to login
@@ -100,7 +99,7 @@ class Home extends React.Component {
 								<Icon name='sidebar' />
 							</NavButton>
 							<NavButton 
-								basic onClick={() => this.goTo('/0/')}>
+								basic onClick={() => this.goTo('/')}>
 								<Icon name='home' />
 							</NavButton>
 						</Row>
@@ -111,7 +110,7 @@ class Home extends React.Component {
 					</TopBar>
 					<Main basic onClick={this.closeSidebar}>
 						<Switch>
-							<Route path='/0/projects/:projectid' render={() => <Project project={this.state.selectedProject}/>} />
+							<Route path='/projects/:projectid' render={() => <Project project={this.state.selectedProject}/>} />
 						</Switch>
 					</Main>
 				</Sidebar.Pusher>

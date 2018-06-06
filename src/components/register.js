@@ -47,7 +47,7 @@ class Register extends React.Component {
       const { token } = result.data.signup
       this.saveAuthData(token)
   
-      this.props.history.push(`/0/`)
+      this.props.history.push(`/`)
     } catch (e) {
       this.setState((prevState, props) => {
         return {error: e.message.split(':')[1], step: 1}

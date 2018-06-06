@@ -61,7 +61,7 @@ class Login extends React.Component {
       })
       const { token } = result.data.login
       this.saveAuthData(token)
-      this.props.history.push(`/0/`)
+      this.props.history.push(`/`)
     } catch (e) {
       this.setState((prevState, props) => {
         return {error: "The username or password is not correct."}
