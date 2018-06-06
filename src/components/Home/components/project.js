@@ -94,15 +94,14 @@ class Project extends React.Component {
     }
 	render() {
 		return (
-			<Row>
-                <SortableList visable={!!this.state.selectedItem ? 'sm-invisible' : 'sm-visible'} clicked={e => this.selectItem(e)} pressDelay={200} items={this.state.items} onSortEnd={this.onSortEnd} />
-                <DetailColumn>
+			<Container>
+                <ListColumn style={{display: this.state.selectedItem ? '' : 'inherit'}}>
+                    <SortableList style={{maxWidth: '100%'}} visable={!!this.state.selectedItem ? 'sm-invisible' : 'sm-visible'} clicked={e => this.selectItem(e)} pressDelay={200} items={this.state.items} onSortEnd={this.onSortEnd} />
+                </ListColumn>
+                <DetailColumn style={{display: this.state.selectedItem ? '' : 'none'}}>
                     <TaskDetails close={e => this.selectItem(e)} task={this.state.selectedItem}/>
-                    <Card>
-                        This is some sample text to demonstrate the width of this card.
-                    </Card>
                 </DetailColumn>
-		    </Row>
+		    </Container>
 		)
 	}
 }
@@ -110,13 +109,13 @@ class Project extends React.Component {
 const sizes = {
     desktop: 992,
     tablet: 768,
-    phone: 376
+    phone: 676
   }
   
   // Iterate through the sizes and create a media template
   const media = Object.keys(sizes).reduce((acc, label) => {
     acc[label] = (...args) => css`
-      @media (max-width: ${sizes[label] / 16}em) {
+      @media (max-width: ${sizes[label]}px) {
         ${css(...args)}
       }
     `
@@ -127,32 +126,43 @@ const sizes = {
 const Row = styled('div')`
     display: flex;
     flex-direction: row;
-    width: 100%;
-    
+`
+const Container = Row.extend`
     ${media.phone`flex-direction: column;`}
+    div {
+        max-width: 100%;
+    }
 `
 const Column = styled('div')`
     display: flex;
     flex-direction: column;
+    flex: 1;
 `
 
 const Card = styled(Segment)`
     &.ui.segment {
         margin: 0.5rem;
         padding: 0.5rem;
+        
     }
     
     &.sm-invisible {
             ${media.phone`display: none;`}
+
     }
 `
 
 const DetailsCard = Card.extend`
     &.ui.segment {
-        
+
     }
 `
+const ListColumn = Column.extend`
+    ${media.desktop`flex: 2;`}
+    ${media.phone`display: none;`}
+`
 const DetailColumn = Column.extend`
+    flex: 1;
 
 `
 
@@ -164,10 +174,10 @@ const ProjectList = Card.extend`
         list-style: none;
         overflow-y: overlay;
     }
-    
 `
 
 const StyledElement = styled('li')`
+    margin: 0 0.5rem 0 0;
     background-color: #FFFFFF;
     cursor: pointer;
     padding: 5px;
@@ -190,11 +200,10 @@ const StyledElement = styled('li')`
         }
         .description {
             text-align: left;
-            width: 80%;
             margin-left: 1rem;
             text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+            overflow-y: hidden;
+            max-height: 1rem;
         }
     }
 `
