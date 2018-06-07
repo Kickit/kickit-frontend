@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Button } from 'semantic-ui-react'
-import Header from './components/Header'
-import Login from './components/login'
-import Register from './components/register';
-import Home from './components/Home/home'
-import './styles/App.css';
+import Login from './Login/Login'
+import Home from './Home/Home'
+import '../styles/App.css';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <div className="App">
         <Router>
         <Switch>
-          <Route path="/login" component={Login} />
+          <Route path="/login"    component={Login} />
           <Route path="/register" component={Login} />
-          <Route path="/" component={Home} />
+          <Route path="/"         component={Home}  />
         </Switch>
         </Router>
         <div className="circle one">&nbsp;</div>

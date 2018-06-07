@@ -1,13 +1,13 @@
 import React from 'react'
-import { AUTH_TOKEN } from '../utils/constants'
+import { AUTH_TOKEN } from '../../utils/constants'
 import { Button, Input, Form, Message, Icon } from 'semantic-ui-react'
-import logo from '../kickit_logo.png'
-import Header from './Header'
+import logo from '../images/kickit_logo.png'
+import Header from '../components/Header'
 
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import '../styles/index.css';
+import '../../styles/index.css';
 import 'semantic-ui-css/semantic.min.css';
 
 /*

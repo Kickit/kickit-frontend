@@ -8,9 +8,9 @@ import {
 } from 'semantic-ui-react'
 import styled, { css } from 'styled-components'
 import '../../styles/index.css'
-import Project from './components/project'
+import Project from './Project/Project'
 import { AUTH_TOKEN } from '../../utils/constants'
-import logo from '../../kickit_logo.png'
+import logo from '../images/kickit_logo.png'
 import data from '../../utils/fixture'  //Fixture data to start with, will wire up later
 
 
