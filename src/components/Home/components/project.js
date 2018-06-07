@@ -8,9 +8,9 @@ import {
 	Header, Label, Divider 
 } from 'semantic-ui-react'
 import styled, { css } from 'styled-components'
-
-import data from '../../../fixture'
-import '../../../index.css'
+import {Card} from '../../../utils/kickitComponents'
+import data from '../../../utils/fixture'
+import '../../../styles/index.css'
 
 
 // SortableItem: Templating for the card
@@ -61,6 +61,7 @@ class Project extends React.Component {
 	constructor(props) {
         super(props)
         let items = []
+        console.log(this.projectItems(props.project))
         this.state = {
             project: props.project,
             items: this.projectItems(props.project),
@@ -106,7 +107,7 @@ class Project extends React.Component {
 	}
 }
 
-// Media querry logic
+// Media query logic
 const sizes = {
     desktop: 992,
     tablet: 768,
@@ -132,19 +133,6 @@ const Column = styled('div')`
     display: flex;
     flex-direction: column;
     flex: 1;
-`
-
-const Card = styled(Segment)`
-    &.ui.segment {
-        margin: 0.5rem;
-        padding: 0.5rem;
-        
-    }
-    
-    &.sm-invisible {
-            ${media.phone`display: none;`}
-
-    }
 `
 const Container = Row.extend`
     ${media.phone`flex-direction: column;`}

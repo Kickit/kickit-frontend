@@ -1,6 +1,6 @@
 import React from 'react';
-import '../index.css';
-import { AUTH_TOKEN } from '../constants'
+import '../styles/index.css';
+import { AUTH_TOKEN } from '../utils/constants'
 import { Button, Input, Form, Message } from 'semantic-ui-react'
 import { graphql, compose } from 'react-apollo'
 

@@ -8,11 +8,11 @@ import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { BrowserRouter } from 'react-router-dom'
-import { AUTH_TOKEN } from './constants'
+import { AUTH_TOKEN } from './utils/constants'
 import { ApolloLink } from 'apollo-client-preset'
 
-import './index.css'
-import './App.css'
+import './styles/index.css'
+import './styles/App.css'
 
 const httpLink = new HttpLink({ uri: 'http://localhost:3030/graphql' })
 

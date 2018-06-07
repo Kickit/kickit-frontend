@@ -5,7 +5,7 @@ import Header from './components/Header'
 import Login from './components/login'
 import Register from './components/register';
 import Home from './components/Home/home'
-import './App.css';
+import './styles/App.css';
 
 class App extends Component {
   render() {
@@ -15,7 +15,7 @@ class App extends Component {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="" component={Home} />
+          <Route path="/" component={Home} />
         </Switch>
         </Router>
         <div className="circle one">&nbsp;</div>

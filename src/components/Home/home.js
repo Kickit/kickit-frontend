@@ -7,11 +7,11 @@ import {
 	Header, Label, Divider 
 } from 'semantic-ui-react'
 import styled, { css } from 'styled-components'
-import '../../index.css'
+import '../../styles/index.css'
 import Project from './components/project'
-import { AUTH_TOKEN } from '../../constants'
+import { AUTH_TOKEN } from '../../utils/constants'
 import logo from '../../kickit_logo.png'
-import data from '../../fixture'  //Fixture data to start with, will wire up later
+import data from '../../utils/fixture'  //Fixture data to start with, will wire up later
 
 
 // Home: Dashboard style setup with some grouping and visualizations
