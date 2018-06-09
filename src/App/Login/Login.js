@@ -46,7 +46,16 @@ class Login extends React.Component {
       password: '',
       error: '',
     }
-}
+  }
+
+  // Will set weather the login or register modal is visable
+  shouldComponentUpdate(nextProps, nextState){
+    let register = nextProps.match.path.includes('register')
+    if(register !== this.state.register){
+      this.setState({register})
+    }
+    return true
+  }
 
   //Renders Modal frame with "CurrScreen" inside.
   render () {
@@ -247,7 +256,7 @@ class Login extends React.Component {
             value={this.state.password} 
             onChange={ this.handleChange.bind(this, 'password') } 
             placeholder='Password' 
-            type='password' />
+            type='current-password' />
         </Form.Field>
         <Form.Field>
           <Button 
