@@ -1,6 +1,6 @@
 import React from 'react'
 import { AUTH_TOKEN } from '../../utils/constants'
-import { Button, Input, Form, Message, Icon } from 'semantic-ui-react'
+import { Button, Input, Form, Message } from 'semantic-ui-react'
 import logo from '../../images/kickit_logo.png'
 import Header from '../components/header'
 
@@ -61,6 +61,9 @@ class Login extends React.Component {
           break
         case 3:
           CurrScreen = this.RegThankyou
+          break
+        default: 
+          CurrScreen = this.RegEmail
       }
     }
     return (
@@ -196,11 +199,6 @@ class Login extends React.Component {
         return {error: e.message.split(':')[1], step: 1}
       })
     }
-  }
-  
-  //Will be used to automatically transition people @foopert
-  checkAuth = () => {
-    const authToken = localStorage.getItem(AUTH_TOKEN)
   }
 
   //Updates state on text input

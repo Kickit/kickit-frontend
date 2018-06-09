@@ -1,8 +1,7 @@
 import React from 'react'
-import { withRouter } from 'react-router'
-import { Button, Sidebar, Segment, Menu, Icon, Divider } from 'semantic-ui-react'
-import styled, { css } from 'styled-components'
-import  { AnvilSidebar, media } from '../../../utils/anvil'
+import { Sidebar, Segment, Menu, Icon, Divider } from 'semantic-ui-react'
+import styled from 'styled-components'
+import  { AnvilSidebar } from '../../../utils/anvil'
 
 class Sidenav extends React.Component {
 	constructor(props) {

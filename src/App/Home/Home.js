@@ -1,24 +1,10 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
-import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
-import Project from './Project/Project'
-import  { Row, media } from '../../utils/anvil'
+import { Switch, Route } from 'react-router-dom'
 import Sidenav from './components/sidenav'
 import Topbar from './components/topbar'
-import styled, { css } from 'styled-components'
-import '../../styles/index.css'
-
-import { 
-	Button, Input, Form, 
-	Message, Sidebar, Segment, 
-	Menu, Image, Icon, 
-	Header, Label, Divider 
-} from 'semantic-ui-react'
-
+import Project from './Project/Project'
 
 import { AUTH_TOKEN } from '../../utils/constants'
-import logo from '../../images/kickit_logo.png'
 import data from '../../utils/fixture'  //Fixture data to start with, will wire up later
 
 // Home: Dashboard style setup with some grouping and visualizations

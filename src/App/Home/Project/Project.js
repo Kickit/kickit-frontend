@@ -1,22 +1,14 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
-import { 
-	Button, Input, Form, 
-	Message, Sidebar, Segment, 
-	Menu, Image, Icon, 
-	Header, Label, Divider 
-} from 'semantic-ui-react'
-import styled, { css } from 'styled-components'
+import { Icon } from 'semantic-ui-react'
 import { Card, Row, Column, ProjectList, ListItem, media} from '../../../utils/anvil'
-import data from '../../../utils/fixture'
 import '../../../styles/index.css'
 
 
 // SortableItem: Templating for the card
 const SortableItem = SortableElement(({value, clicked}) =>
     
-    {if(value.type == 'section'){
+    {if(value.type === 'section'){
         return <ListItem className='item section'><h1>{value.data.title}</h1></ListItem>
     } else {
         return (
@@ -60,7 +52,6 @@ const TaskDetails = ({task, close}) => {
 class Project extends React.Component {
 	constructor(props) {
         super(props)
-        let items = []
         console.log(this.projectItems(props.project))
         this.state = {
             project: props.project,

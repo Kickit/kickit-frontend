@@ -1,8 +1,7 @@
 import React from 'react'
-import { withRouter } from 'react-router'
-import { Button, Segment, Icon } from 'semantic-ui-react'
-import  { Row, IconButton, media } from '../../../utils/anvil'
-import styled, { css } from 'styled-components'
+import { Segment, Icon } from 'semantic-ui-react'
+import  { Row, IconButton } from '../../../utils/anvil'
+import styled from 'styled-components'
 import logo from '../../../images/kickit_logo.png'
 import { AUTH_TOKEN } from '../../../utils/constants'
 
@@ -15,7 +14,7 @@ class Topbar extends React.Component {
 
   render() {
     return (
-        <Container className='Topbar'>
+        <Container>
             <Row>
                 <IconButton 
                     basic onClick={this.props.toggleSidebar}>

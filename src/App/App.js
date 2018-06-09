@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { Button } from 'semantic-ui-react'
+import { BrowserRouter as Route, Switch } from "react-router-dom";
 import Login from './Login/Login'
 import Home from './Home/Home'
 import '../styles/App.css';

@@ -1,9 +1,4 @@
-import { 
-	Button, Input, Form, 
-	Message, Sidebar, Segment, 
-	Menu, Image, Icon, 
-	Header, Label, Divider 
-} from 'semantic-ui-react'
+import { Button, Segment, Sidebar } from 'semantic-ui-react'
 import styled, { css } from 'styled-components'
 
 // Media query logic
