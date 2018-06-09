@@ -26,13 +26,6 @@ class Home extends React.Component {
 		}
 		
 	}
-	
-	
-	// goToProject: function to manage navigation to project route
-	goToProject = (project) => {
-		this.setState({ selectedProject: project });
-		this.props.history.push(`/projects/${project.id}`)
-	}
 
 	// closeSidebar: specifically close the sidebar when user clicks away from it
 	setSidebar = (state) => {
@@ -53,7 +46,7 @@ class Home extends React.Component {
 	// Todo: break sidebar into its own component
 	render() {
 		return (
-			<Sidenav toggleSidebar={this.toggleVisibility} sidebar={this.state.sidebar} data={this.state.data}>
+			<Sidenav toggleSidebar={this.toggleVisibility} sidebar={this.state.sidebar} history={this.props.history} data={this.state.data}>
 				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
 					<Switch>
 						<Route path='/projects/:projectid' render={() => <Project project={this.state.selectedProject}/>} />
