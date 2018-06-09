@@ -1,37 +1,9 @@
 import React from 'react'
-import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
+import { arrayMove } from 'react-sortable-hoc'
 import { Icon } from 'semantic-ui-react'
-import { Card, Row, Column, ProjectList, ListItem, media} from '../../../utils/anvil'
+import { Card, Row, Column, ListItem, media} from '../../../utils/anvil'
+import { KickitList } from '../../components/list'
 import '../../../styles/index.css'
-
-
-// SortableItem: Templating for the card
-const SortableItem = SortableElement(({value, clicked}) =>
-    
-    {if(value.type === 'section'){
-        return <ListItem className='item section'><h1>{value.data.title}</h1></ListItem>
-    } else {
-        return (
-            <div onClick={()=> clicked(value)}>
-            <ListItem className='item task'>
-                <span className='title'><h4>{value.data.title}</h4></span>
-                <span className='description'><p>{value.data.description}</p></span>
-            </ListItem>
-            </div>
-        )
-    }}
-)
-
-// SortableList: Templating for the list
-const SortableList = SortableContainer(({items, clicked, visable}) => {
-    return (
-        <ProjectList className={`project-list ${visable}`}>
-        {items.map((value, index) => (
-            <SortableItem key={`item-${index}`}  index={index} value={value} clicked={clicked} />
-        ))}
-        </ProjectList>
-    )
-})
 
 // TaskDetails: Full information related to the task 
 const TaskDetails = ({task, close}) => {
@@ -52,7 +24,6 @@ const TaskDetails = ({task, close}) => {
 class Project extends React.Component {
 	constructor(props) {
         super(props)
-        console.log(this.projectItems(props.project))
         this.state = {
             project: props.project,
             items: this.projectItems(props.project),
@@ -83,16 +54,31 @@ class Project extends React.Component {
             items : arrayMove(this.state.items, oldIndex, newIndex)
         })
 
-    }
+		}
+
+		listItem = ({ value }) => (
+
+			<div onClick={()=> this.selectItem(value)}>
+			<ListItem className={`item ${value.type === 'section' ? 'section' : 'task'}`}>
+					<span className='title'><h4>{value.data.title}</h4></span>
+					<span className='description'><p>{value.data.description}</p></span>
+			</ListItem>
+			</div>
+		)
 	render() {
 		return (
 			<Row>
-                <ListColumn style={{display: this.state.selectedItem ? '' : 'inherit'}}>
-                    <SortableList style={{maxWidth: '100%'}} visable={!!this.state.selectedItem ? 'sm-invisible' : 'sm-visible'} clicked={e => this.selectItem(e)} pressDelay={200} items={this.state.items} onSortEnd={this.onSortEnd} />
-                </ListColumn>
-                <DetailColumn style={{display: this.state.selectedItem ? '' : 'none'}}>
-                    <TaskDetails close={e => this.selectItem(e)} task={this.state.selectedItem}/>
-                </DetailColumn>
+				<ListColumn style={{display: this.state.selectedItem ? '' : 'inherit'}}>
+					<KickitList 
+								itemTemplate={this.listItem}
+								items={this.state.items} 
+								onSortEnd={this.onSortEnd} />
+				</ListColumn>
+				<DetailColumn style={{display: this.state.selectedItem ? '' : 'none'}}>
+						<TaskDetails 
+							close={e => this.selectItem(e)} 
+							task={this.state.selectedItem}/>
+				</DetailColumn>
 		    </Row>
 		)
 	}
