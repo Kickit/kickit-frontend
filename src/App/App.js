@@ -9,13 +9,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Router>
         <Switch>
+          <Route path="/"         component={Home}  />
           <Route path="/login"    component={Login} />
           <Route path="/register" component={Login} />
-          <Route path="/"         component={Home}  />
         </Switch>
-        </Router>
         <div className="circle one">&nbsp;</div>
         <div className="circle three">&nbsp;</div>
         <div className="circle four">&nbsp;</div>
