@@ -59,6 +59,14 @@ export const DetailColumn = Column.extend`
 
 `
 
+export const IconButton = styled(Button)`
+    display: flex;
+    max-height: 2.5rem;
+    max-width: 4rem;
+    padding: 0;
+    margin: 0;
+`
+
 export const ProjectList = Card.extend`
     &.ui.segment {
         background: linear-gradient(135deg, rgba(30, 187, 202,0.4), rgba(235, 188, 167, 0.4));
@@ -100,3 +108,16 @@ export const ListItem = styled('li')`
         }
     }
 `
+
+export const AnvilSidebar = {
+    Pushable: styled(Sidebar.Pushable)`
+    &.ui.segment {
+        background: none;
+        border: none;
+        margin:0;
+    }
+    .ui.segment {
+        border: none;
+    }
+    `
+}
