@@ -1,8 +1,8 @@
 import React from 'react'
 import { AUTH_TOKEN } from '../../utils/constants'
 import { Button, Input, Form, Message, Icon } from 'semantic-ui-react'
-import logo from '../images/kickit_logo.png'
-import Header from '../components/Header'
+import logo from '../../images/kickit_logo.png'
+import Header from '../components/header'
 
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
