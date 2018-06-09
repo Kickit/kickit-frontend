@@ -19,6 +19,12 @@ class Sidenav extends React.Component {
 		}
 		return false
 	}
+
+	// goToProject: function to manage navigation to project route
+	goToProject = (project) => {
+		this.props.history.push(`/projects/${project.id}`)
+	}
+
 	// userInfo: piece to populate account information of sidebar
 	userInfo = () => {
 		return (
