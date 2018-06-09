@@ -2,13 +2,14 @@ import { Button, Segment, Sidebar } from 'semantic-ui-react'
 import styled, { css } from 'styled-components'
 
 // Media query logic
-export const sizes = {
+
+const sizes = {
     desktop: 992,
     tablet: 768,
     phone: 576
   }
   
-export const media = Object.keys(sizes).reduce((acc, label) => {
+const media = Object.keys(sizes).reduce((acc, label) => {
     acc[label] = (...args) => css`
         @media (max-width: ${sizes[label]}px) {
         ${css(...args)}
@@ -18,43 +19,43 @@ export const media = Object.keys(sizes).reduce((acc, label) => {
 }, {})
 
 
-export const Row = styled('div')`
+const Row = styled('div')`
     display: flex;
     flex-direction: row;
 `
 
-export const Column = styled('div')`
+const Column = styled('div')`
     display: flex;
     flex-direction: column;
 `
 
-export const Card = styled(Segment)`
+const Card = styled(Segment)`
     &.ui.segment {
         margin: 0.5rem;
         padding: 0.5rem;        
     }
 `
-export const Container = Row.extend`
+const Container = Row.extend`
     ${media.phone`flex-direction: column;`}
     div {
         max-width: 100%;
     }
 `
 
-export const DetailsCard = Card.extend`
+const DetailsCard = Card.extend`
     &.ui.segment {
 
     }
 `
-export const ListColumn = Column.extend`
+const ListColumn = Column.extend`
     ${media.phone`display: none;`}
 `
-export const DetailColumn = Column.extend`
+const DetailColumn = Column.extend`
     flex: 1;
 
 `
 
-export const IconButton = styled(Button)`
+const IconButton = styled(Button)`
     display: flex;
     max-height: 2.5rem;
     max-width: 4rem;
@@ -62,17 +63,7 @@ export const IconButton = styled(Button)`
     margin: 0;
 `
 
-export const ProjectList = Card.extend`
-    &.ui.segment {
-        background: linear-gradient(135deg, rgba(30, 187, 202,0.4), rgba(235, 188, 167, 0.4));
-        border-radius: 0.5rem;
-        color: #FFFFFF;
-        list-style: none;
-        overflow-y: overlay;
-    }
-`
-
-export const ListItem = styled('li')`
+const ListItem = styled('li')`
     margin: 0 0.5rem 0 0;
     background-color: #FFFFFF;
     cursor: pointer;
@@ -99,12 +90,12 @@ export const ListItem = styled('li')`
             margin-left: 1rem;
             text-overflow: ellipsis;
             overflow-y: hidden;
-            max-height: 1rem;
+            max-height: 1.5rem;
         }
     }
 `
 
-export const AnvilSidebar = {
+const AnvilSidebar = {
     Pushable: styled(Sidebar.Pushable)`
     &.ui.segment {
         background: none;
@@ -116,3 +107,9 @@ export const AnvilSidebar = {
     }
     `
 }
+
+export { 
+    media, Row, Column, Card, Container, 
+    DetailColumn, ListColumn, DetailsCard, 
+    IconButton, ListItem, AnvilSidebar
+} 
