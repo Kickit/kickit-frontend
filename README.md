@@ -1,15 +1,15 @@
 # Kickit Frontend (Progressive Web App)
 This repo will serve as the web application codebase for the Kickit Open Source Project Manager. This implementation has been done as a 'create-react-app' to increase its accessibility. This app page will be live at http://app.kickit.us and act as the web browser accessible version for kickit users.
 
-The landing page is a separate code base from the Kickit Web app to reduce the size of each codebase and chances requirement to build and reupload the webapp anytime the landing page changes or vise versa. Landing page is available [here](https://www.github.com/nicklewanowicz/kickit-landing)
+The landing page is a separate code base from the Kickit Web app to reduce the size of each codebase and chances requirement to build and reupload the webapp anytime the landing page changes or vise versa. Landing page is available [here](https://www.github.com/kickit/kickit-landing)
 
 #### Prerequisites:
 - NPM
 
 #### Run the following commands to install:
 
-- after getting [kickit-backend](https://www.github.com/nicklewanowicz/kickit-backend) running locally continue
-- `git clone https://github.com/NickLewanowicz/kickit-frontend`
+- after getting [kickit-backend](https://www.github.com/kickit/kickit-backend) running locally continue
+- `git clone https://github.com/kickit/kickit-frontend`
 - `cd kickit-frontend`
 - `yarn`
 - `yarn start`
