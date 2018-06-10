@@ -7,7 +7,7 @@ class Dashboard extends React.Component {
 		this.state = {
 			data: props.data,
 		}
-    }
+	}
     
 	render() {
 		return (
