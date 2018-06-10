@@ -10,7 +10,7 @@ class Topbar extends React.Component {
 	logout = () => {
 		localStorage.removeItem(AUTH_TOKEN)
 		this.props.history.push(`../../login`)
-	}
+    }
 
   render() {
     return (
@@ -21,7 +21,7 @@ class Topbar extends React.Component {
                     <Icon name='sidebar' />
                 </IconButton>
                 <IconButton 
-                    basic onClick={() => this.goTo('/')}>
+                    basic onClick={() => this.props.history.push(`/0/`)}>
                     <Icon name='home' />
                 </IconButton>
             </Row>

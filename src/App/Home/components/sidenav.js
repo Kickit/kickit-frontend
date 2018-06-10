@@ -22,7 +22,7 @@ class Sidenav extends React.Component {
 
 	// goToProject: function to manage navigation to project route
 	goToProject = (project) => {
-		this.props.history.push(`/projects/${project.id}`)
+		this.props.history.push(`/0/projects/${project.id}`)
 	}
 
 	// userInfo: piece to populate account information of sidebar
@@ -60,8 +60,8 @@ class Sidenav extends React.Component {
                 <this.userInfo/>
                 <this.menuProjects/>
             </Sidebar>
-            <Sidebar.Pusher>
-                {this.props.children}
+            <Sidebar.Pusher style={{height: '100VH'}}>
+				{this.props.children}
             </Sidebar.Pusher>
 	    </AnvilSidebar.Pushable>
     )
