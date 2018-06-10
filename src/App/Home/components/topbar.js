@@ -12,6 +12,10 @@ class Topbar extends React.Component {
 		this.props.history.push(`../../login`)
     }
 
+    goHome = () => {
+        this.props.history.push(`/0/`)
+    }
+
   render() {
     return (
         <Container>
@@ -21,9 +25,9 @@ class Topbar extends React.Component {
                     <Icon name='sidebar' />
                 </IconButton>
                 <IconButton 
-                    basic onClick={() => this.props.history.push(`/0/`)}>
+                    basic onClick={this.props.goHome}>
                     <Icon name='home' />
-                </IconButton>
+                </IconButton>      
             </Row>
             <Logo src={logo}/>
             <IconButton basic onClick={this.logout}>

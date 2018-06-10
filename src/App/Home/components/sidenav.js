@@ -7,6 +7,7 @@ class Sidenav extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = { 
+			selectedProject: this.props.selectedProject,
 			sidebar: this.props.sidebar,
 			data: props.data
 		}
@@ -22,6 +23,7 @@ class Sidenav extends React.Component {
 
 	// goToProject: function to manage navigation to project route
 	goToProject = (project) => {
+		this.props.selectProject(project)
 		this.props.history.push(`/0/projects/${project.id}`)
 	}
 
@@ -60,7 +62,7 @@ class Sidenav extends React.Component {
                 <this.userInfo/>
                 <this.menuProjects/>
             </Sidebar>
-            <Sidebar.Pusher style={{height: '100VH'}}>
+            <Sidebar.Pusher style={{height: '100VH', display: 'flex', flexFlow: 'column'}}>
 				{this.props.children}
             </Sidebar.Pusher>
 	    </AnvilSidebar.Pushable>
