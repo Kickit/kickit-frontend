@@ -1,13 +1,15 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Sidenav from './components/sidenav'
 import Topbar from './components/topbar'
 import Project from './Project/Project'
+import Dashboard from './Dashboard/Dashboard'
 
 import { AUTH_TOKEN } from '../../utils/constants'
 import data from '../../utils/fixture'  //Fixture data to start with, will wire up later
+import styled from 'styled-components';
 
-// Home: Dashboard style setup with some grouping and visualizations
+// Home: available to authorized users and establishes routing
 class Home extends React.Component {
 	constructor(props){
 		super(props)
@@ -17,12 +19,14 @@ class Home extends React.Component {
 		}
 		if(!localStorage.getItem(AUTH_TOKEN)){
 			this.props.history.push(`/login`)
-		} else {
+		} else if (props.location.pathname.includes('projects')) {
 			//  #TODO: Change this to query backend for VALID auth_token
 			let project = data.projects.filter( proj => {
-				return proj.id === props.location.pathname.split('/')[2]
+				return proj.id === props.location.pathname.split('/')[3]
 			})[0] || null
 			this.state.selectedProject = project
+		} else {
+			this.props.history.push(`/0/`)
 		}
 		
 	}
@@ -48,14 +52,15 @@ class Home extends React.Component {
 		return (
 			<Sidenav toggleSidebar={this.toggleVisibility} sidebar={this.state.sidebar} history={this.props.history} data={this.state.data}>
 				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
+				<Router>
 					<Switch>
-						<Route path='/projects/:projectid' render={() => <Project project={this.state.selectedProject}/>} />
+						<Route path='/0/projects/:projectid' render={() => <Project project={this.state.selectedProject}/>} />
+						<Route path='/0/' render={() => <Dashboard project={this.state.data}/>} />
 					</Switch>
+				</Router>
 			</Sidenav>
 		)
 	}
 
 }
-
-
 export default Home

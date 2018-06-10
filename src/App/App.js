@@ -10,9 +10,9 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route path="/login"    component={Login} />
-            <Route path="/register" component={Login} />
-            <Route path="/"         component={Home}  />
+            <Route path='/login'    component={Login}/>
+            <Route path='/register' component={Login}/>
+            <Route path='/'         component={Home} />
           </Switch>
         </Router>
         <div className="circle one">&nbsp;</div>
