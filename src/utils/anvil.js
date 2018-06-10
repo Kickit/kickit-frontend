@@ -57,10 +57,8 @@ const DetailColumn = Column.extend`
 
 const IconButton = styled(Button)`
     display: flex;
-    max-height: 2.5rem;
     max-width: 4rem;
-    padding: 0;
-    margin: 0;
+    padding: 1rem 1rem 1.5rem 1rem;
 `
 
 const ListItem = styled('li')`
