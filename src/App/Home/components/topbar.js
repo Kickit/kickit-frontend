@@ -9,33 +9,33 @@ class Topbar extends React.Component {
 	// logout: remove auth token from storage and redirect to login
 	logout = () => {
 		localStorage.removeItem(AUTH_TOKEN)
-		this.props.history.push(`../../login`)
-    }
+		this.props.history.push('../../login')
+	}
 
-    goHome = () => {
-        this.props.history.push(`/0/`)
-    }
+	goHome = () => {
+		this.props.history.push('/0/')
+	}
 
-  render() {
-    return (
-        <Container>
-            <Row>
-                <IconButton 
-                    basic onClick={this.props.toggleSidebar}>
-                    <Icon name='sidebar' />
-                </IconButton>
-                <IconButton 
-                    basic onClick={this.props.goHome}>
-                    <Icon name='home' />
-                </IconButton>      
-            </Row>
-            <Logo src={logo}/>
-            <IconButton basic onClick={this.logout}>
-                <Icon name='external' />
-            </IconButton>
-        </Container>
-    )
-  }
+	render() {
+		return (
+			<Container>
+				<Row>
+					<IconButton 
+						basic onClick={this.props.toggleSidebar}>
+						<Icon name='sidebar' />
+					</IconButton>
+					<IconButton 
+						basic onClick={this.props.goHome}>
+						<Icon name='home' />
+					</IconButton>      
+				</Row>
+				<Logo src={logo}/>
+				<IconButton basic onClick={this.logout}>
+					<Icon name='external' />
+				</IconButton>
+			</Container>
+		)
+	}
 }
 
 export default Topbar

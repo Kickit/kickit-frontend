@@ -30,7 +30,7 @@ class Home extends React.Component {
 		}
 	}
 
-	// closeSidebar: specifically close the sidebar when user clicks away from it
+	// setSidebar: specifically close the sidebar when user clicks away from it
 	setSidebar = (state) => {
     if (this.state.sidebar) {
       this.setState({ sidebar: state });

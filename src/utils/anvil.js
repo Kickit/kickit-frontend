@@ -4,18 +4,18 @@ import styled, { css } from 'styled-components'
 // Media query logic
 
 const sizes = {
-    desktop: 992,
-    tablet: 768,
-    phone: 576
-  }
+	desktop: 992,
+	tablet: 768,
+	phone: 576
+}
   
 const media = Object.keys(sizes).reduce((acc, label) => {
-    acc[label] = (...args) => css`
+	acc[label] = (...args) => css`
         @media (max-width: ${sizes[label]}px) {
         ${css(...args)}
         }
     `
-    return acc
+	return acc
 }, {})
 
 
@@ -94,7 +94,7 @@ const ListItem = styled('li')`
 `
 
 const AnvilSidebar = {
-    Pushable: styled(Sidebar.Pushable)`
+	Pushable: styled(Sidebar.Pushable)`
     &.ui.segment {
         background: none;
         border: none;
@@ -107,7 +107,7 @@ const AnvilSidebar = {
 }
 
 export { 
-    media, Row, Column, Card, Container, 
-    DetailColumn, ListColumn, DetailsCard, 
-    IconButton, ListItem, AnvilSidebar
+	media, Row, Column, Card, Container, 
+	DetailColumn, ListColumn, DetailsCard, 
+	IconButton, ListItem, AnvilSidebar
 } 
