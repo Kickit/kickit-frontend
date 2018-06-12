@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
 		return (
 			<div>
                 Dashboard
-            </div>
+			</div>
 		)
 	}
 
