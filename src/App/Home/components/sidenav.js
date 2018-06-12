@@ -42,7 +42,7 @@ class Sidenav extends React.Component {
 	menuProjects = () => {
 		return this.state.data.projects.map( el => {
 			return (
-				<Menu.Item name={el.title} position='left' onClick={() => this.goToProject(el)}>
+				<Menu.Item key={el.id} name={el.title} position='left' onClick={() => this.goToProject(el)}>
 					<p>{el.title}<Icon name='angle right' inverted={true} size='small' /></p>
         </Menu.Item>
 			)
