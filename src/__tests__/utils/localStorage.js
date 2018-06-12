@@ -1,6 +1,3 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-
 class LocalStorageMock {
     constructor() {
       this.store = {};
@@ -44,5 +41,5 @@ class LocalStorageMock {
     testStorage.clear()
     expect(testStorage.store).toEqual({})
   })
-  
+
   export default LocalStorageMock
