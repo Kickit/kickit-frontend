@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from './Login/Login'
 import Home from './Home/Home'
 import '../styles/App.css';
@@ -8,11 +8,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-          <Switch>
-            <Route path='/login'    component={Login}/>
-            <Route path='/register' component={Login}/>
-            <Route path='/'         component={Home} />
-          </Switch>
+          <Router>
+            <Switch>
+              <Route path='/login'    component={Login}/>
+              <Route path='/register' component={Login}/>
+              <Route path='/'         component={Home} />
+            </Switch>
+          </Router>
         {/* Todo: make this a component */}
         <div className="circle one">&nbsp;</div>
         <div className="circle three">&nbsp;</div>
