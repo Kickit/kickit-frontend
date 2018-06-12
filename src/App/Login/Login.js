@@ -5,32 +5,11 @@ import logo from '../../images/kickit_logo.png'
 import Header from '../components/header'
 
 import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
+import { login, signup } from '../../graphql/auth'
 
 import '../../styles/index.css';
 import 'semantic-ui-css/semantic.min.css';
 
-/*
-  Todo: @nicklewanowicz using localstorage for JWT session tokens. 
-        MUST swap this to serverside sessions and client cookie auth
-*/
-
-//Mutation definition to match with serverside "login" mutation
-const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-    }
-  }
-`
-
-const SIGNUP_MUTATION = gql`
-  mutation SignupMutation($email: String!, $password: String!, $first: String!, $last: String!) {
-    signup(first: $first, last: $last, email: $email, password: $password) {
-      token
-    }
-  }
-`
 
 //Todo @nicklewanowicz add check to see if they have a valid JWT token
 //     and tranition them automatically
@@ -170,6 +149,7 @@ class Login extends React.Component {
   attemptLogin = async () => {
     const { email, password } = this.state
     try {
+      console.log()
       const result = await this.props.loginMutation({
         variables: {
           email,
@@ -271,6 +251,6 @@ class Login extends React.Component {
 }
 
 export default compose(
-  graphql(SIGNUP_MUTATION, { name: 'signupMutation' }),
-  graphql(LOGIN_MUTATION, { name: 'loginMutation' }),
+  graphql(signup, { name: 'signupMutation' }),
+  graphql(login, { name: 'loginMutation' }),
 )(Login)
