@@ -3,26 +3,26 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { Card } from '../../utils/anvil'
 
 const KickitList = ({ items, itemTemplate, onSortEnd }) => (
-    <List
-        style={{maxWidth: '100%'}} 
-        itemTemplate={itemTemplate}
-        pressDelay={200} 
-        items={items} 
-        onSortEnd={onSortEnd} 
-    />
+	<List
+		style={{maxWidth: '100%'}} 
+		itemTemplate={itemTemplate}
+		pressDelay={200} 
+		items={items} 
+		onSortEnd={onSortEnd} 
+	/>
 ) 
 
 const List = SortableContainer(({ items, itemTemplate }) => (
-        <ProjectList>
-        {items.map((value, index) => (
-            <Item key={`item-${index}`} index={index} value={value} ItemTemplate={itemTemplate}/>
-        ))}
-        </ProjectList>
-    )
+	<ProjectList>
+		{items.map((value, index) => (
+			<Item key={`item-${index}`} index={index} value={value} ItemTemplate={itemTemplate}/>
+		))}
+	</ProjectList>
+)
 )
 
 const Item = SortableElement(({value, ItemTemplate}) => (
-    <ItemTemplate value={value}/>   
+	<ItemTemplate value={value}/>   
 ))
 
 export { KickitList }

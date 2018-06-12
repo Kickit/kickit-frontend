@@ -7,53 +7,52 @@ import '../../../styles/index.css'
 
 // TaskDetails: Full information related to the task 
 const TaskDetails = ({task, close}) => {
-    if (task) {
-        return (
-            <Card>
-                <Row><Icon name='close' onClick={()=> close(null)}/></Row>
-                <h1>{task.data.title}</h1>
-                <p>{task.data.description}</p>
-            </Card>
-        )
-    } else {
-        return null
-    }
+	if (task) {
+		return (
+			<Card>
+				<Row><Icon name='close' onClick={()=> close(null)}/></Row>
+				<h1>{task.data.title}</h1>
+				<p>{task.data.description}</p>
+			</Card>
+		)
+	} else {
+		return null
+	}
 }
 
 // Project: Component used on the /projects/:id route
 class Project extends React.Component {
 	constructor(props) {
-        super(props)
-        this.state = {
-            project: props.project,
-            items: this.projectItems(props.project),
-            selectedItem: null,
-        }
-    }
+		super(props)
+		this.state = {
+				project: props.project,
+				items: this.projectItems(props.project),
+				selectedItem: null,
+		}
+  }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({ project: nextProps.project, items: this.projectItems(nextProps.project) });  
-    }
+	componentWillReceiveProps(nextProps) {
+		this.setState({ project: nextProps.project, items: this.projectItems(nextProps.project) });  
+	}
 
-    projectItems(project) {
-        if( !project || project.sections === undefined){return []}
+	projectItems(project) {
+		if( !project || project.sections === undefined){return []}
 
-        return [].concat(...project.sections.map( section => {
-            return [].concat({type: 'section', data: section}, ...section.tasks.map( task => {
-                return {type:'task', data: task}
-            }))
-        }))
-    }
+		return [].concat(...project.sections.map( section => {
+			return [].concat({type: 'section', data: section}, ...section.tasks.map( task => {
+					return {type:'task', data: task}
+			}))
+		}))
+	}
 
-    selectItem(item) {
-        this.setState({selectedItem: item})
-    }
+	selectItem(item) {
+		this.setState({selectedItem: item})
+	}
 
-    onSortEnd = ({oldIndex, newIndex}) => {
-        this.setState({
-            items : arrayMove(this.state.items, oldIndex, newIndex)
-        })
-
+	onSortEnd = ({oldIndex, newIndex}) => {
+		this.setState({
+			items : arrayMove(this.state.items, oldIndex, newIndex)
+		})
 	}
 
 	listItem = ({ value }) => (
@@ -70,14 +69,14 @@ class Project extends React.Component {
 			<Row>
 				<ListColumn style={{display: this.state.selectedItem ? '' : 'inherit'}}>
 					<KickitList 
-								itemTemplate={this.listItem}
-								items={this.state.items} 
-								onSortEnd={this.onSortEnd} />
+						itemTemplate={this.listItem}
+						items={this.state.items} 
+						onSortEnd={this.onSortEnd} />
 				</ListColumn>
 				<DetailColumn style={{display: this.state.selectedItem ? '' : 'none'}}>
-						<TaskDetails 
-							close={e => this.selectItem(e)} 
-							task={this.state.selectedItem}/>
+					<TaskDetails 
+						close={e => this.selectItem(e)} 
+						task={this.state.selectedItem}/>
 				</DetailColumn>
 		    </Row>
 		)
