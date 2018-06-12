@@ -54,17 +54,17 @@ class Project extends React.Component {
             items : arrayMove(this.state.items, oldIndex, newIndex)
         })
 
-		}
+	}
 
-		listItem = ({ value }) => (
-
-			<div onClick={()=> this.selectItem(value)}>
+	listItem = ({ value }) => (
+		<div onClick={()=> this.selectItem(value)}>
 			<ListItem className={`item ${value.type === 'section' ? 'section' : 'task'}`}>
-					<span className='title'><h4>{value.data.title}</h4></span>
-					<span className='description'><p>{value.data.description}</p></span>
+				<span className='title'><h4>{value.data.title}</h4></span>
+				<span className='description'><p>{value.data.description}</p></span>
 			</ListItem>
-			</div>
-		)
+		</div>
+	)
+	
 	render() {
 		return (
 			<Row>
