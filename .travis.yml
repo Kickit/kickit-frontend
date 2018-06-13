@@ -6,7 +6,8 @@ cache:
     - node_modules
 script:
   - npm test
-  - npm run build
+# TODO: Setup gh-pages with mock api and build
+#  - npm run build
 # deploy:
 #   provider: surge
 #   skip_cleanup: true
