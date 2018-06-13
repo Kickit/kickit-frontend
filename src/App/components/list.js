@@ -2,15 +2,22 @@ import React from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { Card } from '../../utils/anvil'
 
-const KickitList = ({ items, itemTemplate, onSortEnd }) => (
-	<List
-		style={{maxWidth: '100%'}} 
-		itemTemplate={itemTemplate}
-		pressDelay={200} 
-		items={items} 
-		onSortEnd={onSortEnd} 
-	/>
-) 
+
+class KickitList extends React.Component {
+	constructor (props) {
+		super(props)
+		debugger
+	}
+	render () {
+		return (<List
+			style={{maxWidth: '100%'}} 
+			itemTemplate={this.props.itemTemplate}
+			pressDelay={200} 
+			items={this.props.items} 
+			onSortEnd={this.props.onSortEnd} 
+		/>)
+	}
+}
 
 const List = SortableContainer(({ items, itemTemplate }) => (
 	<ProjectList>
@@ -25,7 +32,7 @@ const Item = SortableElement(({value, ItemTemplate}) => (
 	<ItemTemplate value={value}/>   
 ))
 
-export { KickitList }
+export default KickitList
 
 const ProjectList = Card.extend`
     &.ui.segment {
