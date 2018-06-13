@@ -61,7 +61,7 @@ class Home extends React.Component {
 				data={this.state.data}>
 				<Topbar toggleSidebar={this.toggleVisibility} goHome={() => this.goTo('/0/')} history={this.props.history}/>
 					<Switch>
-						<Route path='/0/projects/:projectid' render={() => <Project project={this.state.selectedProject}/>} />
+						<Route path='/0/projects/:projectid' render={() => <Project id={this.state.selectedProject.id}/>} />
 						<Route path='/0/' render={() => <Dashboard project={this.state.data}/>} />
 					</Switch>
 			</Sidenav>
