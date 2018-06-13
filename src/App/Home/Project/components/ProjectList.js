@@ -1,12 +1,8 @@
 import React from 'react'
 import { arrayMove } from 'react-sortable-hoc'
-import { Icon } from 'semantic-ui-react'
-import { Card, Row, Column, ListItem, media} from '../../../../utils/anvil'
+import { ListItem} from '../../../../utils/anvil'
 import KickitList from '../../../components/list'
 import '../../../../styles/index.css'
-
-import { graphql, compose, Query } from 'react-apollo'
-import { project } from '../../../../graphql/queries'
 
 // Project: Component used on the /projects/:id route
 class ProjectList extends React.Component {
@@ -72,18 +68,8 @@ class ProjectList extends React.Component {
 				items={this.state.items} 
 				onSortEnd={this.onSortEnd}
 			/>
-      // <PokemonCard pokemon={this.props.data.Pokemon} handleCancel={this.goBack}/>
 		)
 	}
 }
-
-const ListColumn = Column.extend`
-    flex: 1;
-    ${media.phone`display: none;`}
-`
-const DetailColumn = Column.extend`
-    flex: 1;
-`
-
 
 export default ProjectList

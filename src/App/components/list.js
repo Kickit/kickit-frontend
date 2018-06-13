@@ -4,9 +4,6 @@ import { Card } from '../../utils/anvil'
 
 
 class KickitList extends React.Component {
-	constructor (props) {
-		super(props)
-	}
 	render () {
 		return (<List
 			style={{maxWidth: '100%'}} 

@@ -1,10 +1,9 @@
 import React from 'react'
-import { arrayMove } from 'react-sortable-hoc'
 import { Icon } from 'semantic-ui-react'
-import { Card, Row, Column, ListItem, media} from '../../../utils/anvil'
+import { Card, Row, Column, media} from '../../../utils/anvil'
 import ProjectList from './components/ProjectList'
 import { project } from '../../../graphql/queries'
-import { graphql, compose, Query } from 'react-apollo'
+import { graphql } from 'react-apollo'
 
 
 import '../../../styles/index.css'
@@ -41,35 +40,6 @@ class Project extends React.Component {
 				id: props.id
 		}
   }
-
-	// projectItems(project) {
-	// 	if( !project || project.sections === undefined){return []}
-
-	// 	return [].concat(...project.sections.map( section => {
-	// 		return [].concat({type: 'section', data: section}, ...section.tasks.map( task => {
-	// 				return {type:'task', data: task}
-	// 		}))
-	// 	}))
-	// }
-
-	// selectItem(item) {
-	// 	this.setState({selectedItem: item})
-	// }
-
-	// onSortEnd = ({oldIndex, newIndex}) => {
-	// 	this.setState({
-	// 		items : arrayMove(this.state.items, oldIndex, newIndex)
-	// 	})
-	// }
-
-	// listItem = ({ value }) => (
-	// 	<div onClick={()=> this.selectItem(value)}>
-	// 		<ListItem className={`item ${value.type === 'section' ? 'section' : 'task'}`}>
-	// 			<span className='title'><h4>{value.data.title}</h4></span>
-	// 			<span className='description'><p>{value.data.description}</p></span>
-	// 		</ListItem>
-	// 	</div>
-	// )
 	
 	render() {
 		return (
