@@ -2,11 +2,21 @@ import React from 'react'
 import { arrayMove } from 'react-sortable-hoc'
 import { Icon } from 'semantic-ui-react'
 import { Card, Row, Column, ListItem, media} from '../../../utils/anvil'
-import KickitList from '../../components/list'
+import ProjectList from './components/ProjectList'
+import { project } from '../../../graphql/queries'
+import { graphql, compose, Query } from 'react-apollo'
+
+
 import '../../../styles/index.css'
 
-import { graphql, compose } from 'react-apollo'
-import { project } from '../../../graphql/queries'
+
+const KickitList = graphql(project, {
+  options: (ownProps) => ({
+    variables: {
+      id: ownProps.id
+    }
+  })
+})(ProjectList)
 
 // TaskDetails: Full information related to the task 
 const TaskDetails = ({task, close}) => {
@@ -23,69 +33,49 @@ const TaskDetails = ({task, close}) => {
 	}
 }
 
-const ApolloList = compose(
-	graphql(project, { 
-		name: 'getProjects',
-		options: props => ({
-			variables: {
-				id: '5b1d81bab14c2e6a96b1ac1c'
-			}
-		})
-	})
-)(KickitList)
-
 // Project: Component used on the /projects/:id route
 class Project extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-				project: props.project,
-				items: this.projectItems(props.project),
-				selectedItem: null,
+				id: props.id
 		}
   }
 
-	componentWillReceiveProps(nextProps) {
-		this.setState({ project: nextProps.project, items: this.projectItems(nextProps.project) });  
-	}
+	// projectItems(project) {
+	// 	if( !project || project.sections === undefined){return []}
 
-	projectItems(project) {
-		if( !project || project.sections === undefined){return []}
+	// 	return [].concat(...project.sections.map( section => {
+	// 		return [].concat({type: 'section', data: section}, ...section.tasks.map( task => {
+	// 				return {type:'task', data: task}
+	// 		}))
+	// 	}))
+	// }
 
-		return [].concat(...project.sections.map( section => {
-			return [].concat({type: 'section', data: section}, ...section.tasks.map( task => {
-					return {type:'task', data: task}
-			}))
-		}))
-	}
+	// selectItem(item) {
+	// 	this.setState({selectedItem: item})
+	// }
 
-	selectItem(item) {
-		this.setState({selectedItem: item})
-	}
+	// onSortEnd = ({oldIndex, newIndex}) => {
+	// 	this.setState({
+	// 		items : arrayMove(this.state.items, oldIndex, newIndex)
+	// 	})
+	// }
 
-	onSortEnd = ({oldIndex, newIndex}) => {
-		this.setState({
-			items : arrayMove(this.state.items, oldIndex, newIndex)
-		})
-	}
-
-	listItem = ({ value }) => (
-		<div onClick={()=> this.selectItem(value)}>
-			<ListItem className={`item ${value.type === 'section' ? 'section' : 'task'}`}>
-				<span className='title'><h4>{value.data.title}</h4></span>
-				<span className='description'><p>{value.data.description}</p></span>
-			</ListItem>
-		</div>
-	)
+	// listItem = ({ value }) => (
+	// 	<div onClick={()=> this.selectItem(value)}>
+	// 		<ListItem className={`item ${value.type === 'section' ? 'section' : 'task'}`}>
+	// 			<span className='title'><h4>{value.data.title}</h4></span>
+	// 			<span className='description'><p>{value.data.description}</p></span>
+	// 		</ListItem>
+	// 	</div>
+	// )
 	
 	render() {
 		return (
 			<Row>
 				<ListColumn style={{display: this.state.selectedItem ? '' : 'inherit'}}>
-					<ApolloList 
-						itemTemplate={this.listItem}
-						items={this.state.items} 
-						onSortEnd={this.onSortEnd} />
+					<KickitList id={this.props.id} />
 				</ListColumn>
 				<DetailColumn style={{display: this.state.selectedItem ? '' : 'none'}}>
 					<TaskDetails 
