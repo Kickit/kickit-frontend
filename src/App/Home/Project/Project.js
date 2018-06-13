@@ -2,8 +2,11 @@ import React from 'react'
 import { arrayMove } from 'react-sortable-hoc'
 import { Icon } from 'semantic-ui-react'
 import { Card, Row, Column, ListItem, media} from '../../../utils/anvil'
-import { KickitList } from '../../components/list'
+import KickitList from '../../components/list'
 import '../../../styles/index.css'
+
+import { graphql, compose } from 'react-apollo'
+import { project } from '../../../graphql/queries'
 
 // TaskDetails: Full information related to the task 
 const TaskDetails = ({task, close}) => {
@@ -19,6 +22,17 @@ const TaskDetails = ({task, close}) => {
 		return null
 	}
 }
+
+const ApolloList = compose(
+	graphql(project, { 
+		name: 'getProjects',
+		options: props => ({
+			variables: {
+				id: '5b1d81bab14c2e6a96b1ac1c'
+			}
+		})
+	})
+)(KickitList)
 
 // Project: Component used on the /projects/:id route
 class Project extends React.Component {
@@ -68,7 +82,7 @@ class Project extends React.Component {
 		return (
 			<Row>
 				<ListColumn style={{display: this.state.selectedItem ? '' : 'inherit'}}>
-					<KickitList 
+					<ApolloList 
 						itemTemplate={this.listItem}
 						items={this.state.items} 
 						onSortEnd={this.onSortEnd} />
