@@ -6,7 +6,6 @@ import { Card } from '../../utils/anvil'
 class KickitList extends React.Component {
 	constructor (props) {
 		super(props)
-		debugger
 	}
 	render () {
 		return (<List
@@ -25,7 +24,7 @@ const List = SortableContainer(({ items, itemTemplate }) => (
 			<Item key={`item-${index}`} index={index} value={value} ItemTemplate={itemTemplate}/>
 		))}
 	</ProjectList>
-)
+	)
 )
 
 const Item = SortableElement(({value, ItemTemplate}) => (

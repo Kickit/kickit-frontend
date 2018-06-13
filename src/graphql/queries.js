@@ -16,8 +16,15 @@ const me = gql` {
 const project = gql`
 	query project($id: ID!) {
 		project(id: $id) {
-		id
-		title
+			id
+			title
+			sections {
+				tasks {
+					id
+					title
+					description
+				}
+			}
 		}
 	}
 `
