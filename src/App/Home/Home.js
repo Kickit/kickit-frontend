@@ -13,18 +13,11 @@ class Home extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			selectedProject: null,
 			sidebar: false,
 			data: data,
 		}
 		if(!localStorage.getItem(AUTH_TOKEN)){
 			this.props.history.push(`/login`)
-		} else if (props.location.pathname.includes('projects')) {
-			//  #TODO: Change this to query backend for VALID auth_token
-			let project = data.projects.filter( proj => {
-				return proj.id === props.location.pathname.split('/')[3]
-			})[0] || null
-			this.state.selectedProject = project
 		} else {
 			this.props.history.push(`/0/`)
 		}
@@ -46,23 +39,18 @@ class Home extends React.Component {
 		this.props.history.push(route)
 	}
 	
-	selectProject = (project) => {
-		this.setState({selectedProject: project})
-	}
-
 	// Todo: break sidebar into its own component
 	render() {
 		return (
 			<Sidenav 
 				toggleSidebar={this.toggleVisibility}
-				selectProject={this.selectProject}
 				sidebar={this.state.sidebar}
 				history={this.props.history}
 				data={this.state.data}>
-				<Topbar toggleSidebar={this.toggleVisibility} goHome={() => this.goTo('/0/')} history={this.props.history}/>
+				<Topbar toggleSidebar={this.toggleVisibility} location={this.props.location.pathname} history={this.props.history}/>
 					<Switch>
-						<Route path='/0/projects/:projectid' render={() => <Project id={this.state.selectedProject.id}/>} />
-						<Route path='/0/' render={() => <Dashboard project={this.state.data}/>} />
+						<Route path='/0/projects/:projectid' component={Project} />
+						<Route path='/0/' render={Dashboard} />
 					</Switch>
 			</Sidenav>
 		)
