@@ -48,6 +48,7 @@ const DetailsCard = Card.extend`
     }
 `
 const ListColumn = Column.extend`
+    flex: 1;
     ${media.phone`display: none;`}
 `
 const DetailColumn = Column.extend`

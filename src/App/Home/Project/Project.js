@@ -1,6 +1,6 @@
 import React from 'react'
 import ProjectList from './components/ProjectList'
-import { Column, media} from '../../../utils/anvil'
+import { ListColumn } from '../../../utils/anvil'
 import { POLL_INTERVAL } from '../../../utils/constants'
 import { project } from '../../../graphql/queries'
 import { graphql } from 'react-apollo'
@@ -26,11 +26,5 @@ class Project extends React.Component {
 		)
 	}
 }
-
-// Todo: make this more generic or move somewhere
-const ListColumn = Column.extend`
-    flex: 1;
-    ${media.phone`display: none;`}
-`
 
 export default Project
