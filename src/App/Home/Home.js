@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 
 import Nav from './components/nav'
@@ -49,10 +49,9 @@ class Home extends React.Component {
 		return (
 			<KickitSidebar isOpen={this.state.isOpen} toggleSidebar={this.toggleVisibility}>
 				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
-					<Switch>
-						<Route path='/0/projects/:projectid' component={Project} />
-						<Route path='/0/' render={Dashboard} />
-					</Switch>
+					<Route path='/0/projects/:projectid' component={Project} />
+					<Route path='/0/projects/:projectid/task/:taskid' component={Project} />
+					<Route exact path='/0/' render={Dashboard} />
 			</KickitSidebar>
 		)
 	}
