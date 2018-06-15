@@ -1,6 +1,6 @@
 import {ApolloClient, InMemoryCache, HttpLink, ApolloLink } from 'apollo-boost'
 import { AUTH_TOKEN } from '../utils/constants'
-
+import { persistCache } from 'apollo-cache-persist'
 
 // TODO: use uri from env or config
 const httpLink = new HttpLink({ uri: 'http://localhost:3030/graphql' })
@@ -18,10 +18,16 @@ const middlewareAuthLink = new ApolloLink((operation, forward) => {
   
 const httpLinkWithAuthToken = middlewareAuthLink.concat(httpLink)
 
+const cache = new InMemoryCache()
+
+persistCache({
+	cache,
+	storage: window.localStorage,
+  });
 
 const client = new ApolloClient({
 	link: httpLinkWithAuthToken,
-	cache: new InMemoryCache(),
+	cache: cache,
 })
 
 export { client }
