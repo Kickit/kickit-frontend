@@ -21,9 +21,8 @@ class ProjectList extends React.Component {
 				project: nextProps.data.project, 
 				items: this.projectItems(nextProps.data.project) 
 			})  	
-			return true
 		}
-		return false
+		return true
 	}
 
 	projectItems(project) {
@@ -40,6 +39,7 @@ class ProjectList extends React.Component {
 	}
 
 	onSortEnd = ({oldIndex, newIndex}) => {
+		console.log('asd')
 		this.setState({
 			items : arrayMove(this.state.items, oldIndex, newIndex)
 		})
