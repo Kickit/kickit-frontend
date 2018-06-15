@@ -19,6 +19,7 @@ const project = gql`
 			id
 			title
 			sections {
+				title
 				tasks {
 					id
 					title
