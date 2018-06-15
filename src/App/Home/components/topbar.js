@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Segment, Icon } from 'semantic-ui-react'
 import  { Row, IconButton } from '../../../utils/anvil'
 import styled from 'styled-components'
@@ -11,11 +12,6 @@ class Topbar extends React.Component {
 		localStorage.removeItem(AUTH_TOKEN)
 		this.props.history.push('../../login')
 	}
-
-	goHome = () => {
-		this.props.history.push('/0/')
-	}
-
 	render() {
 		return (
 			<Container>
@@ -24,10 +20,15 @@ class Topbar extends React.Component {
 						basic onClick={this.props.toggleSidebar}>
 						<Icon name='sidebar' />
 					</IconButton>
-					<IconButton 
-						basic onClick={this.props.goHome}>
-						<Icon name='home' />
-					</IconButton>      
+					
+					{this.props.location !== '/0/' &&
+						<Link to='/0/'>
+							<IconButton basic>
+							<Icon name='home' />
+							</IconButton>
+						</Link>
+					}
+					
 				</Row>
 				<Logo src={logo}/>
 				<IconButton basic onClick={this.logout}>
