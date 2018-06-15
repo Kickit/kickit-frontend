@@ -1,20 +1,19 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
-import { Card, Row, Column, media} from '../../../utils/anvil'
 import ProjectList from './components/ProjectList'
+import { Card, Row, Column, media} from '../../../utils/anvil'
+import { POLL_INTERVAL } from '../../../utils/constants'
 import { project } from '../../../graphql/queries'
 import { graphql } from 'react-apollo'
 
 import '../../../styles/index.css'
-// TODO: Add to constants
-const POLL_INTERVAL = 10000
 
 const KickitList = graphql(project, {
   options: (ownProps) => ({
     variables: {
       id: ownProps.id
 		},
-		pollInterval: POLL_INTERVAL
+		pollInterval: POLL_INTERVAL,
   })
 })(ProjectList)
 
@@ -34,19 +33,12 @@ const TaskDetails = ({task, close}) => {
 }
 
 // Project: Component used on the /projects/:id route
-class Project extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-				id: this.props.match.params.projectid
-		}
-  }
-	
+class Project extends React.Component {	
 	render() {
 		return (
 			<Row>
 				<ListColumn style={{display: this.state.selectedItem ? '' : 'inherit'}}>
-					<KickitList id={this.state.id} location={this.props.location.pathname} />
+					<KickitList id={this.props.match.params.projectid} location={this.props.location.pathname} />
 				</ListColumn>
 				<DetailColumn style={{display: this.state.selectedItem ? '' : 'none'}}>
 					<TaskDetails 
@@ -58,6 +50,7 @@ class Project extends React.Component {
 	}
 }
 
+// Todo: make this more generic or move somewhere
 const ListColumn = Column.extend`
     flex: 1;
     ${media.phone`display: none;`}
