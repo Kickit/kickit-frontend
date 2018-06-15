@@ -5,11 +5,13 @@ import { graphql } from 'react-apollo'
 import Nav from './components/nav'
 import Topbar from './components/topbar'
 import Project from './Project/Project'
+import Task from './Task/Task'
 import Dashboard from './Dashboard/Dashboard'
 
 import { me } from '../../graphql/queries'
+
 import { AUTH_TOKEN, POLL_INTERVAL } from '../../utils/constants'
-import data from '../../utils/fixture'  //Fixture data to start with, will wire up later
+import { Row } from '../../utils/anvil' 
 
 const KickitSidebar = graphql(me, {
 	options: (ownProps) => ({
@@ -22,8 +24,7 @@ class Home extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			isOpen: false,
-			data: data,
+			isOpen: false
 		}
 		if(!localStorage.getItem(AUTH_TOKEN)){
 			this.props.history.push(`/login`)
@@ -49,9 +50,11 @@ class Home extends React.Component {
 		return (
 			<KickitSidebar isOpen={this.state.isOpen} toggleSidebar={this.toggleVisibility}>
 				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
+				<Row>
 					<Route path='/0/projects/:projectid' component={Project} />
-					<Route path='/0/projects/:projectid/task/:taskid' component={Project} />
-					<Route exact path='/0/' render={Dashboard} />
+					<Route path='/0/projects/:projectid/tasks/:taskid' component={Task} />
+					<Route exact path='/0/' component={Dashboard} />
+				</Row>
 			</KickitSidebar>
 		)
 	}
