@@ -1,13 +1,13 @@
 import React from 'react'
 import { Sidebar, Segment, Menu, Icon, Divider } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import  { AnvilSidebar } from '../../../utils/anvil'
 
 class Sidenav extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { 
-			selectedProject: this.props.selectedProject,
+		this.state = {
 			sidebar: this.props.sidebar,
 			data: props.data
 		}
@@ -19,12 +19,6 @@ class Sidenav extends React.Component {
 			return true
 		}
 		return false
-	}
-
-	// goToProject: function to manage navigation to project route
-	goToProject = (project) => {
-		this.props.selectProject(project)
-		this.props.history.push(`/0/projects/${project.id}`)
 	}
 
 	// userInfo: piece to populate account information of sidebar
@@ -40,11 +34,13 @@ class Sidenav extends React.Component {
 
 	// menuProjects: piece to populated projects for a user
 	menuProjects = () => {
-		return this.state.data.projects.map( el => {
+		return this.state.data.projects.map( project => {
 			return (
-				<Menu.Item key={el.id} name={el.title} position='left' onClick={() => this.goToProject(el)}>
-					<p>{el.title}<Icon name='angle right' inverted={true} size='small' /></p>
-        </Menu.Item>
+				<Link key={project.id} to={`/0/projects/${project.id}`}>
+				<Menu.Item name={project.title} position='left'>
+					<p>{project.title}<Icon name='angle right' inverted={true} size='small' /></p>
+				</Menu.Item>
+				</Link>
 			)
 		})
 	}
@@ -59,7 +55,7 @@ class Sidenav extends React.Component {
                 visible={this.state.sidebar} 
                 icon='labeled' 
                 onClick={this.props.toggleSidebar} vertical inverted>
-                <this.userInfo/>
+                <this.userInfo />
                 <this.menuProjects/>
             </Sidebar>
             <Sidebar.Pusher style={{height: '100VH', display: 'flex', flexFlow: 'column'}}>

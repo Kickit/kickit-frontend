@@ -1,14 +1,8 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 // Dashboard: Dashboard style setup with some grouping and visualizations
 class Dashboard extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			data: props.data,
-		}
-	}
-    
 	render() {
 		return (
 			<div>
@@ -18,4 +12,4 @@ class Dashboard extends React.Component {
 	}
 
 }
-export default Dashboard
+export default withRouter(Dashboard)
