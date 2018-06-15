@@ -4,7 +4,6 @@ import Background from './components/background'
 import Login from './Login/Login'
 import Home from './Home/Home'
 import '../styles/App.css'
-import Background from './components/background';
 
 class App extends React.Component {
 	render() {
