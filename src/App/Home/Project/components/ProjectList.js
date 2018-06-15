@@ -13,20 +13,21 @@ class ProjectList extends React.Component {
 				items: [],
 				selectedItem: null,
 		}
-  	}
+  }
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.data && nextProps.data.project) {
+	shouldComponentUpdate(nextProps) {
+		if (nextProps.data && nextProps.data.project && nextProps.data.project !== this.state.project) {
 			this.setState({ 
 				project: nextProps.data.project, 
 				items: this.projectItems(nextProps.data.project) 
 			})  	
+			return true
 		}
+		return false
 	}
 
 	projectItems(project) {
 		if( !project ){return []}
-
 		return [].concat(...project.sections.map( section => {
 			return [].concat({type: 'section', data: section}, ...section.tasks.map( task => {
 					return {type:'task', data: task}

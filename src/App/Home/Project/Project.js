@@ -5,15 +5,16 @@ import ProjectList from './components/ProjectList'
 import { project } from '../../../graphql/queries'
 import { graphql } from 'react-apollo'
 
-
 import '../../../styles/index.css'
-
+// TODO: Add to constants
+const POLL_INTERVAL = 10000
 
 const KickitList = graphql(project, {
   options: (ownProps) => ({
     variables: {
       id: ownProps.id
-    }
+		},
+		pollInterval: POLL_INTERVAL
   })
 })(ProjectList)
 
@@ -37,7 +38,7 @@ class Project extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-				id: props.id
+				id: this.props.match.params.projectid
 		}
   }
 	
@@ -45,7 +46,7 @@ class Project extends React.Component {
 		return (
 			<Row>
 				<ListColumn style={{display: this.state.selectedItem ? '' : 'inherit'}}>
-					<KickitList id={this.props.id} />
+					<KickitList id={this.state.id} location={this.props.location.pathname} />
 				</ListColumn>
 				<DetailColumn style={{display: this.state.selectedItem ? '' : 'none'}}>
 					<TaskDetails 
