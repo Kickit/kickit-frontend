@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import { arrayMove } from 'react-sortable-hoc'
 import { ListItem} from '../../../../utils/anvil'
 import KickitList from '../../../components/list'
@@ -39,7 +40,6 @@ class ProjectList extends React.Component {
 	}
 
 	onSortEnd = ({oldIndex, newIndex}) => {
-		console.log('asd')
 		this.setState({
 			items : arrayMove(this.state.items, oldIndex, newIndex)
 		})
@@ -47,10 +47,12 @@ class ProjectList extends React.Component {
 
 	listItem = ({ value }) => (
 		<div onClick={()=> this.selectItem(value)}>
+			<Link to={`/0/projects/${this.props.match.params.projectid}/tasks/${value.data.id}`} >
 			<ListItem className={`item ${value.type === 'section' ? 'section' : 'task'}`}>
 				<span className='title'><h4>{value.data.title}</h4></span>
 				<span className='description'><p>{value.data.description}</p></span>
 			</ListItem>
+			</Link>
 		</div>
 	)
 	
@@ -73,4 +75,4 @@ class ProjectList extends React.Component {
 	}
 }
 
-export default ProjectList
+export default withRouter(ProjectList)
