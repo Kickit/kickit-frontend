@@ -6,7 +6,6 @@ import  { AnvilSidebar } from '../../utils/anvil'
 
 class Sidenav extends React.Component {
 	render() {
-		debugger
 		return (
 			<AnvilSidebar.Pushable as={Segment} >
 				<Sidebar 

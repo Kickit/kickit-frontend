@@ -20,7 +20,6 @@ class Topbar extends React.Component {
 						basic onClick={this.props.toggleSidebar}>
 						<Icon name='sidebar' />
 					</IconButton>
-					
 					{this.props.location !== '/0/' &&
 						<Link to='/0/'>
 							<IconButton basic>
