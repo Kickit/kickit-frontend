@@ -1,19 +1,28 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Sidenav from './components/sidenav'
+import { graphql } from 'react-apollo'
+
+import Nav from './components/nav'
 import Topbar from './components/topbar'
 import Project from './Project/Project'
 import Dashboard from './Dashboard/Dashboard'
 
-import { AUTH_TOKEN } from '../../utils/constants'
+import { me } from '../../graphql/queries'
+import { AUTH_TOKEN, POLL_INTERVAL } from '../../utils/constants'
 import data from '../../utils/fixture'  //Fixture data to start with, will wire up later
+
+const KickitSidebar = graphql(me, {
+	options: (ownProps) => ({
+	  variables: { pollInterval: POLL_INTERVAL }
+	})
+  })(Nav)
 
 // Home: available to authorized users and establishes routing
 class Home extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			sidebar: false,
+			isOpen: false,
 			data: data,
 		}
 		if(!localStorage.getItem(AUTH_TOKEN)){
@@ -25,34 +34,26 @@ class Home extends React.Component {
 
 	// setSidebar: specifically close the sidebar when user clicks away from it
 	setSidebar = (state) => {
-    if (this.state.sidebar) {
-      this.setState({ sidebar: state });
-    }
+		if (this.state.sidebar) {
+		this.setState({ sidebar: state });
+		}
 	}
 
 	// toggleVisibility: Open and close sidebar
 	toggleVisibility = () => {
-		this.setState({ sidebar: !this.state.sidebar })
-	}
-	// goTo: simple helper to goto a given route
-	goTo = (route) => {
-		this.props.history.push(route)
+		this.setState({ isOpen: !this.state.isOpen })
 	}
 	
 	// Todo: break sidebar into its own component
 	render() {
 		return (
-			<Sidenav 
-				toggleSidebar={this.toggleVisibility}
-				sidebar={this.state.sidebar}
-				history={this.props.history}
-				data={this.state.data}>
-				<Topbar toggleSidebar={this.toggleVisibility} location={this.props.location.pathname} history={this.props.history}/>
+			<KickitSidebar isOpen={this.state.isOpen} toggleSidebar={this.toggleVisibility}>
+				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
 					<Switch>
 						<Route path='/0/projects/:projectid' component={Project} />
 						<Route path='/0/' render={Dashboard} />
 					</Switch>
-			</Sidenav>
+			</KickitSidebar>
 		)
 	}
 
