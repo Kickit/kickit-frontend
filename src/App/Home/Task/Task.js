@@ -1,19 +1,36 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
-import { Card, Row, Column, media} from '../../../utils/anvil'
+import { Card, Row, CardColumn} from '../../../utils/anvil'
+import TaskDetails from '../../Home/Task/components/taskdetails'
+import { POLL_INTERVAL } from '../../../utils/constants'
+import { task } from '../../../graphql/queries'
+import { graphql } from 'react-apollo'
 
+import '../../../styles/index.css'
+
+const MyTaskDetails = graphql(task, {
+  options: (ownProps) => ({
+    variables: {
+      id: ownProps.id
+		},
+		pollInterval: POLL_INTERVAL,
+  })
+})(TaskDetails)
 
 
 class Task extends React.Component {
-
+    close = () => {
+        this.props.history.push('../')
+    }
     render () {
-        return (
-            <Card>
-                {/* <Row><Icon name='close' onClick={()=> close(null)}/></Row>
-                <h1>{this.props.data.title}</h1>
-                <p>{task.data.description}</p> */}
-		    </Card>
-        )
+			return (
+				<CardColumn orderSm={-1}>
+					<Card>
+						<Row><Icon name='close' onClick={this.close}/></Row>
+						<MyTaskDetails id={this.props.match.params.taskid} location={this.props.location.pathname} />
+					</Card>
+				</CardColumn>
+			)
     }
 }
 
