@@ -30,4 +30,23 @@ const project = gql`
 	}
 `
 
-export { me, project }
+const task = gql`
+	query task($id: ID!) {
+		task(id: $id) {
+			id
+			title
+			description
+			# sections {
+			# 	title
+			# 	tasks {
+			# 		id
+			# 		title
+			# 		description
+			# 	}
+			# }
+		}
+	}
+`
+
+
+export { me, project, task }
