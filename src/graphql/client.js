@@ -20,6 +20,8 @@ const httpLinkWithAuthToken = middlewareAuthLink.concat(httpLink)
 
 const cache = new InMemoryCache()
 
+
+// TODO: @nicklewanowicz: update to indexdb using somthing like https://github.com/localForage/localForage
 persistCache({
 	cache,
 	storage: window.localStorage,
