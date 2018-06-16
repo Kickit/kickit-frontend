@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { Icon } from 'semantic-ui-react'
-import { Card, Row } from '../../../../utils/anvil'
+// import { Link } from 'react-router-dom'
+// import { Icon } from 'semantic-ui-react'
+// import { Card, Row } from '../../../../utils/anvil'
 
 // TODO: @nicklewanowicz customize loader using this tool when layout is more concrete
 // https://github.com/danilowoz/react-content-loader
-import ContentLoader, { Facebook } from 'react-content-loader'
-
-const MyLoader = () => <ContentLoader />
-const MyFacebookLoader = () => <Facebook />
+import { Facebook } from 'react-content-loader'
 
 // TODO: @nicklewanowicz add support for contenteditable pieces like https://github.com/ianstormtaylor/slate
 class TaskDetails extends Component {
