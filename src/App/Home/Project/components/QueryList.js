@@ -6,7 +6,7 @@ import KickitList from '../../../components/list'
 import '../../../../styles/index.css'
 
 // Project: Component used on the /projects/:id route
-class ProjectList extends React.Component {
+class QueryList extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -75,4 +75,4 @@ class ProjectList extends React.Component {
 	}
 }
 
-export default withRouter(ProjectList)
+export default withRouter(QueryList)
