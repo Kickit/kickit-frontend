@@ -1,5 +1,6 @@
 import { Button, Segment, Sidebar } from 'semantic-ui-react'
 import styled, { css } from 'styled-components'
+import { Editor } from 'slate-react'
 
 // Media query logic
 
@@ -71,6 +72,17 @@ const IconButton = styled(Button)`
     padding: 1rem 1rem 1.5rem 1rem;
 `
 
+const TitleEditor = styled(Editor)`
+    font-size: 2rem;
+    text-align: left;
+    margin: 1rem;
+`
+
+const TextEditor = styled(Editor)`
+    text-align: left;
+    margin: 1rem;
+`
+
 const ListItem = styled('li')`
     margin: 0 0.5rem 0 0;
     background-color: #FFFFFF;
@@ -118,6 +130,6 @@ const AnvilSidebar = {
 
 export { 
 	media, Row, Column, Card, Container, 
-	DetailColumn, CardColumn, CardRow, DetailsCard, 
+	DetailColumn, TextEditor, TitleEditor, CardColumn, CardRow, DetailsCard, 
 	IconButton, ListItem, AnvilSidebar
 } 
