@@ -28,7 +28,7 @@ class Home extends React.Component {
 		}
 		if(!localStorage.getItem(AUTH_TOKEN)){
 			this.props.history.push(`/login`)
-		} else {
+		} else if(!this.props.history.location.pathname.includes('/0/')) {
 			this.props.history.push(`/0/`)
 		}
 	}
