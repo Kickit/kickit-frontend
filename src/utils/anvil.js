@@ -18,14 +18,17 @@ const media = Object.keys(sizes).reduce((acc, label) => {
 	return acc
 }, {})
 
-
-const Row = styled('div')`
+const FB = styled('div')`
     display: flex;
+    ${media.phone`
+        order: ${props => props.orderSm};
+    `}
+`
+const Row = FB.extend`
     flex-direction: row;
 `
 
-const Column = styled('div')`
-    display: flex;
+const Column = FB.extend`
     flex-direction: column;
 `
 
@@ -47,9 +50,15 @@ const DetailsCard = Card.extend`
 
     }
 `
-const ListColumn = Column.extend`
+const CardColumn = Column.extend`
     flex: 1;
-    ${media.phone`display: none;`}
+`
+
+const CardRow = Row.extend`
+    flex: 1;
+    ${media.phone`
+        flex-direction: column;
+    `}
 `
 const DetailColumn = Column.extend`
     flex: 1;
@@ -109,6 +118,6 @@ const AnvilSidebar = {
 
 export { 
 	media, Row, Column, Card, Container, 
-	DetailColumn, ListColumn, DetailsCard, 
+	DetailColumn, CardColumn, CardRow, DetailsCard, 
 	IconButton, ListItem, AnvilSidebar
 } 
