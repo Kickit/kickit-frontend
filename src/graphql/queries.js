@@ -47,6 +47,4 @@ const task = gql`
 		}
 	}
 `
-
-
 export { me, project, task }

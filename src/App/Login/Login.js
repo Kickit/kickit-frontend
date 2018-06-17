@@ -149,7 +149,6 @@ class Login extends React.Component {
   attemptLogin = async () => {
     const { email, password } = this.state
     try {
-      console.log()
       const result = await this.props.loginMutation({
         variables: {
           email,
