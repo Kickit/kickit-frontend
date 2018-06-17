@@ -4,18 +4,22 @@ import { Card, Row, CardColumn} from '../../../utils/anvil'
 import TaskDetails from '../../Home/Task/components/taskdetails'
 import { POLL_INTERVAL } from '../../../utils/constants'
 import { task } from '../../../graphql/queries'
-import { graphql } from 'react-apollo'
+import { updateTask } from '../../../graphql/mutations'
+import { graphql, compose } from 'react-apollo'
 
 import '../../../styles/index.css'
 
-const MyTaskDetails = graphql(task, {
-  options: (ownProps) => ({
-    variables: {
-      id: ownProps.id
-		},
-		pollInterval: POLL_INTERVAL,
-  })
-})(TaskDetails)
+const MyTaskDetails = compose(
+	graphql(task, {
+		options: (ownProps) => ({
+			variables: {
+				id: ownProps.id
+			},
+			pollInterval: POLL_INTERVAL,
+		})
+	}),
+	graphql(updateTask, {name: 'updateTask'})
+)(TaskDetails)
 
 
 class Task extends React.Component {
