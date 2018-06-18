@@ -73,7 +73,6 @@ class Login extends React.Component {
 
   //Updates state on text input
   handleChange = ({ target: {name, value} = {} }) => {
-    debugger
     this.setState({[name]: value});
   }
 

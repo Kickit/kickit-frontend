@@ -14,7 +14,6 @@ class EditableItem extends Component {
 	}
 
   onChange = ({value, name}) => {
-		debugger
 		this.setState({ [name]: value })
 		debounce(1000, this.props.updateTask({
 			variables: {

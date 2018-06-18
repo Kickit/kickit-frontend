@@ -20,7 +20,6 @@ class TaskDetails extends Component {
 
   // TODO: @nicklewanowicz revisit and see if there is a less hacky way of doing this
   static getDerivedStateFromProps(props, state){
-    debugger
     if (props.data.task && props.data.task.id !== state.id) {
       return {
         title: Plain.deserialize(props.data.task.title),
