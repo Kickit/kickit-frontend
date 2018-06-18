@@ -22,10 +22,12 @@ const cache = new InMemoryCache()
 
 
 // TODO: @nicklewanowicz: update to indexdb using somthing like https://github.com/localForage/localForage
-persistCache({
-	cache,
-	storage: window.localStorage,
-  });
+if(window.localStorage){
+	persistCache({
+		cache,
+		storage: window.localStorage,
+	})
+}
 
 const client = new ApolloClient({
 	link: httpLinkWithAuthToken,
