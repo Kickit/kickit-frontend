@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router'
 import Plain from 'slate-plain-serializer'
 import {debounce} from 'throttle-debounce';
 // import { Link } from 'react-router-dom'
@@ -21,14 +20,6 @@ class EditableItem extends Component {
 				[name]: Plain.serialize(value)
 			}
 		}))
-		// if(this.state.id && Plain.serialize(this.state[name]) !== Plain.serialize(value)){
-		// 	this.props.updateTask({
-		// 		variables: {
-		// 			id: this.state.id,
-		// 			[name]: Plain.serialize(value)
-		// 		}
-		// 	})
-		// }
 	}
 	render() {
     return (
