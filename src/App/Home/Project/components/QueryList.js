@@ -1,20 +1,18 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { arrayMove } from 'react-sortable-hoc'
-import { ListItem} from '../../../../utils/anvil'
+import { ListItem } from '../../../../utils/anvil'
 import KickitList from '../../../components/list'
+import EditableItem from '../components/EditableItem'
 import '../../../../styles/index.css'
 
 // Project: Component used on the /projects/:id route
 class QueryList extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-				project: null,
-				items: [],
-				selectedItem: null,
-		}
-  }
+	state = {
+		project: null,
+		items: [],
+		selectedItem: null,
+	}
 
 	shouldComponentUpdate(nextProps) {
 		if (nextProps.data && nextProps.data.project && nextProps.data.project !== this.state.project) {
@@ -49,15 +47,20 @@ class QueryList extends React.Component {
 		<div onClick={()=> this.selectItem(value)}>
 			<Link to={`/0/projects/${this.props.match.params.projectid}/tasks/${value.data.id}`} >
 			<ListItem className={`item ${value.type === 'section' ? 'section' : 'task'}`}>
-				<span className='title'><h4>{value.data.title}</h4></span>
-				<span className='description'><p>{value.data.description}</p></span>
+				{value.type === 'task' &&
+					<EditableItem value={value} updateTask={(options) => this.props.updateTask(options)}/>
+				}
+				{value.type === 'section' &&
+					<span>{value.data.title}</span>
+				}
 			</ListItem>
 			</Link>
 		</div>
 	)
 	
 	render() {
-		if (this.props.data.loading) {
+	
+	if (this.props.data.loading) {
       return (<div>Loading</div>)
     }
 
