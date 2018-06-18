@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, Form, Message } from 'semantic-ui-react'
+import { Button, Input, Form } from 'semantic-ui-react'
 
 //2 input boxes for email and password and a button 
 export default ({ state, handleChange, attemptLogin }) => {

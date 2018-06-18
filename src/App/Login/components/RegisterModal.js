@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, Form, Message } from 'semantic-ui-react'
+import { Button, Input, Form } from 'semantic-ui-react'
 
 
 // RegistrationModal: Registration form
@@ -77,5 +77,7 @@ export default ({ state, handleChange, updateStep, attemptRegister }) => {
           
           </div>
         )
+      default:
+        return null
     }
 }

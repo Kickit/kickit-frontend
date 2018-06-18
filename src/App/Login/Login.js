@@ -1,6 +1,5 @@
 import React from 'react'
 import { AUTH_TOKEN } from '../../utils/constants'
-import { Button, Input, Form, Message } from 'semantic-ui-react'
 import logo from '../../images/kickit_logo.png'
 import Header from '../components/header'
 import LoginModal from './components/LoginModal'

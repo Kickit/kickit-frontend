@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, Form, Message } from 'semantic-ui-react'
+import { Message } from 'semantic-ui-react'
 
   //Generic Error 'message' component
 export default (error) => {
