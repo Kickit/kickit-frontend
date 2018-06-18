@@ -3,6 +3,10 @@ import { AUTH_TOKEN } from '../../utils/constants'
 import { Button, Input, Form, Message } from 'semantic-ui-react'
 import logo from '../../images/kickit_logo.png'
 import Header from '../components/header'
+import LoginModal from './components/LoginModal'
+import RegisterModal from './components/RegisterModal'
+import ErrorModal from './components/ErrorModal'
+
 
 import { graphql, compose } from 'react-apollo'
 import { login, signup } from '../../graphql/auth'
@@ -10,140 +14,18 @@ import { login, signup } from '../../graphql/auth'
 import '../../styles/index.css';
 import 'semantic-ui-css/semantic.min.css';
 
-
 //Todo @nicklewanowicz add check to see if they have a valid JWT token
 //     and tranition them automatically
 class Login extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      step: 1,
-      register: props.match.path.includes('register'),
+  state = {
+      register: this.props.match.path.includes('register'),
+      step: this.props.match.path.includes('login') ? 0 : 1,
       email: '',
       first: '',
       last: '',
       password: '',
       error: '',
     }
-  }
-
-  // Will set weather the login or register modal is visable
-  shouldComponentUpdate(nextProps, nextState){
-    let register = nextProps.match.path.includes('register')
-    if(register !== this.state.register){
-      this.setState({register})
-    }
-    return true
-  }
-
-  //Renders Modal frame with "CurrScreen" inside.
-  render () {
-    let CurrScreen = this.LoginModal
-    if (this.state.register) {
-      switch (this.state.step){
-        case 1:
-          CurrScreen = this.RegEmail
-          break
-        case 2:
-          CurrScreen = this.RegNamePass
-          break
-        case 3:
-          CurrScreen = this.RegThankyou
-          break
-        default: 
-          CurrScreen = this.RegEmail
-      }
-    }
-    return (
-      <span>
-        <Header/>
-        <div className="login">
-          <img src={logo} height={"300px"} width={"300px"} alt={""}/>
-          <this.ErrorMessage error={this.state.error} />
-          <div className="inputModal">
-            <CurrScreen/>
-          </div>
-        </div>
-      </span>
-    )
-  }
-
-  // RegEmail: Email form
-  RegEmail = () => {
-    return (
-      <div className="container">
-      <h3>Register</h3>
-      <Form>
-        <Form.Field>
-          <Input 
-            value={this.state.email} 
-            onChange={ this.handleChange.bind(this, 'email') } 
-            placeholder='Email' 
-          />
-        </Form.Field>
-        <Form.Field>
-          <Button 
-            onClick={() => this.updateStep(1)} 
-            color='yellow'>Next {'>'}</Button>
-        </Form.Field>
-      </Form>
-      </div>
-    )
-  }
-  
-  // RegNamePass: First/last name and password form
-  RegNamePass = () => {
-    return (
-      <div className="container">
-      <h3>Register</h3>
-      <Form>
-        <Form.Field>
-          <Input 
-            value={this.state.first} 
-            onChange={ this.handleChange.bind(this, 'first') } 
-            placeholder='First Name' 
-          />
-        </Form.Field>
-        <Form.Field>
-          <Input 
-            value={this.state.last} 
-            onChange={ this.handleChange.bind(this, 'last') } 
-            placeholder='Last Name' 
-          />
-        </Form.Field>
-        <Form.Field>
-          <Input 
-            value={this.state.password} 
-            onChange={ this.handleChange.bind(this, 'password') } 
-            placeholder='Password' type="password" 
-          />
-        </Form.Field>
-        <Form.Field>
-          <Button 
-            onClick={() => this.updateStep(-1)} 
-            color='blue'> 
-            {'<'} Back
-          </Button>
-          <Button 
-            type='submit' 
-            onClick={() => this.attemptRegister()} 
-            color='yellow'>Register</Button>
-        </Form.Field>
-      </Form>
-      </div>
-    )
-  }
-
-  // RegThankyou: Thankyou message
-  RegThankyou = () => {
-    return (
-      <div className="container">
-      <h3>Thankyou for Registering!</h3>
-      <a> If you are not redirected to application click here</a>
-      
-      </div>
-    )
-  }
 
   //Triggered by login button
   attemptLogin = async () => {
@@ -190,8 +72,9 @@ class Login extends React.Component {
   }
 
   //Updates state on text input
-  handleChange(v, e) {
-    this.setState({ [v]: e.target.value });
+  handleChange = ({ target: {name, value} = {} }) => {
+    debugger
+    this.setState({[name]: value});
   }
 
   saveAuthData = token => {
@@ -205,46 +88,34 @@ class Login extends React.Component {
     })
   }
 
-  //Generic Error 'message' component
-  ErrorMessage = (error) => {
-    if(error.error !== ""){
-      return (
-        <Message warning>
-          <Message.Header>Opps!</Message.Header>
-          <p>{error.error}</p>
-        </Message>
-      )
-    }
-    return ''
-  }
-
-  //2 input boxes for email and password and a button 
-  LoginModal = () => {
+  render () {
     return (
-      <div className="container">
-      <h3>Login</h3>
-      <Form>
-        <Form.Field>
-          <Input 
-            value={this.state.email} 
-            onChange={ this.handleChange.bind(this, 'email') } 
-            placeholder='Email' />
-        </Form.Field>
-        <Form.Field>
-          <Input 
-            value={this.state.password} 
-            onChange={ this.handleChange.bind(this, 'password') } 
-            placeholder='Password' 
-            type='current-password' />
-        </Form.Field>
-        <Form.Field>
-          <Button 
-            type='submit' 
-            onClick={() => this.attemptLogin()}  
-            color='yellow'>Login</Button>
-        </Form.Field>
-      </Form>
-      </div>
+      <span>
+        <Header/>
+        <div className="login">
+          <img src={logo} height={"300px"} width={"300px"} alt={""}/>
+          <ErrorModal error={this.state.error} />
+          <div className="inputModal">
+            <div className="container">
+              {
+                !this.state.register &&
+                <LoginModal 
+                  state={this.state}
+                  handleChange={this.handleChange}
+                  attemptLogin={this.attemptLogin}/>
+              }
+              {
+                this.state.register &&
+                <RegisterModal 
+                  handleChange={this.handleChange}
+                  state={this.state}
+                  updateStep={this.updateStep}
+                  attemptRegister={this.attemptRegister}/>
+              }
+            </div>
+          </div>
+        </div>
+      </span>
     )
   }
 }
