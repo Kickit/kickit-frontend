@@ -7,6 +7,7 @@
     "apollo-boost": "^0.1.6",
     "apollo-cache-persist": "^0.1.1",
     "apollo-client-preset": "^1.0.8",
+    "enzyme": "^3.3.0",
     "gh-pages": "^1.2.0",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
@@ -41,7 +42,6 @@
   },
   "devDependencies": {
     "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.9.1",
-    "jest-junit": "^5.0.0"
+    "eslint-plugin-react": "^7.9.1"
   }
 }
