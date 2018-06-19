@@ -25,7 +25,11 @@ class Login extends React.Component {
       password: '',
       error: '',
     }
-
+  
+  shouldComponentUpdate(nextProps, nextState) {
+    nextState.register = nextProps.match.path.includes('register')
+    return true
+  }
   //Triggered by login button
   attemptLogin = async () => {
     const { email, password } = this.state
