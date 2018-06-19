@@ -35,13 +35,15 @@
     "throttle-debounce": "^2.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_STAGE=dev react-scripts start",
+    "mock": "REACT_APP_STAGE=mock react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage --testResultsProcessor ./node_modules/jest-junit",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "npm run build && gh-pages -d build"
+    "deploy": "npm run build && gh-pages -d build",
+    "deploy-demo": "REACT_APP_STAGE=mock npm run build && gh-pages -d build"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
