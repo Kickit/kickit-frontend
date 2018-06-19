@@ -2,12 +2,10 @@ import {ApolloClient, InMemoryCache, HttpLink, ApolloLink } from 'apollo-boost'
 import { AUTH_TOKEN } from '../utils/constants'
 import { persistCache } from 'apollo-cache-persist'
 import link from './mock'
-
-// TODO: Figure out how to populate from cli or config
-const mocking = false
+import config from '../config'
 
 // TODO: use uri from env or config
-const httpLink = new HttpLink({ uri: 'http://localhost:3030/graphql' })
+const httpLink = new HttpLink({ uri: `${config.HOST}:${config.PORT}/${config.API}` })
 
 const middlewareAuthLink = new ApolloLink((operation, forward) => {
 	const token = localStorage.getItem(AUTH_TOKEN)
@@ -23,7 +21,7 @@ const middlewareAuthLink = new ApolloLink((operation, forward) => {
 
 let httpLinkWithAuthToken = middlewareAuthLink.concat(httpLink)
 
-if (mocking) {
+if (config.MOCK) {
 	httpLinkWithAuthToken = link
 }
 
