@@ -18,7 +18,7 @@ import 'semantic-ui-css/semantic.min.css';
 class Login extends React.Component {
   state = {
       register: this.props.match.path.includes('register'),
-      step: this.props.match.path.includes('login') ? 0 : 1,
+      step: 1,
       email: '',
       first: '',
       last: '',
