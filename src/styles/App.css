@@ -73,6 +73,7 @@
 }
 
 img {
+  pointer-events: none;
   width: 300px;
   height: 300px;
   margin: -5rem auto -5rem auto;
