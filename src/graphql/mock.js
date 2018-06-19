@@ -1,24 +1,8 @@
 import { SchemaLink } from 'apollo-link-schema'
 import { makeExecutableSchema } from 'graphql-tools'
 
+import resolvers from './resolvers'
 import typeDefs from './schema'
-
-
-
-// TODO: @nicklewanowicz move to another files like typeDefs
-const resolvers = {
-    Query: {
-      me: () => ({
-        id: 'asd',
-        first: `Nick`,
-        last: `Lew`,
-        email: `https://github.com/`,
-        projects: [
-          
-        ],
-      }),
-    },
-  }
 
 const executableSchema = makeExecutableSchema({
   typeDefs,
