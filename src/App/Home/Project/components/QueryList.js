@@ -17,7 +17,7 @@ class QueryList extends React.Component {
 						<EditableItem
 							field='title'
 							item={value}
-							onChange={this.props.onChange} />
+							onChange={() => null} />
 					</Row>
 				</ListItem>
 			</Link>
