@@ -20,9 +20,11 @@ export default {
 			return project
 		},
 		task: (parent, {id}) => {
-			section = project.sections.filter( section => {
-				return !!findRecord(section.tasks, id)
-			})[0]
+=			section = data.projects.filter(project => {
+				project.sections.filter(section => {
+					return !!findRecord(section.tasks, id)
+				})
+			})
 			task = findRecord(section.tasks, id)
 			return task
 		}
@@ -56,9 +58,16 @@ export default {
 			}
 		},
 		updateTask: (parent, {id, title, description}) => {
-			if(task.id === id){
-				task.title = title || task.title
-				task.description = description || task.description
+			for (let i = 0; i < data.projects.length; i++) {
+				for (let j = 0; j < data.projects[i].sections.length; j++) {
+					for (let k = 0; k < data.projects[i].sections[j].tasks.length; k++) {
+						if (data.projects[i].sections[j].tasks[k].id === id) {
+							data.projects[i].sections[j].tasks[k].title = title || data.projects[i].sections[j].tasks[k].title
+							data.projects[i].sections[j].tasks[k].description = description || data.projects[i].sections[j].tasks[k].description
+							return data.projects[i].sections[j].tasks[k]
+						}
+					}
+				}
 			}
 		}
 	}
