@@ -10,7 +10,6 @@ import Dashboard from './Dashboard/Dashboard'
 import { me } from '../../graphql/queries'
 
 import { AUTH_TOKEN, POLL_INTERVAL } from '../../utils/constants'
-import { CardRow } from '../../utils/anvil' 
 
 const KickitSidebar = graphql(me, {
 	options: (ownProps) => ({
@@ -49,10 +48,8 @@ class Home extends React.Component {
 		return (
 			<KickitSidebar isOpen={this.state.isOpen} toggleSidebar={this.toggleVisibility}>
 				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
-				<CardRow>
-					<Route path='/0/projects/:projectid' component={Project} />
-					<Route exact path='/0/' component={Dashboard} />
-				</CardRow>
+				<Route path='/0/projects/:projectid' component={Project} />
+				<Route exact path='/0/' component={Dashboard} />
 			</KickitSidebar>
 		)
 	}
