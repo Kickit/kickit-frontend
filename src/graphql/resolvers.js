@@ -24,6 +24,7 @@ export default {
 				project.sections.filter(section => {
 					return !!findRecord(section.tasks, id)
 				})
+				return project
 			})
 			task = findRecord(section.tasks, id)
 			return task
