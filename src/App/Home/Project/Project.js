@@ -20,7 +20,7 @@ class Project extends React.Component {
 		}
 		return true
 	}
-	
+
 	selectItem = (value) => {
 		this.setState({selectedItem: value})
 	}
@@ -36,7 +36,7 @@ class Project extends React.Component {
 
 	onChange = ({key, value}) => {
 		let selectedItem = this.state.selectedItem
-		if(!selectedItem || selectedItem.data[key] == value) { return }
+		if(!selectedItem || selectedItem.data[key] === value) { return }
 		selectedItem.data = {...selectedItem.data, [key]: value}
 		this.setState({ selectedItem })
 		this.props.updateTask({
