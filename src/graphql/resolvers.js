@@ -21,10 +21,8 @@ export default {
 		},
 		task: (parent, {id}) => {
 			section = project.sections.filter( section => {
-				debugger
 				return !!findRecord(section.tasks, id)
 			})[0]
-			debugger
 			task = findRecord(section.tasks, id)
 			return task
 		}
