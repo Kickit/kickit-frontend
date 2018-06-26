@@ -16,11 +16,11 @@ class Project extends React.Component {
 	}
 	shouldComponentUpdate(nextProps, nextState) {
 		if (nextProps.data.project) {
-			// if ( nextState.selectedItem && Object.keys(nextState.selectedItem) == 0) { nextState.selectedItem = this.state.selectedItem }
 			nextState.items = this.getItems(nextProps.data.project)
 		}
 		return true
 	}
+	
 	selectItem = (value) => {
 		this.setState({selectedItem: value})
 	}
