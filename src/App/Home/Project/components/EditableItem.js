@@ -14,7 +14,7 @@ class EditableItem extends Component {
         />
 				{this.props.item.data.description &&
 					<EditableField
-					field='description'
+						field='description'
 						value={this.props.item.data.description}
 						onChange={this.props.onChange}
 						
