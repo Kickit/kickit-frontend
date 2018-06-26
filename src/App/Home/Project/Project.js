@@ -58,7 +58,7 @@ class Project extends React.Component {
 		}
 		return (
 			<Row>
-			<CardColumn>
+			<CardColumn phoneInvisible={!!this.state.selectedItem}>
 				<QueryList 
 					items={this.state.items}
 					selectedItem={this.state.selectedItem}
@@ -66,11 +66,12 @@ class Project extends React.Component {
 					onChange={this.onChange} />
 			</CardColumn>
 			{this.state.selectedItem &&
-			<CardColumn>
+			<CardColumn orderSm={-1}>
 				<Card>
 					<EditableTask 
 						item={this.state.selectedItem} 
 						onChange={this.onChange} 
+						selectItem={this.selectItem}
 						location={this.props.location.pathname} />
 				</Card>
 			</CardColumn>}
