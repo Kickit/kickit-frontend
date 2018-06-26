@@ -20,7 +20,7 @@ export default {
 			return project
 		},
 		task: (parent, {id}) => {
-=			section = data.projects.filter(project => {
+			section = data.projects.filter(project => {
 				project.sections.filter(section => {
 					return !!findRecord(section.tasks, id)
 				})
