@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Plain from 'slate-plain-serializer'
 import { Editor } from 'slate-react'
-
-
+import '../../index.css'
 class EditableField extends Component {
     state = {
         value: Plain.deserialize(this.props.value || ''),
@@ -24,6 +23,7 @@ class EditableField extends Component {
 	render() {
         return (
             <Editor
+                className={this.props.classes}
                 placeholder={this.props.placeholder}
                 value={this.state.value}
                 onChange={this.onChange}

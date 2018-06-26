@@ -12,12 +12,16 @@ class EditableTask extends Component {
       <Column>
 				<Row><Icon name='close' onClick={this.close}/></Row>
         <EditableField
+					classes='f2'
+					placeholder='Task Title'
           value={this.props.item.data.title}
           onChange={this.props.onChange}
 					field='title'
         />
-        {this.props.item.data.description &&
+        {this.props.item.data.description !== null &&
         <EditableField
+					classes='ma4 tj'
+					placeholder='Write task description here...'
 					value={this.props.item.data.description}
 					onChange={this.props.onChange}
 					field='description'

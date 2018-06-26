@@ -15,7 +15,6 @@ class QueryList extends React.Component {
 				<ListItem className={`item ${value.type === 'section' ? 'section' : 'task'}`}>
 					<Row>
 						<EditableItem
-							field='title'
 							item={value}
 							onChange={() => null} />
 					</Row>
