@@ -5,7 +5,6 @@ import { graphql } from 'react-apollo'
 import Nav from './components/nav'
 import Topbar from './components/topbar'
 import Project from './Project/Project'
-import Task from './Task/Task'
 import Dashboard from './Dashboard/Dashboard'
 
 import { me } from '../../graphql/queries'
@@ -52,7 +51,6 @@ class Home extends React.Component {
 				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
 				<CardRow>
 					<Route path='/0/projects/:projectid' component={Project} />
-					<Route path='/0/projects/:projectid/tasks/:taskid' component={Task} />
 					<Route exact path='/0/' component={Dashboard} />
 				</CardRow>
 			</KickitSidebar>
