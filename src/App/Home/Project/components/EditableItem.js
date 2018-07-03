@@ -13,6 +13,7 @@ class EditableItem extends Component {
 					onChange={this.props.onChange}
 					
         />
+				{/* // Not Showing description in item list 
 				{this.props.item.data.description &&
 					<EditableField
 						classes='mh2'
@@ -21,7 +22,7 @@ class EditableItem extends Component {
 						onChange={this.props.onChange}
 						
 					/>
-				}
+				} */}
       </Row>
     )
 	}
