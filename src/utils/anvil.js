@@ -1,7 +1,11 @@
-import { Button, Segment, Sidebar } from 'semantic-ui-react'
+import React from 'react'
+import { Button, Segment, Sidebar, Checkbox } from 'semantic-ui-react'
 import styled, { css } from 'styled-components'
 
+
+// ---------------------------------------------------------
 // Media query logic
+// ---------------------------------------------------------
 
 const sizes = {
 	desktop: 992,
@@ -18,6 +22,10 @@ const media = Object.keys(sizes).reduce((acc, label) => {
 	return acc
 }, {})
 
+// ---------------------------------------------------------
+// Types of containers 
+// ---------------------------------------------------------
+
 const FB = styled('div')`
     display: flex;
     ${media.phone`
@@ -32,16 +40,17 @@ const Column = FB.extend`
     flex-direction: column;
 `
 
-const Card = styled(Segment)`
-    &.ui.segment {
-        margin: 0.5rem;
-        padding: 0.5rem;        
-    }
-`
 const Container = Row.extend`
     ${media.phone`flex-direction: column;`}
     div {
         max-width: 100%;
+    }
+`
+
+const Card = styled(Segment)`
+    &.ui.segment {
+        margin: 0.5rem;
+        padding: 0.5rem;        
     }
 `
 
@@ -52,11 +61,13 @@ const DetailsCard = Card.extend`
 `
 const CardColumn = Column.extend`
     flex: 1;
+    ${media.tablet`
+        display: ${props => props.phoneInvisible ? 'none' : ''};
+    `}
     ${media.phone`
         display: ${props => props.phoneInvisible ? 'none' : ''};
     `}
 `
-
 const CardRow = Row.extend`
     flex: 1;
     ${media.phone`
@@ -68,11 +79,21 @@ const DetailColumn = Column.extend`
 
 `
 
+// ---------------------------------------------------------
+// Buttons and types of event triggers
+// ---------------------------------------------------------
+
 const IconButton = styled(Button)`
     display: flex;
     max-width: 4rem;
     padding: 1rem 1rem 1.5rem 1rem;
 `
+const CompleteTask = ({isComplete, onChange}) => (
+    <Checkbox checked={isComplete} onChange={onChange} />
+)
+// ---------------------------------------------------------
+// Garbage
+// ---------------------------------------------------------
 
 const ListItem = styled('li')`
     margin: 0 0.5rem 0 0;
