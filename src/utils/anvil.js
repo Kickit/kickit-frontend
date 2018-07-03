@@ -88,11 +88,13 @@ const IconButton = styled(Button)`
     max-width: 4rem;
     padding: 1rem 1rem 1.5rem 1rem;
 `
+// TODO: complete box for a task item
 const CompleteTask = ({isComplete, onChange}) => (
     <Checkbox checked={isComplete} onChange={onChange} />
 )
+
 // ---------------------------------------------------------
-// Garbage
+// Garbage, need to find better place for these
 // ---------------------------------------------------------
 
 const ListItem = styled('li')`
@@ -143,5 +145,5 @@ const AnvilSidebar = {
 export { 
 	media, Row, Column, Card, Container, 
 	DetailColumn, CardColumn, CardRow, DetailsCard, 
-	IconButton, ListItem, AnvilSidebar
+	IconButton, ListItem, AnvilSidebar, CompleteTask
 } 
