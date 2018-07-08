@@ -4,7 +4,7 @@ This repo will serve as the web application codebase for the Kickit Open Source 
 The landing page is a separate code base from the Kickit Web app to reduce the size of each codebase and chances requirement to build and reupload the webapp anytime the landing page changes or vise versa. Landing page is available [here](https://www.github.com/kickit/kickit-landing)
 
 #### Prerequisites:
-- NPM
+- YARN
 
 #### Run the following commands to install:
 
