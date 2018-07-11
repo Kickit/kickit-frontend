@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import QueryList from './components/QueryList'
 import { CardColumn, Row, Card } from '../../../utils/anvil'
 import EditableTask from './components/EditableTask'
@@ -8,12 +8,19 @@ import { graphql, compose } from 'react-apollo'
 
 import '../../../styles/index.css'
 
+const defaultState = {
+	selectedItem: null,
+	items: []
+}
+
 // Project: Component used on the /projects/:id route
-class Project extends React.Component {
-	state = {
-		selectedItem: null,
-		items: []
+class Project extends Component {
+
+	constructor(props) {
+		super(props)
+		this.state = defaultState
 	}
+
 	shouldComponentUpdate(nextProps, nextState) {
 		if (nextProps.data.project) {
 			nextState.items = this.getItems(nextProps.data.project)
@@ -59,7 +66,7 @@ class Project extends React.Component {
 		return (
 			<Row>
 			<CardColumn phoneInvisible={!!this.state.selectedItem}>
-				<QueryList 
+				<QueryList
 					items={this.state.items}
 					selectedItem={this.state.selectedItem}
 					selectItem={this.selectItem}
@@ -68,9 +75,9 @@ class Project extends React.Component {
 			{this.state.selectedItem &&
 			<CardColumn orderSm={-1}>
 				<Card>
-					<EditableTask 
-						item={this.state.selectedItem} 
-						onChange={this.onChange} 
+					<EditableTask
+						item={this.state.selectedItem}
+						onChange={this.onChange}
 						selectItem={this.selectItem}
 						location={this.props.location.pathname} />
 				</Card>
