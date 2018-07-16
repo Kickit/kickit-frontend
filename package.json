@@ -48,7 +48,7 @@
     "deploy-demo": "REACT_APP_STAGE=mock react-scripts build && gh-pages -d build",
     "css": "tachyons src/css/app.css > src/index.css --minify",
     "prestart": "yarn run css",
-    "prebuild": "npm run css"
+    "prebuild": "yarn run css"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
