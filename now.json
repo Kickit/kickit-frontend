@@ -1,5 +1,6 @@
 {
     "env": {
-        "NODE_ENV": "mock"
+        "NODE_ENV": "mock",
+        "REACT_APP_STAGE": "mock"
     }
 }
