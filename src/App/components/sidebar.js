@@ -8,12 +8,12 @@ class Sidenav extends React.Component {
 	render() {
 		return (
 			<AnvilSidebar.Pushable as={Segment} >
-				<Sidebar 
-					as={Menu} 
-					animation='push' 
-					width='wide' 
-					visible={this.props.isOpen} 
-					icon='labeled' 
+				<Sidebar
+					as={Menu}
+					animation='push'
+					width='wide'
+					visible={this.props.isOpen}
+					icon='labeled'
 					onClick={this.props.toggleSidebar} vertical inverted>
 					<UserInfo user={this.props.user} />
 					<MenuProjects projects={this.props.user.projects}/>
