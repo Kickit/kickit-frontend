@@ -21,6 +21,14 @@ class Project extends Component {
 		this.state = defaultState
 	}
 
+	componentDidMount() {
+		if (this.props.data.project) {
+			this.setState({
+				items: this.getItems(this.props.data.project)
+			})
+		}
+	}
+
 	shouldComponentUpdate(nextProps, nextState) {
 		if (nextProps.data.project) {
 			nextState.items = this.getItems(nextProps.data.project)
