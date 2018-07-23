@@ -9,5 +9,13 @@ const updateTask = gql`
 		}
 	}
 `
+const deleteTask = gql`
+    mutation deleteTask($id: ID!) {
+		deleteTask(id: $id) {
+			id
+			title
+		}
+	}
+`
 
-export { updateTask }
+export { updateTask, deleteTask }
