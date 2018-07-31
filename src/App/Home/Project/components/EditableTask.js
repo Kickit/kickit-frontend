@@ -18,14 +18,14 @@ class EditableTask extends Component {
 			{ key: 'trash', text: 'Delete', icon: 'trash', value: 'delete' }
 		]
 
-		const handleChange = (e, { value }) => {
+		const handleChange = async (e, { value }) => {
 			if(value === 'delete'){
-				console.log(this.props.item.data)
-				this.props.deleteTask({
+				await this.props.deleteTask({
 					variables: {
 						id: this.props.item.data.id
 					}
 				})
+				this.props.selectItem(null)
 			}
 		}
 		
