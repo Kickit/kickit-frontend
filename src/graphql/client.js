@@ -30,7 +30,7 @@ const cache = new InMemoryCache()
 
 // TODO: @nicklewanowicz: update to indexdb using somthing like https://github.com/localForage/localForage
 // this conditional is so tests wont fail on localstorage
-if(window.localStorage){
+if(false || window.localStorage){
 	persistCache({
 		cache,
 		storage: window.localStorage,

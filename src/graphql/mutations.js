@@ -9,6 +9,14 @@ const updateTask = gql`
 		}
 	}
 `
+const deleteTask = gql`
+    mutation deleteTask($id: ID!) {
+		deleteTask(id: $id) {
+			id
+			title
+		}
+	}
+`
 
 // createProject(owners: [ID],title: String!): Project
 const createProject = gql`
@@ -21,4 +29,4 @@ const createProject = gql`
 	}
 `
 
-export { updateTask, createProject }
+export { updateTask, deleteTask, createProject }
