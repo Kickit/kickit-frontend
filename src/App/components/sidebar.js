@@ -1,9 +1,34 @@
 import React from 'react'
-import { Sidebar, Segment, Menu, Icon, Divider } from 'semantic-ui-react'
+import { Button, Sidebar, Segment, Menu, Icon, Divider, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { createProject } from '../../graphql/mutations'
 import  { AnvilSidebar } from '../../utils/anvil'
 
+
+// Add button that sends "createProject" mutation request on click
+const MenuAddProjectButton = ({createProject}) => {
+
+	const handleRef = (c) => {
+		this.inputRef = c
+	}
+	
+	const focus = () => {
+		this.inputRef.focus()
+	}
+	
+	let editing = false
+	
+	return (
+		<div>
+			<Button circular icon='plus' className="h2 w2" onClick={() => { this.editing = true }} />
+			{
+				editing && 
+				<Input ref={this.handleRef} placeholder='Search...' />
+			}
+		</div>
+	)
+}
 class Sidenav extends React.Component {
 	render() {
 		return (
@@ -37,6 +62,8 @@ const MenuProjects = ({ projects }) => {
 			<Menu.Item name={project.title} position='left'>
 				<p>{project.title}<Icon name='angle right' inverted={true} size='small' /></p>
 			</Menu.Item>
+			{/*<MenuAddProjectButton createProject={() => console.log('memes')}/>*/}
+			<MenuAddProjectButton />
 			</Link>
 		)
 	})
