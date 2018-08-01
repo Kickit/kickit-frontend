@@ -18,4 +18,15 @@ const deleteTask = gql`
 	}
 `
 
-export { updateTask, deleteTask }
+// createProject(owners: [ID],title: String!): Project
+const createProject = gql`
+    mutation createProject($owners: [ID], $title: String!) {
+		createProject(owners: $owners, title: $title) {
+			id
+			owners
+			title
+		}
+	}
+`
+
+export { updateTask, deleteTask, createProject }
