@@ -20,7 +20,7 @@ class Project extends Component {
 		super(props)
 		this.state = defaultState
 	}
-
+	
 	shouldComponentUpdate(nextProps, nextState) {
 		if (nextProps.data.project) {
 			nextState.items = this.getItems(nextProps.data.project)
@@ -30,6 +30,7 @@ class Project extends Component {
 
 	selectItem = (value) => {
 		this.setState({selectedItem: value})
+		this.props.data.refetch()
 	}
 
 	getItems(project) {
@@ -40,6 +41,7 @@ class Project extends Component {
 			}))
 		}))
 	}
+
 
 	onChange = ({key, value}) => {
 		let selectedItem = this.state.selectedItem
@@ -55,7 +57,7 @@ class Project extends Component {
 	}
 
 	render() {
-		if (this.props.data.loading) {
+		if (this.props.data.loading && !this.props.data.project) {
 			return (<div>Loading</div>)
 		}
 
@@ -63,6 +65,7 @@ class Project extends Component {
 			console.log(this.props.data.error)
 			return (<div>An unexpected error occurred</div>)
 		}
+
 		return (
 			<Row>
 			<CardColumn phoneInvisible={!!this.state.selectedItem}>
