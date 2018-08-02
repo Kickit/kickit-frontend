@@ -7,7 +7,7 @@ import { graphql, compose } from 'react-apollo'
 
 const EditableTask = (props) => {
 	const close = () => {
-		this.props.selectItem(null)
+		props.selectItem(null)
 	}
 
 	const trigger = (
@@ -20,12 +20,12 @@ const EditableTask = (props) => {
 
 	const handleOptions = async (e, { value }) => {
 		if(value === 'delete'){
-			await this.props.deleteTask({
+			await props.deleteTask({
 				variables: {
-					id: this.props.item.data.id
+					id: props.item.data.id
 				}
 			})
-			this.props.selectItem(null)
+			props.selectItem(null)
 		}
 	}
 	
