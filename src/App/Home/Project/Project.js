@@ -13,6 +13,15 @@ const defaultState = {
 	items: []
 }
 
+const getItems = (project) => {
+	if (!project) { return [] }
+	return [].concat(...project.sections.map(section => {
+		return [].concat({ type: 'section', data: section }, ...section.tasks.map(task => {
+			return { type: 'task', data: task }
+		}))
+	}))
+}
+
 // Project: Component used on the /projects/:id route
 class Project extends Component {
 
@@ -20,28 +29,16 @@ class Project extends Component {
 		super(props)
 		this.state = defaultState
 	}
-	
-	shouldComponentUpdate(nextProps, nextState) {
-		if (nextProps.data.project) {
-			nextState.items = this.getItems(nextProps.data.project)
-		}
-		return true
+
+	static getDerivedStateFromProps(props, state) {
+		state.items = props.data.project? getItems(props.data.project) : []
+		return state
 	}
 
 	selectItem = (value) => {
 		this.setState({selectedItem: value})
 		this.props.data.refetch()
 	}
-
-	getItems(project) {
-		if (!project) { return [] }
-		return [].concat(...project.sections.map(section => {
-			return [].concat({ type: 'section', data: section }, ...section.tasks.map(task => {
-				return { type: 'task', data: task }
-			}))
-		}))
-	}
-
 
 	onChange = ({key, value}) => {
 		let selectedItem = this.state.selectedItem
@@ -81,8 +78,7 @@ class Project extends Component {
 					<EditableTask
 						item={this.state.selectedItem}
 						onChange={this.onChange}
-						selectItem={this.selectItem}
-						location={this.props.location.pathname} />
+						selectItem={this.selectItem} />
 				</Card>
 			</CardColumn>}
 			</Row>
