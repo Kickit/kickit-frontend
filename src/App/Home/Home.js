@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
-import Nav from './components/nav'
+import Sidebar from './components/sidebar'
 import Topbar from './components/topbar'
 import Project from './Project/Project'
 import Dashboard from './Dashboard/Dashboard'
@@ -10,13 +10,6 @@ import Dashboard from './Dashboard/Dashboard'
 import { me } from '../../graphql/queries'
 
 import { AUTH_TOKEN, POLL_INTERVAL } from '../../utils/constants'
-
-const KickitSidebar = graphql(me, {
-	options: (ownProps) => ({
-	  variables: { pollInterval: POLL_INTERVAL }
-	})
-  })(Nav)
-
 // Home: available to authorized users and establishes routing
 class Home extends React.Component {
 	constructor(props){
@@ -45,14 +38,27 @@ class Home extends React.Component {
 	
 	// Todo: break sidebar into its own component
 	render() {
+		if (this.props.data.loading) {
+    	return (<div>{this.props.children}</div>)
+    }
+
+		if (this.props.data.error) {
+			return (<div>An unexpected error occurred</div>)
+		}
+
 		return (
-			<KickitSidebar isOpen={this.state.isOpen} toggleSidebar={this.toggleVisibility}>
+			<Sidebar 
+				user={this.props.data.me}
+				toggleSidebar={this.toggleVisibility}
+				isOpen={this.state.isOpen}>
 				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
 				<Route path='/0/projects/:projectid' component={Project} />
 				<Route exact path='/0/' component={Dashboard} />
-			</KickitSidebar>
+			</Sidebar>
 		)
 	}
 
 }
-export default Home
+export default compose(
+	graphql(me),
+)(Home)

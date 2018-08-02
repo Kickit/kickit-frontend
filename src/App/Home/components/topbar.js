@@ -6,36 +6,34 @@ import styled from 'styled-components'
 import logo from '../../../images/kickit_logo.png'
 import { AUTH_TOKEN } from '../../../utils/constants'
 
-class Topbar extends React.Component {
-	// logout: remove auth token from storage and redirect to login
-	logout = () => {
+const Topbar = (props) => {
+	const logout = () => {
 		localStorage.removeItem(AUTH_TOKEN)
-		this.props.history.push('../../login')
+		props.history.push('../../login')
 	}
-	render() {
-		return (
-			<Container>
-				<Row>
-					<IconButton 
-						basic onClick={this.props.toggleSidebar}>
-						<Icon name='sidebar' />
-					</IconButton>
-					{this.props.location !== '/0/' &&
-						<Link to='/0/'>
-							<IconButton basic>
-							<Icon name='home' />
-							</IconButton>
-						</Link>
-					}
-					
-				</Row>
-				<Logo src={logo}/>
-				<IconButton basic onClick={this.logout}>
-					<Icon name='external' />
+
+	return (
+		<Container>
+			<Row>
+				<IconButton 
+					basic onClick={props.toggleSidebar}>
+					<Icon name='sidebar' />
 				</IconButton>
-			</Container>
-		)
-	}
+				{props.location !== '/0/' &&
+					<Link to='/0/'>
+						<IconButton basic>
+						<Icon name='home' />
+						</IconButton>
+					</Link>
+				}
+				
+			</Row>
+			<Logo src={logo}/>
+			<IconButton basic onClick={logout}>
+				<Icon name='external' />
+			</IconButton>
+		</Container>
+	)
 }
 
 export default Topbar
