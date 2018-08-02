@@ -18,7 +18,7 @@ class EditableTask extends Component {
 			{ key: 'trash', text: 'Delete', icon: 'trash', value: 'delete' }
 		]
 
-		const handleChange = async (e, { value }) => {
+		const handleOptions = async (e, { value }) => {
 			if(value === 'delete'){
 				await this.props.deleteTask({
 					variables: {
@@ -33,7 +33,7 @@ class EditableTask extends Component {
 			<Column>
 				<Row className='justify-between'>
 					<Icon name='close' onClick={this.close}/>
-					<Dropdown trigger={trigger} options={options} onChange={handleChange} pointing='top right' icon={null} />
+					<Dropdown trigger={trigger} options={options} onChange={handleOptions} pointing='top right' icon={null} />
 				</Row>
         <EditableField
 					classes='f1 lh-copy tl nowrap'
