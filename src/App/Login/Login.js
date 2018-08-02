@@ -1,7 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
+
 import { AUTH_TOKEN } from '../../utils/constants'
 import logo from '../../images/kickit_logo.png'
-import Header from '../components/header'
 import LoginModal from './components/LoginModal'
 import RegisterModal from './components/RegisterModal'
 import ErrorModal from './components/ErrorModal'
@@ -93,7 +95,10 @@ class Login extends React.Component {
   render () {
     return (
       <span>
-        <Header/>
+        <div className="nav-links">
+          <Link to="/login"><Button basic color='blue'>Login</Button></Link>
+          <Link to="/register"><Button color='yellow'>Register</Button></Link>
+        </div>
         <div className="login">
           <img src={logo} height={"300px"} width={"300px"} alt={""}/>
           <ErrorModal error={this.state.error} />
