@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Row, Column } from '../../../../utils/anvil'
 import { Icon, Dropdown } from 'semantic-ui-react'
 import EditableField from '../../../components/EditableField'
