@@ -8,8 +8,8 @@ import Project from './Project/Project'
 import Dashboard from './Dashboard/Dashboard'
 
 import { me } from '../../graphql/queries'
-
 import { AUTH_TOKEN, POLL_INTERVAL } from '../../utils/constants'
+
 // Home: available to authorized users and establishes routing
 class Home extends React.Component {
 	constructor(props){
@@ -53,12 +53,12 @@ class Home extends React.Component {
 				isOpen={this.state.isOpen}>
 				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
 				<Route path='/0/projects/:projectid' component={Project} />
-				<Route exact path='/0/' component={Dashboard} />
+				<Route exact path='/0/' render={() => <Dashboard projects={this.props.data.me.projects} />} />
 			</Sidebar>
 		)
 	}
-
 }
+
 export default compose(
 	graphql(me),
 )(Home)

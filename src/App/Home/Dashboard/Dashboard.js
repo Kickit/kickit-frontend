@@ -6,7 +6,9 @@ class Dashboard extends React.Component {
 	render() {
 		return (
 			<div>
-                Dashboard
+				Dashboard
+				{/*TODO: @Foopert here is the projects prop, you can use these to populate the myProjects component*/}
+				{this.props.projects.map( project => (<div key={project.id}>{project.title}</div>))}
 			</div>
 		)
 	}
