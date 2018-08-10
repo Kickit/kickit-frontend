@@ -95,12 +95,16 @@ class Login extends React.Component {
   render () {
     return (
       <span>
-        <div className="nav-links">
+        <div className="flex justify-between">
+          <div>
+          <img src={logo} className='mv0' style={{height: '5rem', width: '5rem'}} alt={""}/>
+          </div>
+          <div className='mt3'>
           <Link to="/login"><Button basic color='blue'>Login</Button></Link>
           <Link to="/register"><Button color='yellow'>Register</Button></Link>
+          </div>
         </div>
-        <div className="login">
-          <img src={logo} height={"300px"} width={"300px"} alt={""}/>
+        <div className="w-100-l flex-column items-center login">
           <ErrorModal error={this.state.error} />
           <div className="inputModal">
             <div className="container">
