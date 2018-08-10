@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import { graphql, compose } from 'react-apollo'
 
+import Layout from './components/layout'
 import Sidebar from './components/sidebar'
 import Topbar from './components/topbar'
 import Project from './Project/Project'
@@ -23,19 +24,6 @@ class Home extends React.Component {
 			this.props.history.push(`/0/`)
 		}
 	}
-
-	// setSidebar: specifically close the sidebar when user clicks away from it
-	setSidebar = (state) => {
-		if (this.state.sidebar) {
-		this.setState({ sidebar: state });
-		}
-	}
-
-	// toggleVisibility: Open and close sidebar
-	toggleVisibility = () => {
-		this.setState({ isOpen: !this.state.isOpen })
-	}
-	
 	// Todo: break sidebar into its own component
 	render() {
 		if (this.props.data.loading) {
@@ -46,15 +34,20 @@ class Home extends React.Component {
 			return (<div>An unexpected error occurred</div>)
 		}
 
-		return (
-			<Sidebar 
-				user={this.props.data.me}
-				toggleSidebar={this.toggleVisibility}
-				isOpen={this.state.isOpen}>
-				<Topbar toggleSidebar={this.toggleVisibility} history={this.props.history}/>
+		const Main = () => (
+			<div>
 				<Route path='/0/projects/:projectid' component={Project} />
 				<Route exact path='/0/' render={() => <Dashboard projects={this.props.data.me.projects} />} />
-			</Sidebar>
+			</div>
+		)
+		return (
+			<div>
+			<Layout 
+				isCollapsed={!this.state.isOpen}
+				Main={Main} 
+				Sidebar={() => <Sidebar user={this.props.data.me} />}
+				Top={() => (<Topbar isOpen={this.state.isOpen}toggle={() => this.setState({isOpen: !this.state.isOpen})} history={this.props.history}/>)} />
+			</div>
 		)
 	}
 }
