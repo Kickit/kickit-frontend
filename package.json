@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://app.kickit.us",
   "dependencies": {
+    "antd": "^3.8.0",
     "apollo-boost": "^0.1.6",
     "apollo-cache-persist": "^0.1.1",
     "apollo-client-preset": "^1.0.8",
