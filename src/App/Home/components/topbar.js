@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Segment, Icon } from 'semantic-ui-react'
-import  { Row, IconButton } from '../../../utils/anvil'
+import { Segment } from 'semantic-ui-react'
+import { Button, Icon } from 'antd'
 import styled from 'styled-components'
 import logo from '../../../images/kickit_logo.png'
 import { AUTH_TOKEN } from '../../../utils/constants'
@@ -14,24 +13,16 @@ const Topbar = (props) => {
 
 	return (
 		<Container>
-			<Row>
-				<IconButton 
-					basic onClick={props.toggleSidebar}>
-					<Icon name='sidebar' />
-				</IconButton>
-				{props.location !== '/0/' &&
-					<Link to='/0/'>
-						<IconButton basic>
-						<Icon name='home' />
-						</IconButton>
-					</Link>
-				}
-				
-			</Row>
-			<Logo src={logo}/>
-			<IconButton basic onClick={logout}>
-				<Icon name='external' />
-			</IconButton>
+			<div className='flex-row'>
+				<Icon
+					className="trigger"
+					type={props.isOpen ? 'menu-unfold' : 'menu-fold'}
+					type='menu-unfold'
+					onClick={props.toggle}
+				/>
+				<img className='ml2' style={{height:'3rem', width:'3rem'}} src={logo}/>
+			</div>
+			<Button onClick={logout} icon="logout" />
 		</Container>
 	)
 }
