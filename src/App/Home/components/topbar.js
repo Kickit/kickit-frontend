@@ -28,3 +28,15 @@ const Topbar = (props) => {
 }
 
 export default Topbar
+
+const Container = styled(Segment)`
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 0.2rem;
+	p {
+		font-weight: 800;
+		font-size: 2rem;
+		margin: 0;
+	}
+`
