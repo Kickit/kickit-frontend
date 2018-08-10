@@ -20,10 +20,13 @@ const deleteTask = gql`
 
 // createProject(owners: [ID],title: String!): Project
 const createProject = gql`
-    mutation createProject($owners: [ID], $title: String!) {
-		createProject(owners: $owners, title: $title) {
+    mutation createProject($title: String!) {
+		createProject(title: $title) {
 			id
-			owners
+	
+			owners {
+				id
+			}
 			title
 		}
 	}

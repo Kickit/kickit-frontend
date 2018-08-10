@@ -21,7 +21,7 @@ const MenuAddProjectButton = ({createProject}) => {
 	
 	return (
 		<div>
-			<Button circular icon='plus' className="h2 w2" onClick={() => { this.editing = true }} />
+			<Button circular icon='plus' className="h2.5 w2.5" onClick={() => { this.editing = true }} />
 			{
 				editing && 
 				<Input ref={this.handleRef} placeholder='Search...' />
@@ -63,7 +63,7 @@ const MenuProjects = ({ projects }) => {
 				<p>{project.title}<Icon name='angle right' inverted={true} size='small' /></p>
 			</Menu.Item>
 			{/*<MenuAddProjectButton createProject={() => console.log('memes')}/>*/}
-			<MenuAddProjectButton />
+			<MenuAddProjectButton/>
 			</Link>
 		)
 	})
