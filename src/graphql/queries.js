@@ -21,10 +21,14 @@ const project = gql`
 			sections {
 				id
 				title
+				section
+				position
 				tasks {
 					id
 					title
+					position
 					description
+					section
 				}
 			}
 		}

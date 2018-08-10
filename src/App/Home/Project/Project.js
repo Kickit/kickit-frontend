@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import QueryList from './components/QueryList'
 import { CardColumn, Row, Card } from '../../../utils/anvil'
 import EditableTask from './components/EditableTask'
+import List from './components/List'
 import { project } from '../../../graphql/queries'
 import { updateTask } from '../../../graphql/mutations'
 import { graphql, compose } from 'react-apollo'
@@ -64,14 +64,12 @@ class Project extends Component {
 		}
 
 		return (
-			<Row>
-			<CardColumn phoneInvisible={!!this.state.selectedItem}>
-				<QueryList
-					items={this.state.items}
-					selectedItem={this.state.selectedItem}
-					selectItem={this.selectItem}
-					onChange={this.onChange} />
-			</CardColumn>
+			<Row className='h-100-l'>
+				<CardColumn className='bg-white-90 br2 ba dark-gray b--black-10 ma2 w-100' phoneInvisible={!!this.state.selectedItem}>
+					<h1 className='tl f2 ml2 mt2'>{this.props.data.project.title}</h1>
+					<List sections={this.props.data.project.sections} 
+						selectItem={this.selectItem} />
+				</CardColumn>
 			{this.state.selectedItem &&
 			<CardColumn orderSm={-1}>
 				<Card>
