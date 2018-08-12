@@ -24,10 +24,16 @@ const LogoHeader = () => (
 // MenuProjects: piece to populated projects for a user
 const MenuProjects = ({ projects }) => (
 	<Menu theme="dark">
+		<Menu.Item className='mb4' key='home'>
+			<Link to={`/0/`}>
+				<Icon type="home" /><span className="nav-text">Home</span>
+			</Link>
+		</Menu.Item>
+		<div className='ml2 mt4 mb3 b'>My Projects</div>
 		{projects.map( project => {
 			return (
 				<Menu.Item onMouseOver={() => console.log('asda')} key={project.id}>
-				<Link key={project.id} to={`/0/projects/${project.id}`}>
+				<Link to={`/0/projects/${project.id}`}>
 					<span className="nav-text">{project.title}</span>
 				</Link>
 				</Menu.Item>
