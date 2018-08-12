@@ -10,7 +10,6 @@ import styled from 'styled-components'
 const Sidenav = (props) => (
 		<div >
 			<LogoHeader/>
-			<UserInfo user={props.user} />
 			<MenuProjects projects={props.user.projects}/>
 		</div>
 )
@@ -35,15 +34,5 @@ const MenuProjects = ({ projects }) => (
 		)}
 	</Menu>
 )
-
-// UserInfo: piece to populate account information of sidebar
-const UserInfo = ({ user }) => {
-	return (
-		<div className='white flex-column tc mt2'>
-			<p className='f6'>{user.first} {user.last}</p>
-			<p className='f6'>{user.email}</p>
-		</div>
-	)
-}
 
 export default Sidenav
