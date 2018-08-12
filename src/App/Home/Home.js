@@ -46,7 +46,14 @@ class Home extends React.Component {
 				isCollapsed={!this.state.isOpen}
 				Main={Main} 
 				Sidebar={() => <Sidebar user={this.props.data.me} />}
-				Top={() => (<Topbar isOpen={this.state.isOpen}toggle={() => this.setState({isOpen: !this.state.isOpen})} history={this.props.history}/>)} />
+				Top={() => (
+					<Topbar 
+						user={this.props.data.me} 
+						isOpen={this.state.isOpen} 
+						toggle={() => this.setState({isOpen: !this.state.isOpen})} 
+						history={this.props.history}
+					/>)} 
+				/>
 			</div>
 		)
 	}
