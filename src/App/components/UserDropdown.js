@@ -12,19 +12,6 @@ const openNotification = ({title}) => {
 class UserDropdown extends React.Component {
     state = {
         visible: false,
-        title: '',
-        checked: false
-    }
-
-    handleMenuClick = (e) => {
-        if (true /*Handle validation here*/) {
-            /* send request here */
-            openNotification({title: this.state.title})
-            this.setState({ visible: false })
-
-            //Dont clear input until dropdown transition finishes
-            setTimeout(() => this.clearInput(), 500)
-        }
     }
 
     handleVisibleChange = (flag) => {
@@ -36,23 +23,9 @@ class UserDropdown extends React.Component {
 
     }
 
-    clearInput = () => {
-        this.setState({ title: '', checked: false })
-    }
 
     render () {
-        const { title, checked, visible } = this.state
-        const dropdown2 = (
-            <Card>
-              <div className='mh2 mv1'>
-              <Input value={title} onChange={ e => this.setState({ title: e.target.value })} type="title" placeholder="Project Name" />
-              </div>
-              <Button type="primary" className="login-form-button ma3" onClick={this.handleMenuClick}>
-                  Create Project
-              </Button>
-              <Checkbox checked={checked} onChange={ e => this.setState({ checked: e.target.checked })}>Public</Checkbox>
-            </Card>
-        )
+        const { visible } = this.state
         const dropdown = (
             <Menu>
                 <Menu.Item disabled>
@@ -72,7 +45,7 @@ class UserDropdown extends React.Component {
                 <Dropdown overlay={dropdown} 
                     onVisibleChange={this.handleVisibleChange} 
                     visible={visible}>
-                <Button className='ma2' onClick={this.props.logout} shape="circle" icon="user" />
+                <Button className='ma2' onClick={() => this.setState({visible: !this.state.visible})} shape="circle" icon="user" />
                 </Dropdown>
             </div>
         )
