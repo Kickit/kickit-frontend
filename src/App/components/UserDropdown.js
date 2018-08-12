@@ -16,11 +16,6 @@ class UserDropdown extends React.Component {
 
     handleVisibleChange = (flag) => {
         this.setState({ visible: flag })
-        if (!flag) {
-            console.log('Clearing')
-            this.clearInput()
-        }
-
     }
 
 
