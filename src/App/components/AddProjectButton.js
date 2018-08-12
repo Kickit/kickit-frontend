@@ -56,15 +56,13 @@ class AddProjectButton extends React.Component {
         )
 
         return (
-            <div className='w-100-l flex justify-center'>
-                <Dropdown overlay={dropdown} 
-                    onVisibleChange={this.handleVisibleChange} 
-                    visible={visible}>
-                    <Button type="dashed">
-                        Add Project <Icon type="plus-circle" />
-                    </Button>
-                </Dropdown>
-            </div>
+            <Dropdown overlay={dropdown} 
+                onVisibleChange={this.handleVisibleChange} 
+                visible={visible}>
+                <Button ghost type="dashed" onClick={()=> this.setState({visible: !this.state.visible})}>
+                    <span className='moon-gray'>Add Project </span><Icon type="plus-circle" />
+                </Button>
+            </Dropdown>
         )
     }
 }
