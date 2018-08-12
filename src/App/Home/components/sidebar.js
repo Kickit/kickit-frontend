@@ -25,7 +25,7 @@ const LogoHeader = () => (
 const MenuProjects = ({ projects }) => (
 	<Menu theme="dark">
 		<Menu.Item className='mb4' key='home'>
-			<Link to={`/0/`}>
+			<Link to={`/0`}>
 				<Icon type="home" /><span className="nav-text">Home</span>
 			</Link>
 		</Menu.Item>
