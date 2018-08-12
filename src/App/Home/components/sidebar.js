@@ -5,6 +5,7 @@ import logo from '../../../images/kickit_logo.png'
 
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import AddProjectButton from '../../components/AddProjectButton';
 
 
 const Sidenav = (props) => (
@@ -32,6 +33,9 @@ const MenuProjects = ({ projects }) => (
 				</Menu.Item>
 			)}
 		)}
+		<div className='ml3'>
+		<AddProjectButton />
+		</div>
 	</Menu>
 )
 
