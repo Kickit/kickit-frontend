@@ -1,8 +1,7 @@
 import React from 'react'
-import { Segment } from 'semantic-ui-react'
 import { Button, Menu, Icon } from 'antd'
-import styled from 'styled-components'
 import { AUTH_TOKEN } from '../../../utils/constants'
+import UserDropdown from '../../components/UserDropdown';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -25,7 +24,7 @@ const Topbar = (props) => {
 				/>
 			</Menu.Item>
 		</Menu>
-		<Button className='ma2' onClick={logout} icon="logout" />
+		<UserDropdown logout={logout} />
 		</div>
 	)
 }
