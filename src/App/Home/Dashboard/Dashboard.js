@@ -6,6 +6,6 @@ import AddProjectButton from '../../components/AddProjectButton'
 
 export default (props) => (
 	<div>
-		<AddProjectButton />
+		Dashboard
 	</div>
 )
