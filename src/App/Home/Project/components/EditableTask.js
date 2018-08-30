@@ -1,5 +1,4 @@
 import React from 'react'
-import { Row, Column } from '../../../../utils/anvil'
 import { Icon, Dropdown } from 'semantic-ui-react'
 import EditableField from '../../../components/EditableField'
 import { deleteTask } from '../../../../graphql/mutations'
@@ -30,11 +29,13 @@ const EditableTask = (props) => {
 	}
 	
 	return (
-		<Column>
-			<Row className='justify-between'>
+		<div className='flex flex-column'>
+			<div className='flex justify-between'>
+				{/*<Icon type="ellipsis" />
+					<Icon type="close" />*/}
 				<Icon name='close' onClick={close}/>
 				<Dropdown trigger={trigger} options={options} onChange={handleOptions} pointing='top right' icon={null} />
-			</Row>
+			</div>
 			<EditableField
 				classes='f1 lh-copy tl nowrap'
 				placeholder='Task Title'
@@ -51,9 +52,18 @@ const EditableTask = (props) => {
 				field='description'
 			/>
 			}
-		</Column>
+		</div>
 	)
 }
+
+// const TastOptions = (props) => {
+	
+// 	return (
+// 		<Dropdown overlay={menu} placement="bottomLeft">
+// 			 <Icon type="ellipsis" />
+// 		</Dropdown>
+// 	)
+// }
 
 export default compose(
 	graphql(deleteTask, { name: 'deleteTask'})
