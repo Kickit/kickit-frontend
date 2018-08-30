@@ -5,7 +5,7 @@ import logo from '../../../images/kickit_logo.png'
 
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import AddProjectButton from '../../components/AddProjectButton';
+import AddProjectButton from 'App/components/AddProjectButton';
 
 
 const Sidenav = (props) => (
@@ -16,8 +16,10 @@ const Sidenav = (props) => (
 )
 
 const LogoHeader = () => (
+	
 	<div className='flex flex-row mt2 justify-start white f3'>
 		<img className='h2 w2 ma2' src={logo}/>
+		{console.log(process.env)}
 		<p className='mt2'>Kickit</p>
 	</div>
 )

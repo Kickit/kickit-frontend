@@ -14,14 +14,13 @@ export default ({ Sidebar, Main, Top, isCollapsed }) => (
       <Sidebar/>
     </Sider>
     <Layout>
-      <Content>
+      <Content className='bg-white-50'>
         <div>
           <Top/>
-          <Main/>
+          <div className='bg-white shadow-3 vh-75 br2 mh2 mt2'><Main/></div>
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
-        {/* Will turn these into links*/}
         Made by Nicholas Lewanowicz and Contributors
       </Footer>
     </Layout>
