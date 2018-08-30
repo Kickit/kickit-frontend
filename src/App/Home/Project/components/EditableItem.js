@@ -3,7 +3,7 @@ import { Row } from '../../../../utils/anvil'
 import EditableField from '../../../components/EditableField';
 
 const EditableItem = (props) => (
-	<Row>
+	<div className='flex flex-row'>
 			<EditableField
 				field='title'
 				classes='b'
@@ -20,7 +20,7 @@ const EditableItem = (props) => (
 					
 				/>
 			} */}
-	</Row>
+	</div>
 )
 
 export default EditableItem

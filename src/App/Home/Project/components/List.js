@@ -60,14 +60,14 @@ class SortableList extends React.Component {
     }
 
     const list = Object.keys(panes).map(key => (
-      <Pane key={key} defaultSize={{ width: '100%', height: 30 } } resizable={{x:false, y:false, xy:false }}>
-        <ListItem 
-          className={`ma1 item ${ panes[key].section ? 'task shadow-hover' : 'section'}`} 
+      <Pane key={key} defaultSize={{ width: '100%'} } resizable={{x:false, y:false, xy:false }}>
+        <li 
+          className={`list ma1 h2 pointer:hover ${ panes[key].section ? 'shadow-hover' : 'f4'}`} 
           onClick={() => this.props.selectItem({data: panes[key]})}>
           <EditableItem
               item={{data: panes[key]}}
               onChange={() => null} />
-        </ListItem>
+        </li>
       </Pane>
     ))
 
@@ -82,14 +82,6 @@ class SortableList extends React.Component {
       </SortablePane>
     );
   }
-}
-
-const style = {
-  background: '#fff',
-  width: '100%',
-  margin: '50px auto',
-  boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.05)',
-  borderRadius: '5px'
 }
 
 export default withRouter(SortableList)

@@ -8,11 +8,6 @@ import { graphql, compose } from 'react-apollo'
 
 import '../../../styles/index.css'
 
-const defaultState = {
-	selectedItem: null,
-	items: []
-}
-
 const getItems = (project) => {
 	if (!project) { return [] }
 	return [].concat(...project.sections.map(section => {
@@ -27,7 +22,10 @@ class Project extends Component {
 
 	constructor(props) {
 		super(props)
-		this.state = defaultState
+		this.state = {
+			selectedItem: null,
+			items: []
+		}
 	}
 
 	static getDerivedStateFromProps(props, state) {
@@ -54,32 +52,33 @@ class Project extends Component {
 	}
 
 	render() {
-		if (this.props.data.loading && !this.props.data.project) {
+		const { data } = this.props
+		const { selectedItem } = this.state
+
+		if (data.loading && !data.project) {
 			return (<div>Loading</div>)
 		}
 
-		if (this.props.data.error) {
-			console.log(this.props.data.error)
+		if (data.error) {
 			return (<div>An unexpected error occurred</div>)
 		}
 
+
 		return (
-			<Row className='h-100-l'>
-				<CardColumn className='bg-white-90 br2 ba dark-gray b--black-10 ma2 w-100' phoneInvisible={!!this.state.selectedItem}>
-					<h1 className='tl f2 ml2 mt2'>{this.props.data.project.title}</h1>
-					<List sections={this.props.data.project.sections} 
+			<div className='flex flex-row h-100'>
+				<div className={`flex-auto ${selectedItem ? 'dn di-l di-m' : ''}`}>
+					<Header className='mt2 ml2' title={data.project.title} /> 
+					<List sections={data.project.sections} 
 						selectItem={this.selectItem} />
-				</CardColumn>
-			{this.state.selectedItem &&
-			<CardColumn orderSm={-1}>
-				<Card>
+				</div>
+			{selectedItem &&
+			<div className='pl2 pt2 vh-75 bl-ns flex-auto w-25' orderSm={-1}>
 					<EditableTask
-						item={this.state.selectedItem}
+						item={selectedItem}
 						onChange={this.onChange}
 						selectItem={this.selectItem} />
-				</Card>
-			</CardColumn>}
-			</Row>
+			</div>}
+			</div>
 		)
 	}
 }
@@ -94,3 +93,10 @@ export default compose(
 	}),
 	graphql(updateTask, { name: 'updateTask'})
 )(Project)
+
+
+const Header = ({title, className}) => (
+	<div className={className}>
+		<h1 className='tl f3 b'>{title}</h1>
+	</div>
+)

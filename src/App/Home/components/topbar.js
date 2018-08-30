@@ -1,9 +1,10 @@
 import React from 'react'
-import { Segment } from 'semantic-ui-react'
-import { Button, Icon } from 'antd'
-import styled from 'styled-components'
-import logo from '../../../images/kickit_logo.png'
+import { Button, Menu, Icon } from 'antd'
 import { AUTH_TOKEN } from '../../../utils/constants'
+import UserDropdown from '../../components/UserDropdown';
+
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
 const Topbar = (props) => {
 	const logout = () => {
@@ -12,31 +13,20 @@ const Topbar = (props) => {
 	}
 
 	return (
-		<Container>
-			<div className='flex-row'>
+		<div className='flex justify-between bg-white'>
+		<Menu
+			mode="horizontal">
+			<Menu.Item key="sidebar" onClick={props.toggle}>
 				<Icon
 					className="trigger"
 					type={props.isOpen ? 'menu-unfold' : 'menu-fold'}
 					type='menu-unfold'
-					onClick={props.toggle}
 				/>
-				<img className='ml2' style={{height:'3rem', width:'3rem'}} src={logo}/>
-			</div>
-			<Button onClick={logout} icon="logout" />
-		</Container>
+			</Menu.Item>
+		</Menu>
+		<UserDropdown logout={logout} />
+		</div>
 	)
 }
 
 export default Topbar
-
-const Container = styled(Segment)`
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	padding: 0.2rem;
-	p {
-		font-weight: 800;
-		font-size: 2rem;
-		margin: 0;
-	}
-`
