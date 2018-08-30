@@ -39,7 +39,7 @@
     "throttle-debounce": "^2.0.0"
   },
   "scripts": {
-    "start": "REACT_APP_STAGE=dev react-scripts start",
+    "start": "REACT_APP_STAGE=dev NODE_PATH=src react-scripts start",
     "mock": "REACT_APP_STAGE=mock react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
